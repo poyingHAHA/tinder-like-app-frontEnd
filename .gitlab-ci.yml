@@ -1,0 +1,6 @@
+Build:
+    script:
+        - echo "Hello"
+    tags:
+        - first-ci
+        - test-ci
