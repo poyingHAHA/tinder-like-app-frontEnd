@@ -1,49 +1,45 @@
-# stages:
-#     - dependencies
-#     - build
-
-# install_dependencies:
-#     #image: node:12-alpine
-#     stage: dependencies
-#     script:
-#         - npm install
-#     only:
-#         - main
-#     cache:
-#       key:
-#         files:
-#           - package-lock.json
-#       paths:
-#         - node_modules
-
-# Build:
-#     #image: node:12-alpine
-#     stage: build
-#     script:
-#         - npm link @angular/cli
-#         - npm run build --prod
-#     only:
-#         - main
-#     cache:
-#       key:
-#         files:
-#           - package-lock.json
-#       paths:
-#         - node_modules
-#       policy: pull
-
 #npm run build don't put base-href, just set locally
 #because there are no /projectName/ on gitlab runner folder
 
-#below is for school-server-runner
+#below is for gitlab CI runner and school-server-runner
+
+
 stages:
-  - build
+    - dependencies
+    - build
+    - CD
+
+install_dependencies:
+    #image: node:12-alpine
+    stage: dependencies
+    script:
+        - npm install
+    only:
+        - main
+    cache:
+      key:
+        files:
+          - package-lock.json
+      paths:
+        - node_modules
 
 Build:
-  stage: build
+    #image: node:12-alpine
+    stage: build
+    script:
+        - npm link @angular/cli
+        - npm run build --prod
+    only:
+        - main
+    cache:
+      key:
+        files:
+          - package-lock.json
+      paths:
+        - node_modules
+      policy: pull
+
+Pull:
+  stage: CD
   script:
-    - ng build --pord --base-href /tinder-like-app/
-  only:
-    - main
-  tags:
-    - school-server-runner
+    - echo "just pull to local server"
