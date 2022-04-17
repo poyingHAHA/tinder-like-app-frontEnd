@@ -21,6 +21,9 @@ Build:
     stage: build
     script:
         - npm link @angular/cli
-        - npm run build --prod --base-href /tinder-like-app-gitlab/
+        - npm run build --prod
     only:
         - main
+
+#npm run build don't put base-href, just set locally
+#because there are no /projectName/ on gitlab runner folder
