@@ -1,0 +1,45 @@
+<div class="my-container">
+  <div class="header">
+    <div class="settings"><i class="fa-solid fa-ellipsis"></i></div>
+    <div class="info-group">
+      <div class="name">Test User</div>
+    </div>
+    <div class="main-info">
+      <div class="follow-group">
+        <div class="follow-item following">
+          <i class="fa-solid fa-user-group"></i>
+          1,073
+        </div>
+        <div class="follow-item rate">
+          <i class="fa-solid fa-star"></i>
+          4.7/5.0
+        </div>
+      </div>
+      <div class="intro">
+        我是一個很奇耙的人<br/>
+        分享的東西都很奇耙...更多
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="main-cont">
+      <div class="cont-pic"></div>
+      <swiper
+        [config]="config"
+      >
+        <ng-template
+          *ngFor="let i of [1,2]"
+          swiperSlide
+        >
+          <div class="posts g-1 row">
+            <div *ngFor="let i of [0,1,2,3]" class="post col-6">
+              <app-share-share-post
+                [coverImg]="'assets/images/post'+i%4+'.png'"
+              ></app-share-share-post>
+            </div>
+          </div>
+        </ng-template>
+      </swiper>
+    </div>
+  </div>
+</div>

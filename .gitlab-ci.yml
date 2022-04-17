@@ -1,6 +1,24 @@
+stages:
+    - dependencies
+    - build
+
+install_dependencies:
+    stage: dependencies
+    script: 
+        - npm install
+    only:
+        - master
+    cache:
+        key:
+        files:
+            - package-lock.json
+        paths:
+        - node_modules
+
 Build:
+    stage: build
     script:
-        - echo "test build 2"
-    tags:
-        - first-ci
-        - test-ci
+        - npm i @angular/cli
+        - ng build --prod --base-href /tinder-like-app/
+    only:
+        - master

@@ -1,0 +1,40 @@
+.mycard
+{
+  background-color: #ffffff;
+  width: 100%;
+  /* height: 70%; */
+  height: 63vmax;
+  border-radius: 20px;
+  position: absolute;
+
+  background-image: url('../../../../assets/images/purse.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  box-shadow:  2px 2px 5px 2px #4b8ebc;
+}
+
+.swipe-out-right
+{
+  transition: all 1s;
+  left: 500px !important;
+  transform: rotateZ(30deg) !important;
+  opacity: 0 !important;
+}
+
+.swipe-out-left
+{
+  transition: all 1s;
+  left: -500px !important;
+  transform: rotateZ(-30deg) !important;
+  opacity: 0 !important;
+}
+
+.reset
+{
+  transition: all .5s;
+  left: 0 !important;
+  top: 80px !important;
+  opacity: 1 !important;
+  transform: rotateZ(0deg) !important;
+}

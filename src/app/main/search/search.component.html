@@ -1,0 +1,21 @@
+<div class="my-container">
+  <div class="search-group">
+    <div class="search-btn" (click)="clickSearchBtn()"><i [ngClass]="isSearchMode?'fa-arrow-left':'fa-magnifying-glass'" class="fa-solid"></i></div>
+    <div class="search-input"><input type="text" [(ngModel)]="searchTxt" (focus)="changeSearchMode()"><div class="clear" (click)="clearTxt()"><i class="fa-solid fa-xmark"></i></div></div>
+  </div>
+  <div class="grid" *ngFor="let treemap of treemaps">
+    <app-tree-map
+      [posts]="treemap"
+    ></app-tree-map>
+  </div>
+  <div class="search-panel" *ngIf="isSearchMode">
+    <div class="history">
+      <div class="his-tag">Hitory</div>
+      <div class="clear-his"><i class="fa-solid fa-trash"></i></div>
+      <div class="his-contents">
+        <div class="his-cont">高領</div>
+        <div class="his-cont">高領shirt</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="my-container">
+  <div *ngIf="!isShow" class="brief-content">
+    <div class="paragraph" *ngFor="let str of brief">
+      {{ str }}
+      <span *ngIf="isLast(str, brief)" class="more" (click)="showMore()">...更多</span>
+      <br/>
+    </div>
+
+  </div>
+  <div *ngIf="isShow" class="content">
+    <div class="paragraph" *ngFor="let str of article.split('\n')">
+      {{ str }} <br/>
+    </div>
+  </div>
+</div>

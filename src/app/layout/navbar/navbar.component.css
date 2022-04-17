@@ -1,0 +1,62 @@
+.mynav
+{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: #63bbf6;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.icon-div
+{
+  position: relative;
+}
+
+.tinder-page
+{
+  /* for svg element use filter to change color */
+  background-image: url('../../../assets/images/swipe-right.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 3vmax;
+  height: 3vmax;
+  filter: invert(81%) sepia(15%) saturate(729%) hue-rotate(175deg) brightness(104%) contrast(97%);
+}
+
+i
+{
+  color: #b7e0fb;
+  font-size: 2.5vmax;
+}
+
+.active
+{
+  /* on a tag */
+  color: #ffffff;
+}
+
+.active::after
+{
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  border: 1px solid #ffffff;
+}
+
+.active-svg
+{
+  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(358deg) brightness(107%) contrast(97%);
+}
+
+.active-tinder-div::after
+{
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  border: 1px solid #ffffff;
+}

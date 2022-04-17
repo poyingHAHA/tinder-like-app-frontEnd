@@ -1,0 +1,117 @@
+.my-container
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 15px;
+  padding-bottom: 9vh;
+  padding-top: 65px;
+}
+
+.grid
+{
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  padding-bottom: 0.2rem;
+}
+
+input
+{
+  border: none;
+  outline: none;
+}
+
+.search-group
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #63bbf6;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  height: 60px;
+}
+
+.search-input
+{
+  width: 70%;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0 10px;
+  position: relative;
+}
+
+.search-input > input
+{
+  padding: 5px 10px;
+  border-radius: 50px;
+  width: 100%;
+  background-color: #d6edff;
+  height: 75%;
+}
+
+.search-btn
+{
+  font-size: 1.6rem;
+  color: #ffffff;
+  margin: 0 5px;
+}
+
+.clear
+{
+  position: absolute;
+  color: white;
+  background-color: #b4d3e9;
+  font-size: 1rem;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-panel
+{
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #63bbf6;
+  z-index: 4;
+}
+
+.history
+{
+  color: #c8e7fe;
+  padding: 0 20px;
+  margin-top: 30px;
+}
+
+.clear-his
+{
+  text-align: end;
+}
+
+.his-cont
+{
+  display: inline-block;    display: inline-block;
+  border: 1px solid #c8e7fe;
+  border-radius: 50px;
+  padding: 1px 10px;
+  margin: 0 5px;
+}

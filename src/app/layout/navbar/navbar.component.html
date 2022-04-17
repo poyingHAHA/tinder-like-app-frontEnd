@@ -1,0 +1,8 @@
+<div class="mynav">
+  <div class="icon-div" (click)="activeIcon('home')"><a [routerLink]="['home']" ><i routerLinkActive="active" nz-icon nzType="home" [nzTheme]="activeList.home?'fill':'outline'"></i></a> </div>
+  <div routerLinkActive="active-tinder-div" class="icon-div" (click)="activeIcon('tinder-page')"><a [routerLink]="['tinder-page']" ><svg routerLinkActive="active-svg" class="tinder-page"></svg></a> </div>
+  <div class="icon-div" (click)="activeIcon('shop')"><a [routerLink]="['shop']" ><i routerLinkActive="active" nz-icon nzType="shopping-cart" nzTheme="outline"></i></a> </div>
+  <div class="icon-div" (click)="activeIcon('search')"><a [routerLink]="['search']" ><i routerLinkActive="active" nz-icon nzType="search" nzTheme="outline"></i></a> </div>
+  <div class="icon-div" (click)="activeIcon('like')"><a [routerLink]="['like']" ><i routerLinkActive="active" nz-icon nzType="heart" [nzTheme]="activeList.like?'fill':'outline'"></i></a> </div>
+  <div class="icon-div" (click)="activeIcon('profile')"><a [routerLink]="['profile']" ><i routerLinkActive="active" nz-icon nzType="user" nzTheme="outline"></i></a> </div>
+</div>

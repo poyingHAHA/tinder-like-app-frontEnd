@@ -1,0 +1,26 @@
+<div class="option-group">
+  <div class="option like">
+    <i [ngStyle]="{'color': iconState['like']?'#f61313':'#ffffff'}" class="fa-solid fa-heart" (click)="changeMode('like')"></i>
+    <div class="num">953</div>
+  </div>
+  <div class="option comments">
+    <i class="fa-solid fa-comment" (click)="changeMode('comment')"></i>
+    <div class="num">27</div>
+  </div>
+  <div class="option shop">
+    <i class="fa-solid fa-bag-shopping" (click)="changeMode('shop')"></i>
+  </div>
+</div>
+<div class="pic"></div>
+<div class="info-group">
+  <div class="user-info">
+    <div class="user-pic"></div>
+    <div class="user-name">Test User</div>
+  </div>
+  <div class="description">
+    聽覺和視覺效果一流, 哈哈哈, <br/>
+    孫而不膩
+  </div>
+  <div class="tag">#高領shirt</div>
+  <div class="time">2022-03-23</div>
+</div>

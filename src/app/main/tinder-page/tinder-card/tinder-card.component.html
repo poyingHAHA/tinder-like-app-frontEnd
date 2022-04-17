@@ -1,0 +1,11 @@
+<div class="mycard"
+    [style.left.px]="x"
+    [style.top.px]="y"
+    [style.transform]="'rotateZ('+rotateDeg+'deg)'"
+    [style.opacity]="opacityPercent"
+    [ngClass]="{'swipe-out-right': isOutRight, 'swipe-out-left': isOutLeft, 'reset': isReset}"
+    [@cardAnimator]="animationState"
+    (@cardAnimator.done)="resetAnimationState()"
+    *ngIf="!isDelete"
+    (pan)="handleDrag($event)">
+</div>

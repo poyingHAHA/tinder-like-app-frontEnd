@@ -1,0 +1,38 @@
+.layout
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #63bbf6;
+  overflow: hidden;
+}
+
+.mynav
+{
+  position: absolute;
+  bottom: -1px;
+  height: 8vh;
+  width: 100vw;
+  z-index: 2;
+}
+
+.mycontent
+{
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+@media(min-width: 768px)
+{
+  .mycontent{
+    padding: 0 50px;
+  }
+}

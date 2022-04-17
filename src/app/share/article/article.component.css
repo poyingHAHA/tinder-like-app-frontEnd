@@ -1,0 +1,18 @@
+.my-container
+{
+  width: 100%;
+  height: 100%;
+}
+
+.content,
+.brief-content
+{
+  padding: 5px;
+  color: #ffffff;
+  word-wrap: break-word;
+}
+
+.more
+{
+  color: #b9b9b9;
+}

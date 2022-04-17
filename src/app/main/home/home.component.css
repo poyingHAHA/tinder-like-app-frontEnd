@@ -1,0 +1,19 @@
+@import "~swiper/swiper-bundle.css";
+
+.swiper {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 8vh;
+  left: 0;
+  right: 0;
+}
+
+/* .swiper-slide {
+
+} */
+
+.my-slide
+{
+  position: relative;
+}

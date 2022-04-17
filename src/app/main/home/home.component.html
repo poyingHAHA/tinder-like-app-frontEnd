@@ -1,0 +1,11 @@
+<swiper
+  [config]="config"
+>
+  <ng-template
+    *ngFor="let i of [1,2,3,4,5]"
+    swiperSlide
+    class="my-slide"
+  >
+    <app-share-big-post></app-share-big-post>
+  </ng-template>
+</swiper>

@@ -1,0 +1,35 @@
+<div class="my-container container-fluid">
+  <!-- <div class="header">
+    <div class="logo">Logo</div>
+    <div class="coin"></div>
+    <div class="record"><i nz-icon nzType="clock-circle" nzTheme="outline"></i></div>
+    <div class="notification"><i nz-icon nzType="bell" nzTheme="outline"></i></div>
+    <div class="message"><i nz-icon nzType="send" nzTheme="outline"></i></div>
+  </div> -->
+  <div class="content">
+    <div class="history-btn" (click)="showHistory()"><i class="fa-solid fa-clock-rotate-left"></i></div>
+    <div
+      class="history"
+      *ngIf="isHistoryOpen"
+    >
+      <div class="his-block">
+        <div class="his-header">
+          <div [ngClass]="likeHis?'like-active':''" class="his-option his-like" (click)="changeHistoryMode('like')"><i class="fa-solid fa-heart"></i></div>
+          <div [ngClass]="dislikeHis?'dislike-active':''" class="his-option his-dislike" (click)="changeHistoryMode('dislike')"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <div class="his-content">
+          <div *ngFor="let item of hisList" class="his-item">
+            {{ item.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let i of test">
+      <app-tinder-card id="{{'card'+i.name}}" [cardInfo]="i"></app-tinder-card>
+    </div>
+    <div class="option-group">
+      <div class="option like" (click)="clickLike()"><i class="fa-solid fa-heart"></i></div>
+      <div class="option dislike" (click)="clickDislike()"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+  </div>
+</div>
