@@ -4,15 +4,15 @@ stages:
 
 install_dependencies:
     stage: dependencies
-    script: 
+    script:
         - npm install
     only:
         - master
     cache:
-        key:
+      key:
         files:
-            - package-lock.json
-        paths:
+          - package-lock.json
+      paths:
         - node_modules
 
 Build:
