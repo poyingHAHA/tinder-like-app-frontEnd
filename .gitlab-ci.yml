@@ -7,7 +7,7 @@ install_dependencies:
     script:
         - npm install
     only:
-        - master
+        - main
     cache:
       key:
         files:
@@ -21,4 +21,4 @@ Build:
         - npm i @angular/cli
         - ng build --prod --base-href /tinder-like-app/
     only:
-        - master
+        - main
