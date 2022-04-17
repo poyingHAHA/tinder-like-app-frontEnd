@@ -24,6 +24,13 @@ Build:
         - npm run build --prod
     only:
         - main
+    cache:
+      key:
+        files:
+          - package-lock.json
+      paths:
+        - node_modules
+      policy: pull
 
 #npm run build don't put base-href, just set locally
 #because there are no /projectName/ on gitlab runner folder
