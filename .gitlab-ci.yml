@@ -3,6 +3,7 @@ stages:
     - build
 
 install_dependencies:
+    image: node:12-alpine
     stage: dependencies
     script:
         - npm install
@@ -16,9 +17,10 @@ install_dependencies:
         - node_modules
 
 Build:
+    image: node:12-alpine
     stage: build
     script:
-        - npm i @angular/cli
-        - ng build --prod --base-href /tinder-like-app/
+        - npm link @angular/cli
+        - npm run build --prod --base-href /tinder-like-app/
     only:
         - main
