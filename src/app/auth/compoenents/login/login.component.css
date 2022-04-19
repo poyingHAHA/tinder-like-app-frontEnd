@@ -1,0 +1,132 @@
+.my-container
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to top right, #0098be, #56b7d0);
+}
+
+.logo
+{
+  position: absolute;
+}
+
+.content
+{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80%;
+  background-color: #ffffff;
+  border-radius: 50px 0 0 0;
+  padding: 0 20px;
+}
+
+.text
+{
+  color: #0098be;
+  font-size: 7vmin;
+  height: 13%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-input-group
+{
+  position: relative;
+  height: 35%;
+  background-color: #fbfbfb;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  padding: 15px 10px;
+  flex-direction: column;
+}
+
+.input-item
+{
+  background-color: #ffffff;
+  flex: 1;
+  margin: 10px 0;
+  border-radius: 20px 0;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 15px;
+}
+
+.lab
+{
+  color: #0098be;
+  display: flex;
+  align-items: center;
+  font-size: 4.3vmin;
+}
+
+.lab>i
+{
+  margin-right: 5px;
+}
+
+.input-item > input,
+.input-item > .pass-input > input
+{
+  outline: none;
+  border: none;
+  flex: 1;
+  padding: 5px 0;
+  font-size: 4.5vmin;
+  width: 100%;
+}
+
+.pass-input
+{
+  position: relative;
+}
+
+.eye
+{
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 5vmin;
+  color: #0098be;
+}
+
+.forget
+{
+  color: #0098be;
+  font-size: 3vmin;
+  text-align: end;
+  padding-top: 6px;
+  padding-right: 15px;
+}
+
+.login
+{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #0399bf, #56b7d0);
+  color: #ffffff;
+  padding: 20px 50px;
+  border-radius: 50px;
+  font-size: 4.5vmin;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: 30px;
+}
+
+.signup
+{
+  color: #0098be;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}

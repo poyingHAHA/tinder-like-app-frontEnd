@@ -1,7 +1,16 @@
 <div class="my-container">
   <div class="search-group">
-    <div class="search-btn" (click)="clickSearchBtn()"><i [ngClass]="isSearchMode?'fa-arrow-left':'fa-magnifying-glass'" class="fa-solid"></i></div>
-    <div class="search-input"><input type="text" [(ngModel)]="searchTxt" (focus)="changeSearchMode()"><div class="clear" (click)="clearTxt()"><i class="fa-solid fa-xmark"></i></div></div>
+    <div *ngIf="isSearchMode" class="backBtn-container">
+      <div class="backBtn" (click)="clickBackBtn()">
+        <i class="fa-arrow-left fa-solid"></i>
+      </div>
+      <div class="back-dummy"></div>
+    </div>
+    <div class="search-input">
+      <input #search type="text" [(ngModel)]="searchTxt" (focus)="changeSearchMode()">
+      <div class="my-placeholder" (click)="changeSearchMode()"><i class="fa-solid fa-magnifying-glass" style="margin-right: 5px;"></i>Search</div>
+      <div class="clear" (click)="clearTxt()"><i class="fa-solid fa-xmark"></i></div>
+    </div>
   </div>
   <div class="grid" *ngFor="let treemap of treemaps">
     <app-tree-map

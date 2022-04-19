@@ -1,1 +1,26 @@
-<p>login works!</p>
+<div class="my-container">
+  <div class="logo"></div>
+  <div class="content">
+    <div class="text">start explore</div>
+    <div class="my-input-group">
+      <div class="input-item email">
+        <div class="lab"><i nz-icon nzType="mail" nzTheme="outline"></i>Email</div>
+        <input type="text" [(ngModel)]="email">
+      </div>
+      <div class="input-item password">
+        <div class="lab"><i nz-icon nzType="lock" nzTheme="outline"></i>Password</div>
+        <div class="pass-input">
+          <input [type]="isSeePassword ? 'text' : 'password'" [(ngModel)]="password">
+          <div class="eye" (click)="seePassword()"><i nz-icon [nzType]="isSeePassword ? 'eye' : 'eye-invisible'" nzTheme="outline"></i></div>
+        </div>
+      </div>
+    </div>
+    <div class="forget">Forget Password</div>
+    <div class="login" (click)="login()">
+      LOG IN
+    </div>
+    <div class="signup">
+      Don't have an account? <em style="font-weight: bolder;">Sign up</em>
+    </div>
+  </div>
+</div>

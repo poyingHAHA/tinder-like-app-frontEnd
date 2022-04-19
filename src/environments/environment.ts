@@ -3,9 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 //測試機 本地機參數
+
 export const environment = {
   production: false,
-  apiurl:''
+  //domain: 'http://localhost:3000',
+  domain: 'http://140.119.19.32:8080',
+  baseRoute: {
+    buyer: "buyer",
+    shop: "shop",
+    items: "items"
+  }
 };
 
 /*

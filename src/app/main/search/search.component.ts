@@ -1,14 +1,16 @@
 import * as ProductPostModel from './../../model/interface/ProductPost';
 import { Subscription } from 'rxjs';
 import { PostService } from './../../service/post-service/post.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild("search") search!: ElementRef;
+
   searchTxt: string;
   isSearchMode: boolean;
 
@@ -36,6 +38,10 @@ export class SearchComponent implements OnInit {
 
   }
 
+  ngAfterViewInit(): void {
+
+  }
+
   clearTxt()
   {
     this.searchTxt = "";
@@ -44,10 +50,13 @@ export class SearchComponent implements OnInit {
   changeSearchMode()
   {
     // only true, or it will no trigger other btn
+    // custom placeholder will block the focus event
+    // so we use view child
+    this.search.nativeElement.focus();
     this.isSearchMode = true;
   }
 
-  clickSearchBtn()
+  clickBackBtn()
   {
     if(this.isSearchMode){
       this.isSearchMode = false;

@@ -2,5 +2,10 @@
 
 export const environment = {
   production: true,
-  apiurl:''
+  domain: 'http://140.119.19.32:8080',
+  baseRoute: {
+    buyer: "buyer",
+    shop: "shop",
+    items: "items"
+  }
 };

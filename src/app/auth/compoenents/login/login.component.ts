@@ -13,15 +13,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginSubscription: Subscription;
   email: string;
   password: string;
+  isSeePassword: boolean;
 
   constructor(private authService: AuthService, private router: Router) {
-    this.email = "test@gmail.com";
-    this.password = "test";
+    this.email = "";
+    this.password = "";
     this.loginSubscription = new Subscription();
+    this.isSeePassword = false;
   }
 
   ngOnInit(): void {
-    this.login();
+    //this.login();
   }
 
   login()
@@ -36,6 +38,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log("No");
       }
     });
+  }
+
+  seePassword()
+  {
+    this.isSeePassword = !this.isSeePassword;
   }
 
   ngOnDestroy(): void {

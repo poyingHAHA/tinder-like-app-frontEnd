@@ -10,9 +10,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
       {path: 'tinder-page', loadChildren: () => import('./tinder-page/tinder-page.module').then(m => m.TinderPageModule)},
-      {path: 'shop', loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule)},
       {path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule)},
-      {path: 'like', loadChildren: () => import('./like/like.module').then(m => m.LikeModule)},
       {path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)}
     ]
   }

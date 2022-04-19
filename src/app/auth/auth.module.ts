@@ -1,3 +1,6 @@
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './compoenents/login/login.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TokenInterceptor } from './token.interceptor';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -17,10 +20,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     }
   ],
   declarations: [
-
+    LoginComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NzIconModule,
+    FormsModule
   ]
 })
 export class AuthModule { }

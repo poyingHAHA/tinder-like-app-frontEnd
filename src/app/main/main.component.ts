@@ -19,10 +19,11 @@ export class MainComponent implements OnInit {
     // so some important data like auth info
     // should store in localstorage, so that it won't refresh when reload
 
-    localStorage.setItem('ACCESS_TOKEN','123');
-    this.http.get<any>('http://localhost:3000/index/protected').subscribe(res=>{
+    //test refresh
+    // localStorage.setItem('ACCESS_TOKEN','123');
+    // this.http.get<any>('http://localhost:3000/index/protected').subscribe(res=>{
 
-      console.log(res);
-    })
+    //   console.log(res);
+    // })
   }
 }

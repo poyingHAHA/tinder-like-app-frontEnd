@@ -1,7 +1,6 @@
 import { catchError, mapTo, Observable, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { localURI as base } from '../../config';
 import { Tokens } from '../models/token';
 import { environment } from 'src/environments/environment';
 
@@ -26,12 +25,13 @@ export class AuthService {
   login(user:{email: string, password: string}): Observable<boolean>
   {
     //使用environment 點參數
-    return this.http.post<Tokens>(`${base}/login`, user)
+    return this.http.post<Tokens>(`${environment.domain}/login`, user)
     .pipe(
       tap(tokens => this.doLoginUser(user.email, tokens)), //side effect
       mapTo(true), //map a each observable to a given value
       catchError(err => {
-        alert(err.error); //alert popout
+        console.log(err);
+        alert(err.error.error); //alert popout
         return of(false); //return an observable of false
       })
     )
@@ -39,14 +39,13 @@ export class AuthService {
 
   logout()
   {
-    this.http.post<any>(`${base}/logout`, {
+    this.http.post<any>(`${environment.production}/logout`, {
       'refreshToken': this.getRefreshToken
     }).pipe(
       tap(()=>{this.doLogoutUser()}),
       mapTo(true),
       catchError(err=>{
-        console.log(err);
-        alert(err.error);
+        alert(err.error.error);
         return of(false);
       })
     );
@@ -62,7 +61,7 @@ export class AuthService {
   refreshToken()
   {
     //index route may change
-    return this.http.post<any>(`${base}/index/refresh`,
+    return this.http.post<any>(`${environment.domain}/index/refresh`,
     {email: this.getLoggedUser(), refreshToken: this.getRefreshToken()})
     .pipe(
       tap((token: any)=>{
