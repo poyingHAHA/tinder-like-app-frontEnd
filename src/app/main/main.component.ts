@@ -22,7 +22,6 @@ export class MainComponent implements OnInit {
     //test refresh
     // localStorage.setItem('ACCESS_TOKEN','123');
     // this.http.get<any>('http://localhost:3000/index/protected').subscribe(res=>{
-
     //   console.log(res);
     // })
   }
