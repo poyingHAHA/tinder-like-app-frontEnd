@@ -3,6 +3,13 @@
 
 #below is for gitlab CI runner and school-server-runner
 
+#default runner -> gitlab share runner
+#close share runnder and group runner and redirect to your own machine gitlab runner
+#can modify runner to untagged run script
+
+#cache or artifacts is to store this job's(pipeline) specific result
+#to next job
+#every end of a stage will remove the file it install
 
 stages:
   - dependencies
@@ -10,7 +17,6 @@ stages:
   - CD
 
 install_dependencies:
-  image: node:12-alpine
   stage: dependencies
   script:
       - npm install
@@ -24,20 +30,15 @@ install_dependencies:
       - node_modules
 
 Build:
-  image: node:12-alpine
   stage: build
   script:
       - npm link @angular/cli
-      - npm run build --prod
+      - ng build --prod --base-href /tinder-like-app-gitlab/
   only:
       - main
-  cache:
-    key:
-      files:
-        - package-lock.json
+  artifacts:
     paths:
-      - node_modules
-    policy: pull
+      - dist/
 
 Pull:
   stage: CD
