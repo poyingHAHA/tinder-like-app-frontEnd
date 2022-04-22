@@ -5,12 +5,14 @@ import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
 import { TreeMapComponent } from './tree-map/tree-map.component';
 import { ShareModule } from 'src/app/share/share.module';
+import { TagComponent } from './tag/tag.component';
 
 
 @NgModule({
   declarations: [
     SearchComponent,
-    TreeMapComponent
+    TreeMapComponent,
+    TagComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,27 @@
+.my-container
+{
+  height: 100%;
+  width: 100%;
+}
+
+.tag
+{
+  color: #4fb2ce;
+  border: 1px solid #4fb2ce;
+  padding: 5px 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  white-space: nowrap; /*important to prevent text wrap*/
+}
+
+.active
+{
+  background-color: #0098be !important;
+  color: #ffffff !important;
+  border: 1px solid #0098be !important;
+}
+
