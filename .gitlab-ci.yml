@@ -28,6 +28,8 @@ install_dependencies:
     paths:
       - node_modules
 
+#artifacts, so it don't remove the output dist folder
+#and send to next job
 Build:
   stage: build
   script:
@@ -41,13 +43,12 @@ Build:
 
 # remove destination folder file and subdir
 # xcopy to copy file to another specific folder
-# /s all file, /q yes to all, 2>null(even if not exist, don't throw error)
+# use powershell command, not cmd command
 Pull:
   stage: deploy
   script:
-    - rmdir /s /q C:\inetpub\wwwroot\tinder-like-app-gitlab\assets 2>null
-    - del /s /q C:\inetpub\wwwroot\tinder-like-app-gitlab\ 2>null
-    - xcopy "C:\Users\user\Desktop\GitLab-Runner\builds\zKs7bwne\0\maoxun1\tinder-like-app\dist" "C:\inetpub\wwwroot\tinder-like-app-gitlab" /e
+    - Remove-Item -Path "C:\inetpub\wwwroot\tinder-like-app-gitlab\*" -Recurse
+    - Copy-Item "C:\Users\user\Desktop\GitLab-Runner\builds\zKs7bwne\0\maoxun1\tinder-like-app\dist\*" -Destination "C:\inetpub\wwwroot\tinder-like-app-gitlab" -Recurse
     - echo "deploy dist to local server specific folder"
   # tags:
   #   - school-server-runner
