@@ -2,7 +2,7 @@
 
 #default runner -> gitlab share runner (randomly)
 #close share runner and group runner and redirect to your own machine gitlab runner
-#can modify runner to untagged run script
+#can modify runner to run untagged script
 
 #artifacts is to store this job's(stage) specific result (small, between stages) to remote server
 #cache is to store this pipeline's specific result (big, package, dependency) to local server
@@ -35,9 +35,8 @@ Build:
       - ng build --prod --base-href /tinder-like-app-gitlab/
   only:
       - main
-  # artifacts:
-  #   paths:
-  #     - dist/
+  paths:
+      - dist/
 
 # remove destination folder file and subdir
 # xcopy to copy file to another specific folder
@@ -45,9 +44,9 @@ Build:
 Pull:
   stage: deploy
   script:
-    # - rmdir /s /q  C:\inetpub\wwwroot\tinder-like-app-gitlab\assets
-    # - del /s /q C:\inetpub\wwwroot\tinder-like-app-gitlab\
-    # - xcopy "C:\Users\user\Desktop\GitLab-Runner\builds\zKs7bwne\0\maoxun1\tinder-like-app\dist" "C:\inetpub\wwwroot\tinder-like-app-gitlab" /e
+    - rmdir /s /q  C:\inetpub\wwwroot\tinder-like-app-gitlab\assets
+    - del /s /q C:\inetpub\wwwroot\tinder-like-app-gitlab\
+    - xcopy "C:\Users\user\Desktop\GitLab-Runner\builds\zKs7bwne\0\maoxun1\tinder-like-app\dist" "C:\inetpub\wwwroot\tinder-like-app-gitlab" /e
     - echo "deploy dist to local server specific folder"
   # tags:
   #   - school-server-runner
