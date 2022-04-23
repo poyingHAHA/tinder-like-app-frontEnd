@@ -35,7 +35,8 @@ Build:
       - ng build --prod --base-href /tinder-like-app-gitlab/
   only:
       - main
-  paths:
+  artifacts:
+    paths:
       - dist/
 
 # remove destination folder file and subdir
