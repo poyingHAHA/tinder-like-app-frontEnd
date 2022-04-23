@@ -1,20 +1,19 @@
-#npm run build don't put base-href, just set locally
-#because there are no /projectName/ on gitlab runner folder
+#below is for gitlab server runner and school-server-runner
 
-#below is for gitlab CI runner and school-server-runner
-
-#default runner -> gitlab share runner
-#close share runnder and group runner and redirect to your own machine gitlab runner
+#default runner -> gitlab share runner (randomly)
+#close share runner and group runner and redirect to your own machine gitlab runner
 #can modify runner to untagged run script
 
-#cache or artifacts is to store this job's(stage) specific result
+#artifacts is to store this job's(stage) specific result (small, between stages) to remote server
+#cache is to store this pipeline's specific result (big, package, dependency) to local server
+
 #to next job
 #every end of a stage will remove the file it install
 
 stages:
   - dependencies
   - build
-  - CD
+  - deploy
 
 install_dependencies:
   stage: dependencies
@@ -36,13 +35,20 @@ Build:
       - ng build --prod --base-href /tinder-like-app-gitlab/
   only:
       - main
-  artifacts:
-    paths:
-      - dist/
+  # artifacts:
+  #   paths:
+  #     - dist/
 
+# xcopy to copy file to another specific folder
 Pull:
-  stage: CD
+  stage: deploy
   script:
-    - echo "just pull to local server"
-  tags:
-    - school-server-runner
+    - xcopy "C:\Users\user\Desktop\GitLab-Runner\builds\zKs7bwne\0\maoxun1\tinder-like-app\dist" "C:\inetpub\wwwroot\tinder-like-app-gitlab" -e
+    - echo "just deploy dist to local server specific folder"
+  # tags:
+  #   - school-server-runner
+
+
+#copy file (test in serevr first)
+#separate branch
+#ssh to connect multiple machine
