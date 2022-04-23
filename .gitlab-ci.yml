@@ -45,9 +45,9 @@ Build:
 Pull:
   stage: deploy
   script:
-    - rmdir /s /q  C:\inetpub\wwwroot\tinder-like-app-gitlab\assets
-    - del /s /q C:\inetpub\wwwroot\tinder-like-app-gitlab\
-    - xcopy "C:\Users\user\Desktop\GitLab-Runner\builds\zKs7bwne\0\maoxun1\tinder-like-app\dist" "C:\inetpub\wwwroot\tinder-like-app-gitlab" /e
+    # - rmdir /s /q  C:\inetpub\wwwroot\tinder-like-app-gitlab\assets
+    # - del /s /q C:\inetpub\wwwroot\tinder-like-app-gitlab\
+    # - xcopy "C:\Users\user\Desktop\GitLab-Runner\builds\zKs7bwne\0\maoxun1\tinder-like-app\dist" "C:\inetpub\wwwroot\tinder-like-app-gitlab" /e
     - echo "deploy dist to local server specific folder"
   # tags:
   #   - school-server-runner
