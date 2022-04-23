@@ -48,7 +48,7 @@ Pull:
   stage: deploy
   script:
     - Remove-Item -Path "C:\inetpub\wwwroot\tinder-like-app-gitlab\*" -Recurse
-    - Copy-Item "C:\Users\user\Desktop\GitLab-Runner\builds\zKs7bwne\0\maoxun1\tinder-like-app\dist\*" -Destination "C:\inetpub\wwwroot\tinder-like-app-gitlab" -Recurse
+    - Copy-Item "C:\Users\user\Desktop\GitLab-Runner\builds\zxLvBqtL\0\maoxun1\tinder-like-app\dist\*" -Destination "C:\inetpub\wwwroot\tinder-like-app-gitlab" -Recurse
     - echo "deploy dist to local server specific folder"
   # tags:
   #   - school-server-runner
