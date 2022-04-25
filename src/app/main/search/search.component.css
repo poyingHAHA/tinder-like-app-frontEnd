@@ -207,6 +207,7 @@ input
   align-items: center;
   padding: 0 10px;
   overflow-x: scroll;
+  z-index: 3;
 }
 
 .sklt-tag
