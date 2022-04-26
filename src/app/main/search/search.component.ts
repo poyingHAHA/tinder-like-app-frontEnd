@@ -1,7 +1,7 @@
 import * as ProductPostModel from './../../model/interface/ProductPost';
-import { Subscription, tap } from 'rxjs';
+import { Subscription, tap, BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { PostService } from './../../service/post-service/post.service';
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-search',
@@ -19,8 +19,9 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   searchTxt: string;
   isSearchMode: boolean;
 
-  getProductPost$?: Subscription;
+  destroy$: Subject<any>;
   treemaps: ProductPostModel.ProductPost[][]=[];
+  loadLimit: number;
 
   constructor(
     private postService: PostService
@@ -28,11 +29,20 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isLoading = true;
     this.searchTxt = "";
     this.isSearchMode = false;
+    this.loadLimit = 18;
+    this.destroy$ = new Subject<any>();
 
-    let limit:number = 18;
+    let shop: string = "624941b301a9a3c75d9d26d6";
+    this.initTreeMaps(shop);
+  }
 
-    //testing subscribe
-    this.getProductPost$ = this.postService.getProductPosts(limit, 0, "624941b301a9a3c75d9d26d6")
+  initTreeMaps(shop: string)
+  {
+    //testing subscribe, random shop
+    this.postService.getProductPosts(this.loadLimit, 0, shop)
+    .pipe(
+      takeUntil(this.destroy$)
+    )
     .subscribe(posts => {
       if(posts){
         this.isLoading = false;
@@ -43,27 +53,50 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
         {
           label: "All",
           isActive: true
-        },
-        {
-          label: "高領shirt",
-          isActive: false
-        },
-        {
-          label: "高領shirtshirt",
-          isActive: false
-        },
-        {
-          label: "高領shirtshirtshirt",
-          isActive: false
         }
       ]
 
+      //test, choose 5 post's labels
+      for(let i=0; i<3; i++)
+      {
+        posts[i].labels.forEach(label=>{
+          this.testTags.push({
+            label: label.display_name,
+            isActive: false
+          });
+        });
+      }
+
       //每6個一組
-      for(let i=0,j=5; i<limit; i+=6,j=i+5)
+      for(let i=0,j=5; i<this.loadLimit; i+=6,j=i+5)
       {
         this.treemaps.push(posts.slice(i, j+1));
       }
     });
+  }
+
+  loadMoreTreeMaps(shop: string)
+  {
+    //can randomly choose shop, so that productpost won't run out
+    let skip = this.loadLimit;
+    this.loadLimit+=18;
+    this.postService.getProductPosts(this.loadLimit, skip, shop)
+    .pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(posts =>{
+      for(let i=0,j=5; i<this.loadLimit; i+=6,j=i+5)
+      {
+        this.treemaps.push(posts.slice(i, j+1));
+      }
+    });
+  }
+
+  @HostListener('scroll', ['$event'])
+  onScroll(e: any): void {
+    // visible height + pixel scrolled >= total height
+    if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
+      this.loadMoreTreeMaps("624941b301a9a3c75d9d26d6");
+    }
   }
 
   ngOnInit(): void {
@@ -107,7 +140,8 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      //can use subject to unsubscribe all observable
-    this.getProductPost$?.unsubscribe();
+    //can use subject to unsubscribe all observable
+    this.destroy$.next(null);
+    this.destroy$.complete();
   }
 }

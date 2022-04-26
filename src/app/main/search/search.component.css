@@ -218,3 +218,12 @@ input
   background-color: #dedede;
   border-radius: 20px;
 }
+
+.loader-wrapper
+{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+}

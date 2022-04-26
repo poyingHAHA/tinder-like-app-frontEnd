@@ -1,4 +1,4 @@
-<div class="my-container">
+<div class="my-container" (scroll)="onScroll($event)">
   <div class="search-group">
     <div *ngIf="isSearchMode" class="backBtn-container">
       <div class="backBtn" (click)="clickBackBtn()">
@@ -34,9 +34,13 @@
     </div>
   </div>
 
+  <div class="loader-wrapper">
+    <app-loader-spiner></app-loader-spiner>
+  </div>
+
   <div class="search-panel" *ngIf="isSearchMode">
     <div class="search-block history">
-      <div class="search-tag his-tag">Hitory</div>
+      <div class="search-tag his-tag">History</div>
       <div class="search-opt clear-his"><i class="fa-solid fa-trash"></i></div>
       <div class="search-contents his-contents">
         <div class="search-cont his-cont">高領</div>

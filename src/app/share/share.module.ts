@@ -1,3 +1,4 @@
+import { LoaderSpinerComponent } from './../layout/loader-spiner/loader-spiner.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ const exportComponents:any[] = [
   BigPostComponent,
   CommentComponent,
   ArticleComponent,
-  SharePostComponent
+  SharePostComponent,
+  LoaderSpinerComponent
 ];
 const exportModules:any[] = [
   FormsModule,
@@ -26,7 +28,8 @@ const exportModules:any[] = [
     CommentComponent,
     ArticleComponent,
     BigPostComponent,
-    SharePostComponent
+    SharePostComponent,
+    LoaderSpinerComponent
   ],
   imports: [
     CommonModule,
