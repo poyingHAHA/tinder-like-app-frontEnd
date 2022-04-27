@@ -76,32 +76,8 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     .pipe(
       takeUntil(this.destroy$)
     ).subscribe(posts =>{
-      console.log("call api");
       this.addTreeMaps(this.slicePosts(posts));
     });
-  }
-
-  //on mobile will detect multiple times, so that it will call api so many times
-  //use rxjs delay
-  async onScroll(e: any): Promise<void>{
-    // offset -> 移動的
-    // visible height + pixel scrolled >= total height
-    if(!this.isScrollToBottom){
-      if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
-        this.isScrollToBottom = true;
-
-        this.cleanTagsAndKeepFirst();
-        console.log("scroll to bottom");
-        this.loadMoreTreeMaps(18);
-        let randTreemaps: ProductPostModel.ProductPost[][] = this.selectFromArrayRandomly<ProductPostModel.ProductPost[]>(this.treemaps, 3);
-        let randPosts: ProductPostModel.ProductPost[] = [];
-        randTreemaps.forEach(treemap=>{
-          randPosts.push(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(treemap, 1)[0]);
-        });
-        this.generateAndAddTags(randPosts);
-        this.isScrollToBottom = false;
-      }
-    }
   }
 
   clearTxt()
@@ -141,14 +117,17 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+
+    //on mobile will trigger multiple times, so that it will call api so many times
+    //use rxjs delay
     this.scrollSub = fromEvent(this.container.nativeElement, 'scroll')
     .pipe(
+      takeUntil(this.destroy$),
       //delay 300ms
       debounceTime(300),
       filter(()=>this.container.nativeElement.offsetHeight + this.container.nativeElement.scrollTop >= this.container.nativeElement.scrollHeight)
     ).subscribe(()=>{
       this.cleanTagsAndKeepFirst();
-      console.log("scroll to bottom");
       this.loadMoreTreeMaps(18);
       let randTreemaps: ProductPostModel.ProductPost[][] = this.selectFromArrayRandomly<ProductPostModel.ProductPost[]>(this.treemaps, 3);
       let randPosts: ProductPostModel.ProductPost[] = [];

@@ -1,11 +1,16 @@
 <div class="my-container">
   <div class="header">
     <div class="header-opt history-btn" (click)="showHistory()"><i class="fa-solid fa-clock-rotate-left"></i></div>
+    <div class="header-opt notification"><i class="fa-solid fa-bell"></i></div>
+    <div class="add"></div>
   </div>
   <div class="card-content">
-    <div *ngFor="let i of test">
-      <app-tinder-card id="{{'card'+i.name}}" [cardInfo]="i"></app-tinder-card>
-    </div>
+      <div *ngFor="let t of test;">
+        <app-tinder-card
+          id="{{'card'+t.name}}"
+          [cardInfo]="t"
+        ></app-tinder-card>
+      </div>
   </div>
 
   <div
@@ -24,13 +29,4 @@
         </div>
       </div>
   </div>
-
-  <!-- <div class="content">
-
-    <div class="option-group">
-      <div class="option like" (click)="clickLike()"><i class="fa-solid fa-heart"></i></div>
-      <div class="option dislike" (click)="clickDislike()"><i class="fa-solid fa-xmark"></i></div>
-    </div>
-  </div> -->
-
 </div>

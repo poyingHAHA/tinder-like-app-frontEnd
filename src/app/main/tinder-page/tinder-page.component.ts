@@ -44,6 +44,7 @@ export class TinderPageComponent implements OnInit, OnDestroy {
         this.dislikes.push(card);
         this.top = this.top<1 ? 0 : this.top-1;
       }
+
     });
   }
 

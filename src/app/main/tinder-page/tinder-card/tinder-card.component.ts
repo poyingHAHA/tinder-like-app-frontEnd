@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 import { animate, transition, trigger, keyframes } from '@angular/animations';
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
 import { TinderLayoutService } from 'src/app/service/layout-service/tinder-layout.service';
 import * as kf from '../../keyframes';
 
@@ -17,10 +17,12 @@ import * as kf from '../../keyframes';
     ])
   ]
 })
-export class TinderCardComponent implements OnInit, OnDestroy {
+export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
   //place in product_post or sth else
   @Input('cardInfo') cardInfo!: {name: string};
   @Output('swiped') swipeEvent = new EventEmitter();
+
+  @ViewChild("card") card!: ElementRef;
 
   animationState?: string;
   lastX!: number;
@@ -28,6 +30,9 @@ export class TinderCardComponent implements OnInit, OnDestroy {
 
   x!: number;
   y!: number;
+
+  initY!: number;
+  initX!: number;
 
   rotateDeg!: number;
   opacityPercent!: number;
@@ -43,13 +48,15 @@ export class TinderCardComponent implements OnInit, OnDestroy {
   constructor(private tinderLayoutService: TinderLayoutService) {
     this.rotateDeg = 0;
     this.opacityPercent = 1;
+    this.initX = 0;
+    this.initY = 0;
+    this.x = this.initX;
+    this.y = this.initY;
+    this.lastX = this.x;
+    this.lastY = this.y;
   }
 
   ngOnInit(): void {
-    this.x = 0;
-    this.y = 80;
-    this.lastX = this.x;
-    this.lastY = this.y;
     this.clickSubs$ = this.tinderLayoutService.getClickObs().subscribe(event => {
       if(event.cardInfo == this.cardInfo.name)
       {
@@ -62,6 +69,10 @@ export class TinderCardComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   startAnimation(state: string)
@@ -106,8 +117,8 @@ export class TinderCardComponent implements OnInit, OnDestroy {
         this.isReset = true;
         this.sleep(400).then(()=>{
           this.isReset = false;
-          this.x = 0;
-          this.y = 80;
+          this.x = this.initX;
+          this.y = this.initY;
           this.resetRotateAndOpacity();
         });
       }
