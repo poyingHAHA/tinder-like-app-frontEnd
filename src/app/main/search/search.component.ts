@@ -71,7 +71,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     .pipe(
       takeUntil(this.destroy$)
     ).subscribe(posts =>{
-      console.log(posts);
+      console.log("call api");
       this.addTreeMaps(this.slicePosts(posts));
     });
   }
@@ -80,9 +80,9 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   onScroll(e: any): void {
     // offset -> 移動的
     // visible height + pixel scrolled >= total height
-    console.log(e.target.scrollTop);
     if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
       this.cleanTagsAndKeepFirst();
+      console.log("scroll to bottom");
       this.loadMoreTreeMaps(18);
       let randTreemaps: ProductPostModel.ProductPost[][] = this.selectFromArrayRandomly<ProductPostModel.ProductPost[]>(this.treemaps, 3);
       let randPosts: ProductPostModel.ProductPost[] = [];
