@@ -1,12 +1,13 @@
 <div class="my-container">
   <div class="header">
-    <div class="history-btn" (click)="showHistory()"><i class="fa-solid fa-clock-rotate-left"></i></div>
+    <div class="header-opt history-btn" (click)="showHistory()"><i class="fa-solid fa-clock-rotate-left"></i></div>
   </div>
   <div class="card-content">
     <div *ngFor="let i of test">
       <app-tinder-card id="{{'card'+i.name}}" [cardInfo]="i"></app-tinder-card>
     </div>
   </div>
+
   <div
       class="history"
       *ngIf="isHistoryOpen"
@@ -22,7 +23,7 @@
           </div>
         </div>
       </div>
-    </div>
+  </div>
 
   <!-- <div class="content">
 

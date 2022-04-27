@@ -1,5 +1,5 @@
 import * as ProductPostModel from './../../model/interface/ProductPost';
-import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter } from 'rxjs';
+import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, fromEvent, debounceTime } from 'rxjs';
 import { PostService } from './../../service/post-service/post.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListener, Type } from '@angular/core';
 
@@ -10,6 +10,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, Hos
 })
 export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("search") search!: ElementRef;
+  @ViewChild("container") container!: ElementRef;
 
   isLoading: boolean;
 
@@ -21,6 +22,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   destroy$: Subject<any>;
   treemaps: ProductPostModel.ProductPost[][]=[];
+  scrollSub!: Subscription;
 
   isScrollToBottom: boolean;
 
@@ -35,7 +37,6 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     let shop: string = "624941b301a9a3c75d9d26d6";
 
     this.isScrollToBottom = false;
-
     this.initTreeMaps(shop);
   }
 
@@ -140,7 +141,22 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-
+    this.scrollSub = fromEvent(this.container.nativeElement, 'scroll')
+    .pipe(
+      //delay 300ms
+      debounceTime(300),
+      filter(()=>this.container.nativeElement.offsetHeight + this.container.nativeElement.scrollTop >= this.container.nativeElement.scrollHeight)
+    ).subscribe(()=>{
+      this.cleanTagsAndKeepFirst();
+      console.log("scroll to bottom");
+      this.loadMoreTreeMaps(18);
+      let randTreemaps: ProductPostModel.ProductPost[][] = this.selectFromArrayRandomly<ProductPostModel.ProductPost[]>(this.treemaps, 3);
+      let randPosts: ProductPostModel.ProductPost[] = [];
+      randTreemaps.forEach(treemap=>{
+        randPosts.push(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(treemap, 1)[0]);
+      });
+      this.generateAndAddTags(randPosts);
+    });
   }
 
   selectFromArrayRandomly<T>(arr: any[], num: number): T[]
