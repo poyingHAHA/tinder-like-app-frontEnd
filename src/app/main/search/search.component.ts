@@ -78,8 +78,9 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('scroll', ['$event'])
   onScroll(e: any): void {
-    //offset -> 移動的
+    // offset -> 移動的
     // visible height + pixel scrolled >= total height
+    console.log(e.target.scrollTop);
     if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
       this.cleanTagsAndKeepFirst();
       this.loadMoreTreeMaps(18);
