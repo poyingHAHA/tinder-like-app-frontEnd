@@ -22,7 +22,6 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   destroy$: Subject<any>;
   treemaps: ProductPostModel.ProductPost[][]=[];
 
-  scrollSubject: BehaviorSubject<any>;
   isScrollToBottom: boolean;
 
   constructor(
@@ -35,7 +34,6 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
     let shop: string = "624941b301a9a3c75d9d26d6";
 
-    this.scrollSubject = new BehaviorSubject<any>(null);
     this.isScrollToBottom = false;
 
     this.initTreeMaps(shop);
@@ -83,15 +81,14 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   //on mobile will detect multiple times, so that it will call api so many times
-  //use behavior subject to queue up event and only take first one
+  //use flag to handle this
   @HostListener('scroll', ['$event'])
-  async onScroll(e: any): Promise<void> {
+  onScroll(e: any): void{
     // offset -> 移動的
     // visible height + pixel scrolled >= total height
     if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
       if(!this.isScrollToBottom){
         this.isScrollToBottom = true;
-        this.scrollSubject.next(false);
 
         this.cleanTagsAndKeepFirst();
         console.log("scroll to bottom");
@@ -102,16 +99,8 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
           randPosts.push(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(treemap, 1)[0]);
         });
         this.generateAndAddTags(randPosts);
-        this.scrollSubject.next(true);
         this.isScrollToBottom = false;
-      }else
-      {
-        this.scrollSubject.pipe(
-          filter(status => status==true),
-          tap(()=>{console.log("complete, unexecute");})
-        )
       }
-
     }
   }
 
@@ -211,6 +200,5 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     //can use subject to unsubscribe all observable
     this.destroy$.next(null);
     this.destroy$.complete();
-    this.scrollSubject.complete();
   }
 }
