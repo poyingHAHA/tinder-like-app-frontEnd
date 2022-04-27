@@ -8,14 +8,23 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PostService {
+  private baseURI: string;
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.baseURI = `${environment.domain}/${environment.baseRoute.items}`;
+  }
 
   getProductPosts(limit: number, skip: number, shopid: string): Observable<ProductPost[]>
   {
-    let uri: string = `${environment.domain}/${environment.baseRoute.items}/?limit=${limit}&skip=${skip}&shopid=${shopid}`
+    let uri: string = `${this.baseURI}/?limit=${limit}&skip=${skip}&shopid=${shopid}`
+    return this.http.get<ProductPost[]>(uri);
+  }
+
+  getProductPostsRandomly(num: number): Observable<ProductPost[]>
+  {
+    let uri: string = `${this.baseURI}/random/${num}`;
     return this.http.get<ProductPost[]>(uri);
   }
 }
