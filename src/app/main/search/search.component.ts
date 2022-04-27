@@ -1,5 +1,5 @@
 import * as ProductPostModel from './../../model/interface/ProductPost';
-import { Subscription, tap, BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter } from 'rxjs';
 import { PostService } from './../../service/post-service/post.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListener, Type } from '@angular/core';
 
@@ -22,6 +22,9 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   destroy$: Subject<any>;
   treemaps: ProductPostModel.ProductPost[][]=[];
 
+  scrollSubject: BehaviorSubject<any>;
+  isScrollToBottom: boolean;
+
   constructor(
     private postService: PostService
   ) {
@@ -31,6 +34,9 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.destroy$ = new Subject<any>();
 
     let shop: string = "624941b301a9a3c75d9d26d6";
+
+    this.scrollSubject = new BehaviorSubject<any>(null);
+    this.isScrollToBottom = false;
 
     this.initTreeMaps(shop);
   }
@@ -76,20 +82,36 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  //on mobile will detect multiple times, so that it will call api so many times
+  //use behavior subject to queue up event and only take first one
   @HostListener('scroll', ['$event'])
-  onScroll(e: any): void {
+  async onScroll(e: any): Promise<void> {
     // offset -> 移動的
     // visible height + pixel scrolled >= total height
     if (e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight) {
-      this.cleanTagsAndKeepFirst();
-      console.log("scroll to bottom");
-      this.loadMoreTreeMaps(18);
-      let randTreemaps: ProductPostModel.ProductPost[][] = this.selectFromArrayRandomly<ProductPostModel.ProductPost[]>(this.treemaps, 3);
-      let randPosts: ProductPostModel.ProductPost[] = [];
-      randTreemaps.forEach(treemap=>{
-        randPosts.push(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(treemap, 1)[0]);
-      });
-      this.generateAndAddTags(randPosts);
+      if(!this.isScrollToBottom){
+        this.isScrollToBottom = true;
+        this.scrollSubject.next(false);
+
+        this.cleanTagsAndKeepFirst();
+        console.log("scroll to bottom");
+        this.loadMoreTreeMaps(18);
+        let randTreemaps: ProductPostModel.ProductPost[][] = this.selectFromArrayRandomly<ProductPostModel.ProductPost[]>(this.treemaps, 3);
+        let randPosts: ProductPostModel.ProductPost[] = [];
+        randTreemaps.forEach(treemap=>{
+          randPosts.push(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(treemap, 1)[0]);
+        });
+        this.generateAndAddTags(randPosts);
+        this.scrollSubject.next(true);
+        this.isScrollToBottom = false;
+      }else
+      {
+        this.scrollSubject.pipe(
+          filter(status => status==true),
+          tap(()=>{console.log("complete, unexecute");})
+        )
+      }
+
     }
   }
 
@@ -189,5 +211,6 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     //can use subject to unsubscribe all observable
     this.destroy$.next(null);
     this.destroy$.complete();
+    this.scrollSubject.complete();
   }
 }
