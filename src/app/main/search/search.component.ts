@@ -71,6 +71,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     .pipe(
       takeUntil(this.destroy$)
     ).subscribe(posts =>{
+      console.log(posts);
       this.addTreeMaps(this.slicePosts(posts));
     });
   }
