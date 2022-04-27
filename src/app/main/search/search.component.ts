@@ -81,9 +81,8 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   //on mobile will detect multiple times, so that it will call api so many times
-  //use flag to handle this
-  // @HostListener('scroll', ['$event'])
-  onScroll(e: any): void{
+  //use rxjs delay
+  async onScroll(e: any): Promise<void>{
     // offset -> 移動的
     // visible height + pixel scrolled >= total height
     if(!this.isScrollToBottom){
