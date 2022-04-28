@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="loader-wrapper">
+  <div *ngIf="!isLoading" class="loader-wrapper">
     <app-loader-spiner></app-loader-spiner>
   </div>
 

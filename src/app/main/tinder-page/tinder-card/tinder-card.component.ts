@@ -1,3 +1,4 @@
+import { ProductPost } from './../../../model/interface/ProductPost';
 import { Subscription } from 'rxjs';
 import { animate, transition, trigger, keyframes } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
@@ -44,6 +45,8 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
   isReset: boolean = false;
 
   clickSubs$?: Subscription;
+
+  @Input('posts') posts?: ProductPost[];
 
   constructor(private tinderLayoutService: TinderLayoutService) {
     this.rotateDeg = 0;

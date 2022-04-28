@@ -7,9 +7,12 @@
   height: 100%;
 
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
 
-
-  background-image: url('../../../../assets/images/purse.png');
+  background-image: url('../../../../assets/images/coat.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -38,4 +41,72 @@
   top: 0 !important;
   opacity: 1 !important;
   transform: rotateZ(0deg) !important;
+}
+
+.mask
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, transparent, 85%, black 100%);
+}
+
+.info-group
+{
+  width: 100%;
+  height: 10%;
+}
+
+.action-group
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 15%;
+}
+
+.action
+{
+  font-size: 8vmin;
+  padding: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action>.dummy
+{
+  width: 100%;
+  padding-bottom: 100%;
+}
+
+.dislike
+{
+  color: #418f96;
+  border: 2.5px solid #4ec4ce;
+}
+
+.dislike-svg
+{
+  background-image: url('../../../../assets/images/dislike.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 8vmin !important;
+  height: 8vmin;
+}
+
+.like
+{
+  color: #e5bb27;
+  border: 2.5px solid #e5bb27;
+}
+
+.super-like-status
+{
+  width: 100%;
+  height: 8%;
 }

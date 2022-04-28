@@ -1,13 +1,26 @@
 <div
-    #card
-    class="mycard"
-    [style.left.px]="x"
-    [style.top.px]="y"
-    [style.transform]="'rotateZ('+rotateDeg+'deg)'"
-    [style.opacity]="opacityPercent"
-    [ngClass]="{'swipe-out-right': isOutRight, 'swipe-out-left': isOutLeft, 'reset': isReset}"
-    [@cardAnimator]="animationState"
-    (@cardAnimator.done)="resetAnimationState()"
-    *ngIf="!isDelete"
-    (pan)="handleDrag($event)">
+  #card
+  class="mycard"
+  [style.left.px]="x"
+  [style.top.px]="y"
+  [style.transform]="'rotateZ('+rotateDeg+'deg)'"
+  [style.opacity]="opacityPercent"
+  [ngClass]="{'swipe-out-right': isOutRight, 'swipe-out-left': isOutLeft, 'reset': isReset}"
+  [@cardAnimator]="animationState"
+  (@cardAnimator.done)="resetAnimationState()"
+  *ngIf="!isDelete"
+  (pan)="handleDrag($event)">
+    <div class="mask"></div>
+    <div class="info-group">
+      <div class="name"></div>
+      <div class="info"></div>
+    </div>
+    <div class="action-group">
+      <div class="action dislike">
+        <div class="dislike-svg"></div>
+      </div>
+      <div class="action super-like"><i class="fa-regular fa-star"></i><div class="dummy"></div></div>
+      <div class="action like"><i class="fa-solid fa-heart"></i><div  class="dummy"></div></div>
+    </div>
+    <div class="super-like-status"></div>
 </div>
