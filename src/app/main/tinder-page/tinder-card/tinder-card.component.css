@@ -66,7 +66,7 @@
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  height: 13%;
+  height: 14%;
   z-index: 2;
   position: relative;
 }
@@ -74,7 +74,7 @@
 .action
 {
   font-size: 6vmin;
-  padding: 15px;
+  padding: 2vmin;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -121,8 +121,8 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  top: 15px;
-  bottom: -1px;
+  height: 150%;
+  bottom: calc(100% - 1px);
   left: 0;
   right: 0;
 }
@@ -136,6 +136,7 @@
   border-radius: 10px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .status-item
