@@ -1,7 +1,8 @@
+import { tinderEvent } from './../../service/layout-service/tinder-layout.service';
 import { TinderLayoutService } from '../../service/layout-service/tinder-layout.service';
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import 'hammerjs';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tinder-page',
@@ -26,14 +27,23 @@ export class TinderPageComponent implements OnInit, OnDestroy {
   likeHis: boolean = true;
   dislikeHis: boolean = false;
 
+  actionSub$: Subject<tinderEvent>;
   swipeSubs$?: Subscription;
+  clickSubs$?: Subscription;
 
   isHistoryOpen: boolean = false;
 
-  constructor(private tinderLayoutService: TinderLayoutService) { }
+  constructor(private tinderLayoutService: TinderLayoutService) {
+    this.actionSub$ = new Subject<tinderEvent>();
+  }
 
   ngOnInit(): void {
-    this.swipeSubs$ = this.tinderLayoutService.getSwipeObs().subscribe(event=>{
+    this.tinderLayoutService.getClickObs().subscribe(this.actionSub$);
+    this.tinderLayoutService.getSwipeObs().subscribe(this.actionSub$);
+
+    // observable <-subscribe- subject -subscribe(addObserver)-> observer
+    this.actionSub$.subscribe(event=>{
+      //一定是最上面的人發生event
       let card = this.test[this.top];
       if(card && event.type == "like")
       {
@@ -44,22 +54,7 @@ export class TinderPageComponent implements OnInit, OnDestroy {
         this.dislikes.push(card);
         this.top = this.top<1 ? 0 : this.top-1;
       }
-
     });
-  }
-
-  clickLike()
-  {
-    this.likes.push(this.test[this.top]);
-    this.tinderLayoutService.setClickEvent({type: "like", cardInfo: this.test[this.top].name});
-    this.top = this.top<1 ? 0 : this.top-1;
-  }
-
-  clickDislike()
-  {
-    this.dislikes.push(this.test[this.top]);
-    this.tinderLayoutService.setClickEvent({type: "dislike", cardInfo: this.test[this.top].name});
-    this.top = this.top<1 ? 0 : this.top-1;
   }
 
   showHistory()

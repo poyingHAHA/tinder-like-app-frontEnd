@@ -19,8 +19,8 @@
     >
       <div class="his-block">
         <div class="his-header">
-          <div [ngClass]="likeHis?'like-active':''" class="his-option his-like" (click)="changeHistoryMode('like')"><i class="fa-solid fa-heart"></i></div>
           <div [ngClass]="dislikeHis?'dislike-active':''" class="his-option his-dislike" (click)="changeHistoryMode('dislike')"><i class="fa-solid fa-xmark"></i></div>
+          <div [ngClass]="likeHis?'like-active':''" class="his-option his-like" (click)="changeHistoryMode('like')"><i class="fa-solid fa-heart"></i></div>
         </div>
         <div class="his-content">
           <div *ngFor="let item of hisList" class="his-item">

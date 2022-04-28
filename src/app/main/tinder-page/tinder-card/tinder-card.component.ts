@@ -1,4 +1,4 @@
-import { ProductPost } from './../../../model/interface/ProductPost';
+import { ProductPost, Like } from './../../../model/interface/ProductPost';
 import { Subscription } from 'rxjs';
 import { animate, transition, trigger, keyframes } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
@@ -46,7 +46,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
 
   clickSubs$?: Subscription;
 
-  @Input('posts') posts?: ProductPost[];
+  @Input('post') post!: ProductPost;
 
   constructor(private tinderLayoutService: TinderLayoutService) {
     this.rotateDeg = 0;
@@ -60,18 +60,20 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   ngOnInit(): void {
-    this.clickSubs$ = this.tinderLayoutService.getClickObs().subscribe(event => {
-      if(event.cardInfo == this.cardInfo.name)
-      {
-        if(event.type=="like")
-        {
-          this.isOutLeft = true;
-        }else if(event.type=="dislike")
-        {
-          this.isOutRight = true;
-        }
-      }
-    });
+
+  }
+
+  clickAction(action: string)
+  {
+    if(action=="like")
+    {
+      this.isOutRight = true;
+      this.tinderLayoutService.setClickEvent({type: "like", cardInfo: this.post});
+    }else if(action=="dislike")
+    {
+      this.isOutLeft = true;
+      this.tinderLayoutService.setClickEvent({type: "dislike", cardInfo: this.post});
+    }
   }
 
   ngAfterViewInit(): void {
@@ -109,10 +111,10 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
       if((this.x>0&&this.x>=150) || (this.x<0&&this.x<=-160)){
         if(this.x>0){
           this.isOutRight = true;
-          this.tinderLayoutService.setSwipeEvent({type: "dislike", cardInfo: this.cardInfo.name});
+          this.tinderLayoutService.setSwipeEvent({type: "like", cardInfo: this.post});
         }else{
           this.isOutLeft = true;
-          this.tinderLayoutService.setSwipeEvent({type: "like", cardInfo: this.cardInfo.name});
+          this.tinderLayoutService.setSwipeEvent({type: "dislike", cardInfo: this.post});
         }
         this.sleep(800).then(()=>this.isDelete=true);
       }else

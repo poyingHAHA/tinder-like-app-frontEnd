@@ -1,10 +1,11 @@
+import { ProductPost } from './../../model/interface/ProductPost';
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
-interface tinderEvent
+export interface tinderEvent
 {
   type: "like" | "dislike",
-  cardInfo: string
+  cardInfo: ProductPost
 }
 
 @Injectable({
