@@ -5,10 +5,9 @@
     <div class="add"></div>
   </div>
   <div class="card-content">
-      <div *ngFor="let t of test;">
+      <div *ngFor="let post of cardsInfo">
         <app-tinder-card
-          id="{{'card'+t.name}}"
-          [cardInfo]="t"
+          [post]="post"
         ></app-tinder-card>
       </div>
   </div>

@@ -10,18 +10,38 @@
   (@cardAnimator.done)="resetAnimationState()"
   *ngIf="!isDelete"
   (pan)="handleDrag($event)">
-    <div class="mask"></div>
+    <swiper
+      [navigation]="true"
+    >
+      <ng-template
+        *ngFor="let img of post.images"
+        swiperSlide
+      >
+        <div class="mask"></div>
+        <div
+          class="post-img"
+          [ngStyle]="{'background-image': 'url('+imgBaseURL+img+')'}"
+        ></div>
+      </ng-template>
+    </swiper>
+
+
     <div class="info-group">
       <div class="name"></div>
       <div class="info"></div>
     </div>
     <div class="action-group">
       <div class="action dislike" (click)="clickAction('dislike')">
-        <div class="dislike-svg"></div>
+        <div class="btn-wrapper">
+          <div class="dislike-svg"></div>
+        </div>
       </div>
-      <div class="action super-like" (click)="clickAction('superlike')"><i class="fa-regular fa-star"></i><div class="dummy"></div></div>
-      <div class="action like" (click)="clickAction('like')"><i class="fa-solid fa-heart"></i><div  class="dummy"></div></div>
-
+      <div class="action super-like" (click)="clickAction('superlike')">
+        <div><i class="fa-regular fa-star"></i></div>
+      </div>
+      <div class="action like" (click)="clickAction('like')">
+        <div class="btn-wrapper"><i class="fa-solid fa-heart"></i></div>
+      </div>
     </div>
     <div class="super-like-status">
       <div class="super-like-btn"></div>

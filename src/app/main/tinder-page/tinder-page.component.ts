@@ -1,8 +1,10 @@
+import { ProductPost } from './../../model/interface/ProductPost';
+import { PostService } from './../../service/post-service/post.service';
 import { tinderEvent } from './../../service/layout-service/tinder-layout.service';
 import { TinderLayoutService } from '../../service/layout-service/tinder-layout.service';
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import 'hammerjs';
-import { Subscription, Subject, Observable } from 'rxjs';
+import { Subscription, Subject, Observable, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tinder-page',
@@ -19,6 +21,8 @@ export class TinderPageComponent implements OnInit, OnDestroy {
     {name: '5'}
   ];
 
+  cardsInfo: ProductPost[];
+
   likes: any[] = [];
   dislikes: any[] = [];
   top: number = this.test.length-1;
@@ -27,19 +31,25 @@ export class TinderPageComponent implements OnInit, OnDestroy {
   likeHis: boolean = true;
   dislikeHis: boolean = false;
 
+  destroy$: Subject<any>;
   actionSub$: Subject<tinderEvent>;
   swipeSubs$?: Subscription;
   clickSubs$?: Subscription;
 
   isHistoryOpen: boolean = false;
 
-  constructor(private tinderLayoutService: TinderLayoutService) {
+  constructor(
+    private tinderLayoutService: TinderLayoutService,
+    private postService: PostService
+  ) {
     this.actionSub$ = new Subject<tinderEvent>();
+    this.destroy$ = new Subject<any>();
+    this.cardsInfo = [];
   }
 
   ngOnInit(): void {
-    this.tinderLayoutService.getClickObs().subscribe(this.actionSub$);
-    this.tinderLayoutService.getSwipeObs().subscribe(this.actionSub$);
+    this.tinderLayoutService.getClickObs().pipe(takeUntil(this.destroy$)).subscribe(this.actionSub$);
+    this.tinderLayoutService.getSwipeObs().pipe(takeUntil(this.destroy$)).subscribe(this.actionSub$);
 
     // observable <-subscribe- subject -subscribe(addObserver)-> observer
     this.actionSub$.subscribe(event=>{
@@ -54,6 +64,12 @@ export class TinderPageComponent implements OnInit, OnDestroy {
         this.dislikes.push(card);
         this.top = this.top<1 ? 0 : this.top-1;
       }
+    });
+
+    this.postService.getProductPostsRandomly(15)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(posts=>{
+      this.cardsInfo = posts;
     });
   }
 
@@ -81,6 +97,8 @@ export class TinderPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.swipeSubs$?.unsubscribe();
+    this.destroy$.next(null);
+    this.destroy$.complete();
+    this.actionSub$.complete();
   }
 }

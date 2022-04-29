@@ -4,7 +4,9 @@ import { animate, transition, trigger, keyframes } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
 import { TinderLayoutService } from 'src/app/service/layout-service/tinder-layout.service';
 import * as kf from '../../keyframes';
+import SwiperCore, { Navigation, Pagination} from 'swiper';
 
+SwiperCore.use([Navigation]);
 
 @Component({
   selector: 'app-tinder-card',
@@ -22,8 +24,13 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
   //place in product_post or sth else
   @Input('cardInfo') cardInfo!: {name: string};
   @Output('swiped') swipeEvent = new EventEmitter();
+  @Input('post') post!: ProductPost;
 
   @ViewChild("card") card!: ElementRef;
+
+  clickSubs$?: Subscription;
+
+  imgBaseURL: string = "https://cf.shopee.tw/file/";
 
   animationState?: string;
   lastX!: number;
@@ -43,10 +50,6 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
   isOutLeft: boolean = false;
   isDelete: boolean = false;
   isReset: boolean = false;
-
-  clickSubs$?: Subscription;
-
-  @Input('post') post!: ProductPost;
 
   constructor(private tinderLayoutService: TinderLayoutService) {
     this.rotateDeg = 0;

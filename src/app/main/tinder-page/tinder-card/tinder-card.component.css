@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: flex-end;
 
-  background-image: url('../../../../assets/images/coat.jpeg');
+  /* background-image: url('../../../../assets/images/coat.jpeg'); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -52,6 +52,7 @@
   left: 0;
   background: linear-gradient(to bottom, transparent, 75%, black 100%);
   border-radius: 10px;
+  z-index: 3;
 }
 
 .info-group
@@ -73,52 +74,56 @@
 
 .action
 {
-  font-size: 6vmin;
-  padding: 2vmin;
-  border-radius: 50%;
+  font-size: 7vmin;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 5;
+  flex: 1;
+}
+
+.btn-wrapper
+{
+  padding: 4vmin;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-self: center
+  justify-content: center;
 }
 
-.action>.dummy
+.dislike>.btn-wrapper
 {
-  width: 100%;
-  padding-bottom: 100%;
-}
-
-.dislike
-{
-  color: #418f96;
-  border: 2.5px solid #4ec4ce;
+  border: 2.5px solid #ff0000;
 }
 
 .dislike-svg
 {
   background-image: url('../../../../assets/images/dislike.svg');
+  filter: invert(9%) sepia(100%) saturate(5487%) hue-rotate(356deg) brightness(91%) contrast(102%);
   background-repeat: no-repeat;
   background-size: contain;
-  width: 6vmin !important;
-  height: 6vmin;
+  width:  7vmin;
+  height: 7vmin;
 }
 
 .like
 {
   color: #e5bb27;
+}
+
+.like>.btn-wrapper
+{
   border: 2.5px solid #e5bb27;
 }
 
 .super-like
 {
-  color: #2465bb;
+  color: #0098be;
 }
 
 .super-like-btn
 {
+  /*可以改用img 才不會跑版*/
   position: absolute;
   background-image: url('../../../../assets/images/super-like-button.svg');
   background-repeat: no-repeat;
@@ -128,13 +133,14 @@
   bottom: calc(100% - 1px);
   left: 0;
   right: 0;
+  filter: invert(38%) sepia(96%) saturate(760%) hue-rotate(154deg) brightness(98%) contrast(101%);
 }
 
 .super-like-status
 {
   width: 100%;
   height: 8%;
-  background-color: #2465bb;
+  background-color: #0098be;
   z-index: 5;
   border-radius: 10px;
   display: flex;
@@ -147,4 +153,24 @@
   flex: 1;
 }
 
+.swiper
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
 
+.post-img
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px;
+}
