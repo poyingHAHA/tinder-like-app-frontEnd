@@ -125,7 +125,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
       takeUntil(this.destroy$),
       //delay 300ms
       debounceTime(300),
-      filter(()=>this.container.nativeElement.offsetHeight + this.container.nativeElement.scrollTop >= this.container.nativeElement.scrollHeight)
+      filter(()=>this.container.nativeElement.offsetHeight + this.container.nativeElement.scrollTop >= this.container.nativeElement.scrollHeight-80)
     ).subscribe(()=>{
       this.cleanTagsAndKeepFirst();
       this.loadMoreTreeMaps(18);
