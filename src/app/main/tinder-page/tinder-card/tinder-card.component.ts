@@ -5,8 +5,7 @@ import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, 
 import { TinderLayoutService } from 'src/app/service/layout-service/tinder-layout.service';
 import * as kf from '../../keyframes';
 import SwiperCore, { Navigation, Pagination} from 'swiper';
-
-SwiperCore.use([Navigation]);
+import { NzCarouselComponent, NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 @Component({
   selector: 'app-tinder-card',
@@ -21,12 +20,14 @@ SwiperCore.use([Navigation]);
   ]
 })
 export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
+
   //place in product_post or sth else
   @Input('cardInfo') cardInfo!: {name: string};
   @Output('swiped') swipeEvent = new EventEmitter();
   @Input('post') post!: ProductPost;
 
   @ViewChild("card") card!: ElementRef;
+  @ViewChild("carousel") carousel!: NzCarouselComponent;
 
   clickSubs$?: Subscription;
 
@@ -139,6 +140,16 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
     //溫度計法
     this.rotateDeg = Math.floor(((2/27.0)*this.x)*100)/100;
     this.opacityPercent = Math.floor((1 - Math.abs((1/20.0)*this.rotateDeg))*100)/100;
+  }
+
+  prevImg()
+  {
+    this.carousel.pre();
+  }
+
+  nextImg()
+  {
+    this.carousel.next();
   }
 
   sleep(ms: number)

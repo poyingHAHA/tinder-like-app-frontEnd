@@ -18,10 +18,6 @@ export class ProfileComponent implements OnInit {
   )
   {}
 
-  config: SwiperOptions = {
-    pagination: true
-  };
-
   ngOnInit(): void {
 
   }

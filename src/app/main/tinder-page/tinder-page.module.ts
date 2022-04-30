@@ -6,6 +6,7 @@ import { TinderPageRoutingModule } from './tinder-page-routing.module';
 import { TinderPageComponent } from './tinder-page.component';
 import { TinderCardComponent } from './tinder-card/tinder-card.component';
 import { SwiperModule } from 'swiper/angular';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SwiperModule } from 'swiper/angular';
     CommonModule,
     TinderPageRoutingModule,
     NzIconModule,
-    SwiperModule
+    SwiperModule,
+    NzCarouselModule
   ]
 })
 export class TinderPageModule { }
