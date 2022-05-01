@@ -239,3 +239,26 @@
   right: 0;
   width: 15%;
 }
+
+.card-skeleton
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+}
+.card-skeleton::after
+{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20vmin;
+  height: 20vmin;
+  border: 3px solid #dedede;
+  border-radius: 50%;
+}

@@ -1,7 +1,7 @@
 import { ProductPost, Like } from './../../../model/interface/ProductPost';
 import { Subscription } from 'rxjs';
 import { animate, transition, trigger, keyframes } from '@angular/animations';
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, AfterViewInit, SimpleChanges, OnChanges } from '@angular/core';
 import { TinderLayoutService } from 'src/app/service/layout-service/tinder-layout.service';
 import * as kf from '../../keyframes';
 import SwiperCore, { Navigation, Pagination} from 'swiper';
@@ -19,7 +19,7 @@ import { NzCarouselComponent, NzCarouselModule } from 'ng-zorro-antd/carousel';
     ])
   ]
 })
-export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
+export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges{
 
   //place in product_post or sth else
   @Input('cardInfo') cardInfo!: {name: string};
@@ -52,6 +52,8 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
   isDelete: boolean = false;
   isReset: boolean = false;
 
+  isLoading: boolean = true;
+
   constructor(private tinderLayoutService: TinderLayoutService) {
     this.rotateDeg = 0;
     this.opacityPercent = 1;
@@ -61,6 +63,15 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit{
     this.y = this.initY;
     this.lastX = this.x;
     this.lastY = this.y;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.post != null)
+    {
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
+    }
   }
 
   ngOnInit(): void {

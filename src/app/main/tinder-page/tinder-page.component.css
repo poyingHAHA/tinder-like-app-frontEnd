@@ -2,7 +2,6 @@
 {
   height: 100%;
   overflow: hidden;
-  background: linear-gradient(to bottom, #ffffff, #eeeeee);
 }
 
 .header
@@ -16,12 +15,31 @@
   position: relative;
   z-index: 6;
 }
+.header-skeleton
+{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  justify-content: flex-end;
+  padding: 5px 15px;
+  position: relative;
+  z-index: 7;
+}
 
 .header-opt
 {
   color: #0098be;
   font-size: 7vmin;
   margin: 0 10px;
+}
+.hs
+{
+  background-color: #dedede;
+  height: 50%;
+  width: 15%;
+  border-radius: 15px;
+  margin: 0 15px;
 }
 
 .card-content

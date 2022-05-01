@@ -4,7 +4,7 @@ import { tinderEvent } from './../../service/layout-service/tinder-layout.servic
 import { TinderLayoutService } from '../../service/layout-service/tinder-layout.service';
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import 'hammerjs';
-import { Subscription, Subject, Observable, takeUntil } from 'rxjs';
+import { Subscription, Subject, Observable, takeUntil, filter } from 'rxjs';
 
 @Component({
   selector: 'app-tinder-page',
@@ -37,6 +37,7 @@ export class TinderPageComponent implements OnInit, OnDestroy {
   clickSubs$?: Subscription;
 
   isHistoryOpen: boolean = false;
+  isLoading: boolean = true;
 
   constructor(
     private tinderLayoutService: TinderLayoutService,
@@ -69,6 +70,10 @@ export class TinderPageComponent implements OnInit, OnDestroy {
     this.postService.getProductPostsRandomly(15)
     .pipe(takeUntil(this.destroy$))
     .subscribe(posts=>{
+      if(posts!=null)
+      {
+        this.isLoading = false;
+      }
       this.cardsInfo = posts;
     });
   }

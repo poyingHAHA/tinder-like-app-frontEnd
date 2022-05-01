@@ -1,13 +1,23 @@
-<div class="my-container">
-  <div class="header">
+<div
+  class="my-container"
+  [ngStyle]="{
+    'background': (isLoading?'#ffffff':'linear-gradient(to bottom, #ffffff, #eeeeee)')
+  }"
+>
+  <div *ngIf="!isLoading" class="header">
     <div class="header-opt history-btn" (click)="showHistory()"><i class="fa-solid fa-clock-rotate-left"></i></div>
     <div class="header-opt notification"><i class="fa-solid fa-bell"></i></div>
     <div class="add"></div>
   </div>
+  <div *ngIf="isLoading" class="header-skeleton">
+    <div class="hs" *ngFor="let i of [1,2]"></div>
+  </div>
+
   <div class="card-content">
       <div *ngFor="let post of cardsInfo">
         <app-tinder-card
           [post]="post"
+          *ngIf="!isLoading"
         ></app-tinder-card>
       </div>
   </div>
