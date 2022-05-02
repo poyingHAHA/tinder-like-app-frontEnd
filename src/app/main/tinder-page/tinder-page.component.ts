@@ -79,7 +79,7 @@ export class TinderPageComponent implements OnInit, OnDestroy {
   showHistory()
   {
     this.isHistoryOpen = !this.isHistoryOpen;
-    this.hisList = this.likes;
+    this.changeHistoryMode("like");
   }
 
   changeHistoryMode(type: string)

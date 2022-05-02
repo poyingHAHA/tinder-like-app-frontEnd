@@ -139,6 +139,7 @@
   flex-direction: column;
   overflow-y: scroll;
   border-radius: 20px;
+  padding: 10px 0;
 }
 
 .his-item
