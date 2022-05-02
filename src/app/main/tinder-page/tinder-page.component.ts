@@ -12,20 +12,14 @@ import { Subscription, Subject, Observable, takeUntil, filter } from 'rxjs';
   styleUrls: ['./tinder-page.component.css']
 })
 export class TinderPageComponent implements OnInit, OnDestroy {
-  //place in card info
-  test: {name: string}[] = [
-    {name: '1'},
-    {name: '2'},
-    {name: '3'},
-    {name: '4'},
-    {name: '5'}
-  ];
 
+  //place in card info
+  //add-> unshift往頭加(queue)
   cardsInfo: ProductPost[];
 
   likes: any[] = [];
   dislikes: any[] = [];
-  top: number = this.test.length-1;
+  top: number;
   hisList: any[] = [];
 
   likeHis: boolean = true;
@@ -46,6 +40,7 @@ export class TinderPageComponent implements OnInit, OnDestroy {
     this.actionSub$ = new Subject<tinderEvent>();
     this.destroy$ = new Subject<any>();
     this.cardsInfo = [];
+    this.top = 0;
   }
 
   ngOnInit(): void {
@@ -55,7 +50,7 @@ export class TinderPageComponent implements OnInit, OnDestroy {
     // observable <-subscribe- subject -subscribe(addObserver)-> observer
     this.actionSub$.subscribe(event=>{
       //一定是最上面的人發生event
-      let card = this.test[this.top];
+      let card = this.cardsInfo[this.top];
       if(card && event.type == "like")
       {
         this.likes.push(card);
@@ -75,6 +70,7 @@ export class TinderPageComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }
       this.cardsInfo = posts;
+      this.top = this.cardsInfo.length-1;
     });
   }
 

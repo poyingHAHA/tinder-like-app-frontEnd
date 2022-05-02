@@ -22,7 +22,7 @@
     <div class="card-next" (click)="nextImg()"></div>
 
     <div class="info-group">
-      <div class="name"></div>
+      <div class="name">{{ post.name }}</div>
       <div class="info"></div>
     </div>
     <div class="action-group">
@@ -40,9 +40,18 @@
     </div>
     <div class="super-like-status">
       <div class="super-like-btn"></div>
-      <div class="status-item progress-bar"></div>
-      <div class="status-item progress-percentage"></div>
-      <div class="status-item left-time"></div>
+      <div class="status-item my-progress-bar">
+        <nz-progress
+          [nzPercent]="80"
+          [nzShowInfo]="false"
+          nzStatus="active"
+          [nzStrokeColor]="'#b1e5f2'"
+        >
+        </nz-progress>
+        <div class="percentage">80%</div>
+      </div>
+      <div class="status-item progress-percentage">10%</div>
+      <div class="status-item left-time">03:10</div>
     </div>
 </div>
 <div *ngIf="isLoading" class="card-skeleton"></div>

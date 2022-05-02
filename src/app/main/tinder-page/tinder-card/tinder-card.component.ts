@@ -6,6 +6,7 @@ import { TinderLayoutService } from 'src/app/service/layout-service/tinder-layou
 import * as kf from '../../keyframes';
 import SwiperCore, { Navigation, Pagination} from 'swiper';
 import { NzCarouselComponent, NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
 
 @Component({
   selector: 'app-tinder-card',

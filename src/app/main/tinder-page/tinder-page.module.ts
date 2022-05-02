@@ -1,3 +1,4 @@
+import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -18,7 +19,8 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
     TinderPageRoutingModule,
     NzIconModule,
     SwiperModule,
-    NzCarouselModule
+    NzCarouselModule,
+    NzProgressModule
   ]
 })
 export class TinderPageModule { }
