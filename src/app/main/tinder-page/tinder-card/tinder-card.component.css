@@ -119,6 +119,33 @@
 .super-like
 {
   color: #0098be;
+  position: relative;
+}
+
+.remain-num
+{
+  position: absolute;
+  border-radius: 50%;
+  top: -10px;
+  right: 25px;
+  width: 15%;
+  background-color: #ffe015;
+}
+
+.remain-num::after
+{
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.remain-num-inner
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 55%;
 }
 
 .super-like-btn

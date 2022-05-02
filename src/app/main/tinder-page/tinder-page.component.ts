@@ -17,10 +17,12 @@ export class TinderPageComponent implements OnInit, OnDestroy {
   //add-> unshift往頭加(queue)
   cardsInfo: ProductPost[];
 
-  likes: any[] = [];
-  dislikes: any[] = [];
+  imgBaseURL: string = "https://cf.shopee.tw/file/";
+
+  likes: ProductPost[] = [];
+  dislikes: ProductPost[] = [];
   top: number;
-  hisList: any[] = [];
+  hisList: ProductPost[] = [];
 
   likeHis: boolean = true;
   dislikeHis: boolean = false;

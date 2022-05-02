@@ -33,6 +33,7 @@
       </div>
       <div class="action super-like" (click)="clickAction('superlike')">
         <div><i class="fa-regular fa-star"></i></div>
+        <div class="remain-num"><div class="remain-num-inner">5</div></div>
       </div>
       <div class="action like" (click)="clickAction('like')">
         <div class="btn-wrapper"><i class="fa-solid fa-heart"></i></div>
@@ -44,7 +45,6 @@
         <nz-progress
           [nzPercent]="80"
           [nzShowInfo]="false"
-          nzStatus="active"
           [nzStrokeColor]="'#b1e5f2'"
         >
         </nz-progress>

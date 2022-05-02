@@ -79,6 +79,7 @@
   align-items: center;
   justify-content: center;
   z-index: 5;
+  /* overflow-y: scroll; */
 }
 
 .his-block
@@ -89,7 +90,7 @@
   background-color: #ffffff;
   width: 95%;
   height: 80%;
-  border-radius: 50px;
+  border-radius: 20px;
 }
 
 .his-header
@@ -134,4 +135,56 @@
 {
   flex: 1;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  border-radius: 20px;
+}
+
+.his-item
+{
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  height: 15%;
+}
+
+.his-pic
+{
+  flex: 2;
+  border-radius: 10px;
+  background-color: #0098be;
+  position: relative;
+}
+
+.his-pic > img
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 90%;
+  border-radius: 50%;
+}
+
+.his-pic::after
+{
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.his-name
+{
+  flex: 8;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #4fb0cd;
+  padding-left: 15px;
+}
+
+.his-time
+{
+  flex: 2;
 }
