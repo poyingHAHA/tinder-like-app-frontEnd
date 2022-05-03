@@ -52,6 +52,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   isOutLeft: boolean = false;
   isDelete: boolean = false;
   isReset: boolean = false;
+  isFading: boolean = false;
 
   isLoading: boolean = true;
 
@@ -81,14 +82,20 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   clickAction(action: string)
   {
-    if(action=="like" && !this.isOutRight)
+    //set isDelete,set isFading
+
+    if(action=="like" && !this.isFading)
     {
+      this.isFading = true;
       this.isOutRight = true;
       this.tinderLayoutService.setClickEvent({type: "like", cardInfo: this.post});
-    }else if(action=="dislike" && !this.isOutLeft)
+      this.sleep(800).then(()=>{this.isDelete=true;});
+    }else if(action=="dislike" && !this.isFading)
     {
+      this.isFading = true;
       this.isOutLeft = true;
       this.tinderLayoutService.setClickEvent({type: "dislike", cardInfo: this.post});
+      this.sleep(800).then(()=>{this.isDelete=true;});
     }
   }
 
