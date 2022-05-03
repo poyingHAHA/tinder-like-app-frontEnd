@@ -81,11 +81,11 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   clickAction(action: string)
   {
-    if(action=="like")
+    if(action=="like" && !this.isOutRight)
     {
       this.isOutRight = true;
       this.tinderLayoutService.setClickEvent({type: "like", cardInfo: this.post});
-    }else if(action=="dislike")
+    }else if(action=="dislike" && !this.isOutLeft)
     {
       this.isOutLeft = true;
       this.tinderLayoutService.setClickEvent({type: "dislike", cardInfo: this.post});
