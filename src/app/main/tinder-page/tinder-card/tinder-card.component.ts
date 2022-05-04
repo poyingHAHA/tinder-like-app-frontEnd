@@ -119,7 +119,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   handleDrag(event: any)
   {
-    if(!this.isDragging && !this.isDeleting){
+    if(!this.isDragging && !this.isDeleting && !this.isReset){
       this.lastX = this.x;
       this.lastY = this.y;
       this.isDragging = true;
