@@ -1,7 +1,7 @@
 import { ProductPost, Like } from './../../../model/interface/ProductPost';
 import { Subscription } from 'rxjs';
 import { animate, transition, trigger, keyframes } from '@angular/animations';
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, AfterViewInit, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, AfterViewInit, SimpleChanges, OnChanges, Renderer2 } from '@angular/core';
 import { TinderLayoutService } from 'src/app/service/layout-service/tinder-layout.service';
 import * as kf from '../../keyframes';
 import { NzCarouselComponent, NzCarouselModule } from 'ng-zorro-antd/carousel';
@@ -29,6 +29,9 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   @ViewChild("card") card!: ElementRef;
   @ViewChild("carousel") carousel!: NzCarouselComponent;
+  @ViewChild("status") status!: ElementRef;
+
+  statusOriginalHeight!: number;
 
   clickSubs$?: Subscription;
 
@@ -55,9 +58,14 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   isReset: boolean = false;
   isFading: boolean = false;
 
+  superIsDragging: boolean = false;
+
   isLoading: boolean = true;
 
-  constructor(private tinderLayoutService: TinderLayoutService) {
+  constructor(
+    private tinderLayoutService: TinderLayoutService,
+    private rederer: Renderer2
+  ) {
     this.rotateDeg = 0;
     this.opacityPercent = 1;
     this.initX = 0;
@@ -101,7 +109,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   }
 
   ngAfterViewInit(): void {
-
+    this.statusOriginalHeight = (<HTMLElement>this.status.nativeElement).offsetHeight;
   }
 
   startAnimation(state: string)
@@ -127,6 +135,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
       this.lastX = this.x;
       this.lastY = this.y;
       this.isDragging = true;
+
     }
 
     this.x  = this.lastX + event.deltaX;
@@ -179,7 +188,19 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   handleDragSuperLike(event: any)
   {
+    console.log("super!");
+    let statusElement = this.status.nativeElement as HTMLElement;
+    this.superIsDragging = true;
+    let deltay = event.deltaY;
 
+    if(this.superIsDragging){
+      this.rederer.setStyle(statusElement, 'height', this.statusOriginalHeight+deltay);
+    }
+
+    if(event.isFinal){
+      this.rederer.setStyle(statusElement, 'height', this.statusOriginalHeight);
+      this.superIsDragging = false;
+    }
   }
 
   sleep(ms: number)

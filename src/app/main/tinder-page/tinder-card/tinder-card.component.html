@@ -26,21 +26,21 @@
       <div class="info"></div>
     </div>
     <div class="action-group">
-      <div class="action dislike" (click)="clickAction('dislike')">
-        <div class="btn-wrapper">
+      <div class="action dislike">
+        <div class="btn-wrapper" (click)="clickAction('dislike')">
           <div class="dislike-svg"></div>
         </div>
       </div>
       <div class="action super-like" (click)="clickAction('superlike')">
-        <div><i class="fa-regular fa-star"></i></div>
+        <div (pan)="handleDragSuperLike($event)"><i class="fa-regular fa-star"></i></div>
         <div class="remain-num"><div class="remain-num-inner">5</div></div>
       </div>
-      <div class="action like" (click)="clickAction('like')">
-        <div class="btn-wrapper"><i class="fa-solid fa-heart"></i></div>
+      <div class="action like">
+        <div class="btn-wrapper" (click)="clickAction('like')"><i class="fa-solid fa-heart"></i></div>
       </div>
     </div>
-    <div class="super-like-status">
-      <div class="super-like-btn" (pan)="handleDragSuperLike($event)"></div>
+    <div #status class="super-like-status" (pan)="handleDragSuperLike($event)">
+      <div class="super-like-btn"></div>
       <div class="status-item my-progress-bar">
         <nz-progress
           [nzPercent]="80"
@@ -52,6 +52,8 @@
       </div>
       <div class="status-item progress-percentage">10%</div>
       <div class="status-item left-time">03:10</div>
+
+      <div class="super-like-dragged-info"></div>
     </div>
 </div>
 <div *ngIf="isLoading" class="card-skeleton"></div>
