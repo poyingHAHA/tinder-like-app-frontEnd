@@ -4,7 +4,6 @@ import { animate, transition, trigger, keyframes } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, AfterViewInit, SimpleChanges, OnChanges } from '@angular/core';
 import { TinderLayoutService } from 'src/app/service/layout-service/tinder-layout.service';
 import * as kf from '../../keyframes';
-import SwiperCore, { Navigation, Pagination} from 'swiper';
 import { NzCarouselComponent, NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 
@@ -26,6 +25,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   @Input('cardInfo') cardInfo!: {name: string};
   @Output('swiped') swipeEvent = new EventEmitter();
   @Input('post') post!: ProductPost;
+  @Input('isDragable') isDragable!: boolean;
 
   @ViewChild("card") card!: ElementRef;
   @ViewChild("carousel") carousel!: NzCarouselComponent;
@@ -119,6 +119,10 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   handleDrag(event: any)
   {
+    if(!this.isDragable){
+      return;
+    }
+
     if(!this.isDragging && !this.isDeleting && !this.isReset){
       this.lastX = this.x;
       this.lastY = this.y;
@@ -171,6 +175,11 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   nextImg()
   {
     this.carousel.next();
+  }
+
+  handleDragSuperLike(event: any)
+  {
+
   }
 
   sleep(ms: number)

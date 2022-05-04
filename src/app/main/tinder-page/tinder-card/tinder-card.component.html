@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="super-like-status">
-      <div class="super-like-btn"></div>
+      <div class="super-like-btn" (pan)="handleDragSuperLike($event)"></div>
       <div class="status-item my-progress-bar">
         <nz-progress
           [nzPercent]="80"

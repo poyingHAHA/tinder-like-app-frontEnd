@@ -18,6 +18,7 @@
         <app-tinder-card
           [post]="post"
           *ngIf="!isLoading"
+          [isDragable]="post === cardsInfo[top]"
         ></app-tinder-card>
       </div>
   </div>
