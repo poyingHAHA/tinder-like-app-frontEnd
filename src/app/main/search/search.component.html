@@ -1,10 +1,12 @@
 <div #container class="my-container">
   <div class="search-group">
     <div *ngIf="isSearchMode" class="backBtn-container">
-      <div class="backBtn" (click)="clickBackBtn()">
-        <i class="fa-arrow-left fa-solid"></i>
+      <div class="backBtn-inner">
+        <div class="backBtn" (click)="clickBackBtn()">
+          <i class="fa-arrow-left fa-solid"></i>
+        </div>
+        <div class="back-dummy"></div>
       </div>
-      <div class="back-dummy"></div>
     </div>
     <div class="search-input">
       <input #search type="text" [(ngModel)]="searchTxt" (focus)="changeSearchMode()">

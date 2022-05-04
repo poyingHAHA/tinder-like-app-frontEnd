@@ -51,6 +51,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   isOutRight: boolean = false;
   isOutLeft: boolean = false;
   isDelete: boolean = false;
+  isDeleting: boolean = false;
   isReset: boolean = false;
   isFading: boolean = false;
 
@@ -118,7 +119,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   handleDrag(event: any)
   {
-    if(!this.isDragging){
+    if(!this.isDragging && !this.isDeleting){
       this.lastX = this.x;
       this.lastY = this.y;
       this.isDragging = true;
@@ -131,7 +132,8 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
     if(event.isFinal) {
       this.isDragging = false;
-      if((this.x>0&&this.x>=150) || (this.x<0&&this.x<=-160)){
+      if((this.x>0&&this.x>=150) || (this.x<0&&this.x<=-160) && !this.isDelete){
+        this.isDeleting = true;
         if(this.x>0){
           this.isOutRight = true;
           this.tinderLayoutService.setSwipeEvent({type: "like", cardInfo: this.post});

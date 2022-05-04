@@ -128,8 +128,25 @@ input
 
 .backBtn-container
 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  width: 8%;
+  width: 10%;
+}
+
+.backBtn-inner
+{
+  width: 70%;
+  position: relative;
+}
+
+@media(min-width: 576px)
+{
+  .backBtn-inner
+  {
+    width: 45%;
+  }
 }
 
 .back-dummy
