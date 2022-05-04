@@ -127,7 +127,9 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   handleDrag(event: any)
   {
-    if(!this.isDragable){
+    //need to filter the super-like-drag
+    //maybe set a detecter
+    if(!this.isDragable || this.superIsDragging){
       return;
     }
 
@@ -135,7 +137,6 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
       this.lastX = this.x;
       this.lastY = this.y;
       this.isDragging = true;
-
     }
 
     this.x  = this.lastX + event.deltaX;
@@ -188,17 +189,16 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   handleDragSuperLike(event: any)
   {
-    console.log("super!");
-    let statusElement = this.status.nativeElement as HTMLElement;
     this.superIsDragging = true;
-    let deltay = event.deltaY;
+    let statusElement = this.status.nativeElement as HTMLElement;
+    let deltaY = -event.deltaY; //to positive
 
     if(this.superIsDragging){
-      this.rederer.setStyle(statusElement, 'height', this.statusOriginalHeight+deltay);
+      statusElement.style.height = (this.statusOriginalHeight+deltaY).toString()+"px";
     }
 
     if(event.isFinal){
-      this.rederer.setStyle(statusElement, 'height', this.statusOriginalHeight);
+      statusElement.style.height = (this.statusOriginalHeight).toString()+"px";
       this.superIsDragging = false;
     }
   }
