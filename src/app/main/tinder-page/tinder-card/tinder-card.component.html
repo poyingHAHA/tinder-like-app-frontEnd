@@ -19,8 +19,8 @@
         </div>
       </nz-carousel>
     </div>
-    <div class="card-prev" (click)="prevImg()"></div>
-    <div class="card-next" (click)="nextImg()"></div>
+    <div class="card-prev" (pan)="handleDrag($event)" (click)="prevImg()"></div>
+    <div class="card-next" (pan)="handleDrag($event)" (click)="nextImg()"></div>
 
     <div class="info-group">
       <div class="name">{{ post.name }}</div>

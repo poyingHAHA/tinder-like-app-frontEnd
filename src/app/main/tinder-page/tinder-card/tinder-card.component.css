@@ -330,6 +330,7 @@ nz-progress
   bottom: 0;
   left: 0;
   width: 15%;
+  z-index: 10;
 }
 
 .card-next
@@ -339,6 +340,7 @@ nz-progress
   bottom: 0;
   right: 0;
   width: 15%;
+  z-index: 10;
 }
 
 .card-skeleton
