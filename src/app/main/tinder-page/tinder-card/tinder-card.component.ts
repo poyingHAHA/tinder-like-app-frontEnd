@@ -1,3 +1,4 @@
+import { ImgloadDirective } from './../../../directives/imgload.directive';
 import { ProductPost, Like } from './../../../model/interface/ProductPost';
 import { Subscription } from 'rxjs';
 import { animate, transition, trigger, keyframes } from '@angular/animations';
@@ -67,12 +68,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   isLoading: boolean = true;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.post != null)
-    {
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 300);
-    }
+
   }
 
   constructor(
@@ -214,9 +210,9 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
 
     if(event.isFinal){
-      if(finalHeight >= cardHeight/2){
+      if(finalHeight >= 5*cardHeight/10){
         this.isSuperLikeSpanded = true;
-        finalHeight = cardHeight/2;
+        finalHeight = 7*cardHeight/10;
 
       }else{
         finalHeight = this.statusOriginalHeight;
@@ -228,6 +224,11 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
       this.statusLastHeight = finalHeight;
       this.superIsDragging = false;
     }
+  }
+
+  imgLoaded()
+  {
+    this.isLoading = false;
   }
 
   sleep(ms: number)

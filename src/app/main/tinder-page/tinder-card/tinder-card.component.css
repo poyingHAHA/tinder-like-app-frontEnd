@@ -78,7 +78,7 @@
   justify-content: space-around;
   width: 100%;
   height: 13vh;
-  z-index: 6;
+  z-index: 10;
   position: relative;
 }
 .action-group-spanded
@@ -191,7 +191,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .remain-num
@@ -374,6 +374,11 @@ nz-progress
 ::ng-deep .ant-carousel .slick-dots li.slick-active button
 {
   background-color: #ffffff;
+}
+
+::ng-deep .ant-carousel .slick-slider
+{
+  border-radius: 10px;
 }
 
 .card-prev

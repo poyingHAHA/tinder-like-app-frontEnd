@@ -15,7 +15,7 @@
     <nz-carousel #carousel [nzEnableSwipe]="false" style="border-radius: 10px;" [nzDotPosition]="'top'">
       <div nz-carousel-content *ngFor="let img of post.images">
         <div class="mask"></div>
-        <div class="card-img" [ngStyle]="{'background-image': 'url('+imgBaseURL+img+')'}"></div>
+        <div appImgload (imageLoaded)="imgLoaded()" class="card-img" [ngStyle]="{'background-image': 'url('+imgBaseURL+img+')'}"></div>
       </div>
     </nz-carousel>
   </div>
@@ -65,10 +65,7 @@
       <div class="status-item progress-percentage">10%</div>
       <div class="status-item left-time">03:10</div>
     </div>
-
     <div *ngIf="superIsDragging || isSuperLikeSpanded" class="super-like-dragged-info">
-
-
 
 
     </div>

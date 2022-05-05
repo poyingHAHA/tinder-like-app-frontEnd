@@ -1,3 +1,4 @@
+import { ShareModule } from 'src/app/share/share.module';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,7 +21,8 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
     NzIconModule,
     SwiperModule,
     NzCarouselModule,
-    NzProgressModule
+    NzProgressModule,
+    ShareModule
   ]
 })
 export class TinderPageModule { }
