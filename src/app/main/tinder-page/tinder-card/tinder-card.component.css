@@ -376,7 +376,7 @@ nz-progress
   background-color: #ffffff;
 }
 
-::ng-deep .ant-carousel .slick-slider
+::ng-deep .ant-carousel .slick-list
 {
   border-radius: 10px;
 }
