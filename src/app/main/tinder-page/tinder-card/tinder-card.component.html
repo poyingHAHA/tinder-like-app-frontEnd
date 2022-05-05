@@ -11,38 +11,48 @@
   *ngIf="!isDelete"
 >
   <div class="card-detecter" (pan)="handleDrag($event)"></div>
-    <div class="carousel">
-      <nz-carousel #carousel [nzEnableSwipe]="false" style="border-radius: 10px;" [nzDotPosition]="'top'">
-        <div nz-carousel-content *ngFor="let img of post.images">
-          <div class="mask"></div>
-          <div class="card-img" [ngStyle]="{'background-image': 'url('+imgBaseURL+img+')'}"></div>
-        </div>
-      </nz-carousel>
-    </div>
-    <div class="card-prev" (pan)="handleDrag($event)" (click)="prevImg()"></div>
-    <div class="card-next" (pan)="handleDrag($event)" (click)="nextImg()"></div>
+  <div class="carousel">
+    <nz-carousel #carousel [nzEnableSwipe]="false" style="border-radius: 10px;" [nzDotPosition]="'top'">
+      <div nz-carousel-content *ngFor="let img of post.images">
+        <div class="mask"></div>
+        <div class="card-img" [ngStyle]="{'background-image': 'url('+imgBaseURL+img+')'}"></div>
+      </div>
+    </nz-carousel>
+  </div>
+  <div class="card-prev" (pan)="handleDrag($event)" (click)="prevImg()"></div>
+  <div class="card-next" (pan)="handleDrag($event)" (click)="nextImg()"></div>
 
-    <div class="info-group">
-      <div class="name">{{ post.name }}</div>
-      <div class="info"></div>
-    </div>
-    <div class="action-group">
-      <div class="action dislike" (pan)="handleDrag($event)">
-        <div class="btn-wrapper" (click)="clickAction('dislike')">
-          <div class="dislike-svg"></div>
-        </div>
-      </div>
-      <div class="action super-like" (click)="clickAction('superlike')">
-        <div><i class="fa-regular fa-star"></i></div>
-        <div class="remain-num"><div class="remain-num-inner">5</div></div>
-      </div>
-      <div class="action like" (pan)="handleDrag($event)">
-        <div class="btn-wrapper" (click)="clickAction('like')"><i class="fa-solid fa-heart"></i></div>
+  <div [style.marginBottom]="superIsDragging || isSuperLikeSpanded?'13vh':'0'" class="info-group">
+    <div class="name">{{ post.name }}</div>
+    <div class="info"></div>
+  </div>
+  <div [ngClass]="superIsDragging || isSuperLikeSpanded?'action-group-spanded action-group':'action-group'">
+    <div class="action dislike" (pan)="handleDrag($event)">
+      <div [ngClass]="{'dislike-spanded': superIsDragging || isSuperLikeSpanded}" class="btn-wrapper" (click)="clickAction('dislike')">
+        <i class="fa-solid fa-xmark"></i>
       </div>
     </div>
-    <div class="super-drag-detecter" (pan)="handleDragSuperLike($event)"></div>
-    <div #status class="super-like-status" (pan)="handleDrag($event)">
-      <div class="super-like-btn"></div>
+    <div class="action super-like" (click)="clickAction('superlike')">
+      <div [ngClass]="{'super-like-spanded': superIsDragging || isSuperLikeSpanded}" class="btn-wrapper">
+        <i class="fa-regular fa-star"></i>
+      </div>
+      <div class="remain-num"><div class="remain-num-inner">5</div></div>
+    </div>
+    <div class="action like" (pan)="handleDrag($event)">
+      <div [ngClass]="{'like-spanded': superIsDragging || isSuperLikeSpanded}" class="btn-wrapper" (click)="clickAction('like')">
+        <i class="fa-solid fa-heart"></i>
+      </div>
+    </div>
+  </div>
+  <div #superDetecter [style.bottom]="superDetecterBottom" class="super-drag-detecter" (pan)="handleDragSuperLike($event)"></div>
+  <div
+    #status
+    [style.height]="statusHeight"
+    class="super-like-status"
+    (pan)="handleDrag($event)"
+  >
+    <div class="super-like-btn"></div>
+    <div *ngIf="!superIsDragging && !isSuperLikeSpanded" class="status-wrapper">
       <div class="status-item my-progress-bar">
         <nz-progress
           [nzPercent]="80"
@@ -54,13 +64,14 @@
       </div>
       <div class="status-item progress-percentage">10%</div>
       <div class="status-item left-time">03:10</div>
-
-      <div class="super-like-dragged-info">
-
-
-
-
-      </div>
     </div>
+
+    <div *ngIf="superIsDragging || isSuperLikeSpanded" class="super-like-dragged-info">
+
+
+
+
+    </div>
+  </div>
 </div>
 <div *ngIf="isLoading" class="card-skeleton"></div>

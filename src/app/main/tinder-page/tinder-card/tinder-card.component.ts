@@ -27,13 +27,17 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   @Input('post') post!: ProductPost;
   @Input('isDragable') isDragable!: boolean;
 
+  //even ngif or some change, can get the ref
   @ViewChild("card") card!: ElementRef;
   @ViewChild("carousel") carousel!: NzCarouselComponent;
   @ViewChild("status") status!: ElementRef;
 
   statusOriginalHeight!: number;
+  statusLastHeight!: number;
+  statusHeight: string;
+  superDetecterOriginalBottom: string;
+  superDetecterBottom: string;
 
-  clickSubs$?: Subscription;
 
   imgBaseURL: string = "https://cf.shopee.tw/file/";
 
@@ -57,10 +61,19 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   isDeleting: boolean = false;
   isReset: boolean = false;
   isFading: boolean = false;
-
+  isSuperLikeSpanded: boolean = false;
   superIsDragging: boolean = false;
 
   isLoading: boolean = true;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.post != null)
+    {
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 300);
+    }
+  }
 
   constructor(
     private tinderLayoutService: TinderLayoutService,
@@ -74,18 +87,23 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
     this.y = this.initY;
     this.lastX = this.x;
     this.lastY = this.y;
-  }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if(this.post != null)
-    {
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 300);
-    }
+    this.statusHeight = "8%";
+    this.superDetecterOriginalBottom = this.statusHeight;
+    this.superDetecterBottom = this.statusHeight;
   }
 
   ngOnInit(): void {
+
+  }
+
+
+  ngAfterViewInit(): void {
+    this.statusOriginalHeight = (this.status.nativeElement as HTMLElement).offsetHeight;
+    this.statusLastHeight = this.statusOriginalHeight;
+  }
+
+  ngOnDestroy(): void {
 
   }
 
@@ -106,10 +124,6 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
       this.tinderLayoutService.setClickEvent({type: "dislike", cardInfo: this.post});
       this.sleep(800).then(()=>{this.isDelete=true;});
     }
-  }
-
-  ngAfterViewInit(): void {
-    this.statusOriginalHeight = (<HTMLElement>this.status.nativeElement).offsetHeight;
   }
 
   startAnimation(state: string)
@@ -190,19 +204,28 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   handleDragSuperLike(event: any)
   {
     this.superIsDragging = true;
-    let statusElement = this.status.nativeElement as HTMLElement;
-    let deltaY = -event.deltaY; //to positive
-    let finalHeight = this.statusOriginalHeight+deltaY;
+    let deltaY = event.deltaY;
+    let finalHeight = this.statusLastHeight+(-deltaY); //main calculating
+    let cardHeight = (<HTMLElement>this.card.nativeElement).offsetHeight;
 
     if(this.superIsDragging){
-      statusElement.style.height = finalHeight.toString()+"px";
+      this.statusHeight = finalHeight+"px";
+      this.superDetecterBottom = finalHeight+"px";
     }
 
     if(event.isFinal){
-      if(finalHeight){
+      if(finalHeight >= cardHeight/2){
+        this.isSuperLikeSpanded = true;
+        finalHeight = cardHeight/2;
 
+      }else{
+        finalHeight = this.statusOriginalHeight;
+        this.isSuperLikeSpanded = false;
       }
-      statusElement.style.height = (this.statusOriginalHeight).toString()+"px";
+      this.statusHeight = finalHeight+"px";
+      this.superDetecterBottom = finalHeight+"px";
+
+      this.statusLastHeight = finalHeight;
       this.superIsDragging = false;
     }
   }
@@ -210,9 +233,5 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   sleep(ms: number)
   {
     return new Promise(resolve=>{setTimeout(resolve, ms);})
-  }
-
-  ngOnDestroy(): void {
-
   }
 }
