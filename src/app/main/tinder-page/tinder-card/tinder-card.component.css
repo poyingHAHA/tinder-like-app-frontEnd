@@ -18,6 +18,16 @@
   background-position: center;
 }
 
+.card-detecter
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 15vh;
+  left: 0;
+  z-index: 10;
+}
+
 .swipe-out-right
 {
   transition: all 1s;

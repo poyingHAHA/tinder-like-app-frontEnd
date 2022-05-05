@@ -192,12 +192,16 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
     this.superIsDragging = true;
     let statusElement = this.status.nativeElement as HTMLElement;
     let deltaY = -event.deltaY; //to positive
+    let finalHeight = this.statusOriginalHeight+deltaY;
 
     if(this.superIsDragging){
-      statusElement.style.height = (this.statusOriginalHeight+deltaY).toString()+"px";
+      statusElement.style.height = finalHeight.toString()+"px";
     }
 
     if(event.isFinal){
+      if(finalHeight){
+
+      }
       statusElement.style.height = (this.statusOriginalHeight).toString()+"px";
       this.superIsDragging = false;
     }

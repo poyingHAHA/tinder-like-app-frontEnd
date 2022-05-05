@@ -9,7 +9,8 @@
   [@cardAnimator]="animationState"
   (@cardAnimator.done)="resetAnimationState()"
   *ngIf="!isDelete"
-  (pan)="handleDrag($event)">
+>
+  <div class="card-detecter" (pan)="handleDrag($event)"></div>
     <div class="carousel">
       <nz-carousel #carousel [nzEnableSwipe]="false" style="border-radius: 10px;" [nzDotPosition]="'top'">
         <div nz-carousel-content *ngFor="let img of post.images">
@@ -26,7 +27,7 @@
       <div class="info"></div>
     </div>
     <div class="action-group">
-      <div class="action dislike">
+      <div class="action dislike" (pan)="handleDrag($event)">
         <div class="btn-wrapper" (click)="clickAction('dislike')">
           <div class="dislike-svg"></div>
         </div>
@@ -35,12 +36,12 @@
         <div><i class="fa-regular fa-star"></i></div>
         <div class="remain-num"><div class="remain-num-inner">5</div></div>
       </div>
-      <div class="action like">
+      <div class="action like" (pan)="handleDrag($event)">
         <div class="btn-wrapper" (click)="clickAction('like')"><i class="fa-solid fa-heart"></i></div>
       </div>
     </div>
     <div class="super-drag-detecter" (pan)="handleDragSuperLike($event)"></div>
-    <div #status class="super-like-status">
+    <div #status class="super-like-status" (pan)="handleDrag($event)">
       <div class="super-like-btn"></div>
       <div class="status-item my-progress-bar">
         <nz-progress
@@ -54,7 +55,12 @@
       <div class="status-item progress-percentage">10%</div>
       <div class="status-item left-time">03:10</div>
 
-      <div class="super-like-dragged-info"></div>
+      <div class="super-like-dragged-info">
+
+
+
+
+      </div>
     </div>
 </div>
 <div *ngIf="isLoading" class="card-skeleton"></div>
