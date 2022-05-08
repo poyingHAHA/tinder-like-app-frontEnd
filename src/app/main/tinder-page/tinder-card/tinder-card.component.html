@@ -35,8 +35,8 @@
     <div class="action super-like" (click)="clickAction('superlike')">
       <div [ngClass]="{'super-like-spanded': superIsDragging || isSuperLikeSpanded}" class="btn-wrapper">
         <i class="fa-regular fa-star"></i>
+        <div class="remain-num"><div class="remain-num-inner">5</div></div>
       </div>
-      <div class="remain-num"><div class="remain-num-inner">5</div></div>
     </div>
     <div class="action like" (pan)="handleDrag($event)">
       <div [ngClass]="{'like-spanded': superIsDragging || isSuperLikeSpanded}" class="btn-wrapper" (click)="clickAction('like')">

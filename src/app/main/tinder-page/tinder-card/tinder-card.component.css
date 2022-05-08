@@ -105,6 +105,7 @@
   align-items: center;
   justify-content: center;
   width: 50%;
+  max-width: 10vh;
   position: relative;
 }
 .btn-wrapper::after
@@ -168,7 +169,7 @@
 .super-drag-detecter
 {
   position: absolute;
-  bottom: 8%;
+  /* bottom: 8%; */
   left: 50%;
   transform: translateX(-50%);
   width: 28%;
@@ -198,10 +199,11 @@
 {
   position: absolute;
   border-radius: 50%;
-  top: -10px;
-  right: 25px;
-  width: 15%;
+  top: -5px;
+  right: -5px;
+  width: 30%;
   background-color: #ffe015;
+  font-size: 5vmin;
 }
 
 .remain-num::after
@@ -237,7 +239,7 @@
 .super-like-status
 {
   width: 100%;
-  height: 8%;
+  /* height: 8%; */
   background-color: #0098be;
   z-index: 5;
   border-radius: 10px;
