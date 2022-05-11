@@ -64,6 +64,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   isFading: boolean = false;
   isSuperLikeSpanded: boolean = false;
   superIsDragging: boolean = false;
+  isInfoOpened: boolean = false;
 
   isLoading: boolean = true;
 
@@ -97,6 +98,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   ngAfterViewInit(): void {
     this.statusOriginalHeight = (this.status.nativeElement as HTMLElement).offsetHeight;
     this.statusLastHeight = this.statusOriginalHeight;
+    this.handleDragSuperLike({deltaY: -50, isFinal: true}); //first trigger
   }
 
   ngOnDestroy(): void {
@@ -225,6 +227,16 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
       this.statusLastHeight = finalHeight;
       this.superIsDragging = false;
     }
+  }
+
+  openInfo()
+  {
+    this.isInfoOpened = true;
+  }
+
+  closeInfo(event: any)
+  {
+    this.isInfoOpened = false;
   }
 
   imgLoaded()

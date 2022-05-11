@@ -1,0 +1,84 @@
+.my-container
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content
+{
+  width: 100%;
+  height: 85%;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cont-item
+{
+  width: 100%;
+}
+
+.back-wrapper
+{
+  height: 10%;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.back
+{
+  color: #ffffff;
+  background-color: #e5e4e4;
+  border-radius: 50%;
+  width: 8%;
+  position: relative;
+}
+
+.back>i
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4vmin;
+}
+
+.back::after
+{
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.price-wrapper
+{
+  height: 10%;
+}
+
+.name-wrapper
+{
+  height: 10%;
+}
+
+.info-wrapper
+{
+  flex: 1;
+}
+
+.options
+{
+  width: 100%;
+  height: 15%;
+  border-radius: 0 0 10px 10px;
+  background-color: #c3c3c3;
+}

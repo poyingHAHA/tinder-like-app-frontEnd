@@ -9,11 +9,13 @@ import { TinderPageComponent } from './tinder-page.component';
 import { TinderCardComponent } from './tinder-card/tinder-card.component';
 import { SwiperModule } from 'swiper/angular';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { ProductInfoComponent } from './tinder-card/product-info/product-info.component';
 
 @NgModule({
   declarations: [
     TinderPageComponent,
-    TinderCardComponent
+    TinderCardComponent,
+    ProductInfoComponent
   ],
   imports: [
     CommonModule,

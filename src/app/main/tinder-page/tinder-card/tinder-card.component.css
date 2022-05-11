@@ -187,13 +187,73 @@
 
 .super-like-dragged-info
 {
-  background-color: #33adcb;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   border-radius: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;
+}
+
+.spanded-header
+{
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  background-color: #0098be;
+  border-bottom: 2px solid #ffffff;
+  min-height: 15%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 4.5vmin;
+}
+
+.spanded-content
+{
+  width: 100%;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 85%;
+  background-color: #33adcb;
+}
+
+.spanded-item
+{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 13%;
+}
+
+.spanded-icon-title
+{
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  font-size: 3.5vmin;
+}
+
+.spanded-text
+{
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  font-size: 3.5vmin;
+}
+
+.spanded-icon
+{
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+  width: 10%;
+  margin: 0 10px;
 }
 
 .remain-num
@@ -431,7 +491,7 @@ nz-progress
 {
   display: flex;
   align-items: center;
-  z-index: 2;
+  z-index: 10;
   margin-bottom: 20px;
   position: relative;
 }
@@ -458,4 +518,5 @@ nz-progress
   right: 20px;
   height: 10vmin;
   width: 10vmin;
+  z-index: 11;
 }

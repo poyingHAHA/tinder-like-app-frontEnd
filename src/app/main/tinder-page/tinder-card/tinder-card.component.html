@@ -22,10 +22,11 @@
   <div class="card-prev" (pan)="handleDrag($event)" (click)="prevImg()"></div>
   <div class="card-next" (pan)="handleDrag($event)" (click)="nextImg()"></div>
 
-  <div [style.marginBottom]="superIsDragging || isSuperLikeSpanded?'13vh':'0'" class="info-group">
+  <div *ngIf="!(superIsDragging || isSuperLikeSpanded)" class="info-group" (pan)="handleDrag($event)">
     <div class="name">{{ post.name }}</div>
-    <div class="info"></div>
+    <div class="info" (click)="openInfo()"></div>
   </div>
+
   <div [ngClass]="superIsDragging || isSuperLikeSpanded?'action-group-spanded action-group':'action-group'">
     <div class="action dislike" (pan)="handleDrag($event)">
       <div [ngClass]="{'dislike-spanded': superIsDragging || isSuperLikeSpanded}" class="btn-wrapper" (click)="clickAction('dislike')">
@@ -66,9 +67,28 @@
       <div class="status-item left-time">03:10</div>
     </div>
     <div *ngIf="superIsDragging || isSuperLikeSpanded" class="super-like-dragged-info">
-
-
+      <div class="spanded-header">
+        <div class="spanded-name">{{ post.name }}</div>
+      </div>
+      <div class="spanded-content">
+        <div class="spanded-item target">
+          <div class="spanded-icon-title"><img class="spanded-icon" src="../../../../assets/images/target.svg">Target</div>
+          <div class="spanded-text">10% discount</div>
+        </div>
+        <div class="spanded-item completeness">
+          <div class="spanded-icon-title"><img class="spanded-icon" src="../../../../assets/images/completeness.svg">Completeness</div>
+          <div class="spanded-text">8/10</div>
+        </div>
+        <div class="spanded-item time-left">
+          <div class="spanded-icon-title"><img class="spanded-icon" src="../../../../assets/images/time-left.svg">Time eft</div>
+          <div class="spanded-text">03:10</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <div *ngIf="isLoading" class="card-skeleton"></div>
+<app-product-info
+  *ngIf="isInfoOpened"
+  (closeInfo)="closeInfo($event)"
+></app-product-info>
