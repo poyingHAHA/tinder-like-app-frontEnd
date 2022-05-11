@@ -9,21 +9,21 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  @Input('post') post?: ProductPostModel.ProductPost; //to get product info
+  @Input('post') post!: ProductPostModel.ProductPost; //to get product info
 
   imgBaseURL: string = `https://cf.shopee.tw/file/`;
-  cover?: string;
-  rate?: number;
+  cover!: string;
+  rate: number;
 
   constructor() {
-
+    this.rate = 0;
   }
 
   //field change
   ngOnChanges(changes: SimpleChanges): void {
-    this.cover = this.imgBaseURL + this.post?.images[0];
-    this.rate =  this.post?.rating?.rating_star;
-    this.rate = this.rate!=undefined ? Math.floor(this.rate*10)/10 : this.rate;
+    this.cover = this.imgBaseURL + this.post.images[0];
+    this.rate =  this.post.rating.rating_star;
+    this.rate = parseFloat(this.rate.toFixed(1));
   }
 
   ngOnInit(): void {

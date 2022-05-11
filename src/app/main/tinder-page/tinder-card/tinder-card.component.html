@@ -90,5 +90,6 @@
 <div *ngIf="isLoading" class="card-skeleton"></div>
 <app-product-info
   *ngIf="isInfoOpened"
+  [post]="post"
   (closeInfo)="closeInfo($event)"
 ></app-product-info>

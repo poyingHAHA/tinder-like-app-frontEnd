@@ -2,7 +2,8 @@
   <div
     class="tag rate"
   >
-    <span><i class="fa-solid fa-star"></i>{{ rate }}</span>
+    <!-- DecimalPipe -->
+    <span>{{ rate | number: '1.1-1'}}</span>
   </div>
   <div class="cover" [ngStyle]="{'background-image': 'url('+cover+')'}">
 

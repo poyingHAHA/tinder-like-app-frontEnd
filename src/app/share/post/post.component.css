@@ -45,16 +45,10 @@
 .rate
 {
   position: absolute;
-  transform: rotate(45deg);
-  right: -25px;
-  top: 10px;
-  width: 90px;
-  background-color: #e85758;
-}
-
-.rate > span > i
-{
-  color: #ffff04;
-  font-size: 0.6rem;
-  margin-right: 4px;
+  background-color: #0098be;
+  border-radius: 5px;
+  padding: 2px 7px;
+  font-size: 3.5vmin;
+  top: 5px;
+  left: 5px;
 }

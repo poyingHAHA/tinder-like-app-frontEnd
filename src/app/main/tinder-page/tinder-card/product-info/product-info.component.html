@@ -3,9 +3,26 @@
     <div class="cont-item back-wrapper">
       <div class="back" (click)="back()"><i class="fa-solid fa-arrow-left"></i></div>
     </div>
-    <div class="cont-item price-wrapper"></div>
-    <div class="cont-item name-wrapper"></div>
-    <div class="cont-item info-wrapper"></div>
+    <div class="cont-item price-wrapper">
+      <div class="price">NT 168</div>
+      <div class="target-price">NT 151.2 <i class="fa-solid fa-angle-right"></i></div>
+    </div>
+    <div class="cont-item name-wrapper">
+      <div class="name">{{ post.name }}</div>
+    </div>
+    <div class="cont-item info-wrapper">
+      <div class="info-item labels">
+        <div *ngFor="let label of testLabels">{{label}}</div>
+      </div>
+      <div class="info-item datas">
+        <div *ngFor="let data of testDatas">{{data}}</div>
+      </div>
+    </div>
   </div>
-  <div class="options"></div>
+  <div class="options">
+    <div class="opt-item info-btn"><i class="fa-solid fa-circle-info"></i></div>
+    <div class="opt-item comment-btn"><i class="fa-solid fa-comment"></i></div>
+    <div class="opt-item share-btn"><i class="fa-solid fa-share-from-square"></i></div>
+    <div class="opt-item cart-btn"><i class="fa-solid fa-cart-shopping"></i></div>
+  </div>
 </div>

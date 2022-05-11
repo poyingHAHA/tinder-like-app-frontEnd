@@ -15,7 +15,7 @@
 .content
 {
   width: 100%;
-  height: 85%;
+  height: 88%;
   border-radius: 10px 10px 0 0;
   display: flex;
   flex-direction: column;
@@ -63,22 +63,131 @@
 .price-wrapper
 {
   height: 10%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.price
+{
+  color: #0098be;
+  font-size: 6vmin;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.target-price
+{
+  color: #ffffff;
+  background-color: #0098be;
+  font-size: 4vmin;
+  border-radius: 10px;
+  padding: 0 5px;
+  margin-left: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.target-price>i
+{
+  margin-left: 5px;
 }
 
 .name-wrapper
 {
-  height: 10%;
+  min-height: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.name
+{
+  flex: 1;
+  color: #000000;
+  font-size: 4vmin;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 0 0 20px;
+  height: 100%;
 }
 
 .info-wrapper
 {
   flex: 1;
+  display: flex;
+  padding-top: 15px;
+  overflow-y: scroll;
+}
+
+.info-item
+{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #a7c2c9;
+  font-size: 4vmin;
+}
+
+.info-item>div
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.labels
+{
+  flex: 4;
+
+}
+
+.datas
+{
+  flex: 6;
 }
 
 .options
 {
   width: 100%;
-  height: 15%;
+  height: 12%;
   border-radius: 0 0 10px 10px;
   background-color: #c3c3c3;
+  display: flex;
+  align-items: center;
+}
+
+.opt-item
+{
+  height: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 7vmin;
+  padding: 10px;
+}
+
+.info-btn
+{
+  border-radius: 10px 0 0 0;
+}
+
+.share-btn,
+.comment-btn
+{
+  background-color: #e2e2e2;
+}
+
+.cart-btn
+{
+  padding: 10px 30px !important;
+  background-color: #0098be;
+  border-radius: 0 0 10px 0;
 }
