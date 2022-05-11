@@ -98,7 +98,9 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   ngAfterViewInit(): void {
     this.statusOriginalHeight = (this.status.nativeElement as HTMLElement).offsetHeight;
     this.statusLastHeight = this.statusOriginalHeight;
-    this.handleDragSuperLike({deltaY: -50, isFinal: true}); //first trigger
+
+    //first trigger, in order to fix the bug on mobile
+    this.handleDragSuperLike({deltaY: -50, isFinal: true});
   }
 
   ngOnDestroy(): void {
