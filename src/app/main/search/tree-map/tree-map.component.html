@@ -2,7 +2,10 @@
   <div class="inner-grid">
     <div class="treemap"
       *ngFor="let post of posts; let i=index"
-      [ngClass]="i==2?'great-recommend':''"
+      [ngClass]="{
+        'great-recommend-odd': i==2 && evenOrOdd%2!=0,
+        'great-recommend-even': i==2 && evenOrOdd%2==0
+      }"
     >
       <app-share-post
         [post]="post"

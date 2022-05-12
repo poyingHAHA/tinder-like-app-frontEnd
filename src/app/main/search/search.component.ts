@@ -34,17 +34,17 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isSearchMode = false;
     this.destroy$ = new Subject<any>();
 
-    let shop: string = "624941b301a9a3c75d9d26d6";
+    //let shop: string = "624941b301a9a3c75d9d26d6";
 
     this.isScrollToBottom = false;
-    this.initTreeMaps(shop);
+    this.initTreeMaps();
   }
 
-  initTreeMaps(shop: string)
+  initTreeMaps()
   {
     //testing subscribe, random shop
     let num = 18;
-    this.postService.getProductPosts(num, 0, shop)
+    this.postService.getProductPostsRandomly(num)
     .pipe(
       takeUntil(this.destroy$)
     )

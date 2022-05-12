@@ -10,6 +10,7 @@ import * as ProductPostModel from 'src/app/model/interface/ProductPost';
 })
 export class TreeMapComponent implements OnInit {
   @Input('posts') posts?: ProductPostModel.ProductPost[];
+  @Input('evenOrOdd') evenOrOdd!: number;
 
   constructor() { }
 
