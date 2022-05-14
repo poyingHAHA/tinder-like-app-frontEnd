@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { PostComponent } from './post/post.component';
 import { BigPostComponent } from './post/big-post/big-post.component';
 import { SharePostComponent } from './post/share-post/share-post.component';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 const exportComponents:any[] = [
   PostComponent,
@@ -37,6 +38,7 @@ const exportDirectives: any[]=[
     CommonModule,
     FormsModule,
     NzIconModule,
+    NzCarouselModule
   ],
   exports:[
     exportComponents,

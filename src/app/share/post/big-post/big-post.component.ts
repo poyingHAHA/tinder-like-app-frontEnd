@@ -1,9 +1,10 @@
+import { NzCarouselComponent } from 'ng-zorro-antd/carousel';
 import { Shop } from './../../../model/interface/Shop';
 import { ShopService } from './../../../service/shop-service/shop.service';
 import { Subject, take, takeUntil } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ProductPost } from './../../../model/interface/ProductPost';
-import { Component, Input, OnInit, Type, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, Type, OnDestroy, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-share-big-post',
@@ -19,6 +20,8 @@ export class BigPostComponent implements OnInit, OnDestroy {
   };
 
   @Input('post') post!: ProductPost;
+
+  @ViewChild('carousel') carousel!: NzCarouselComponent;
 
   destroy$: Subject<any>;
 
@@ -44,6 +47,16 @@ export class BigPostComponent implements OnInit, OnDestroy {
   changeMode(type: string): void
   {
     this.iconState[type] = !this.iconState[type];
+  }
+
+  prevImg()
+  {
+    this.carousel.pre();
+  }
+
+  nextImg()
+  {
+    this.carousel.next();
   }
 
   ngOnDestroy(): void {
