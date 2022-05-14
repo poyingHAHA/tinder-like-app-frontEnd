@@ -23,3 +23,8 @@
 {
   position: relative;
 }
+
+::ng-deep .swiper-pagination
+{
+  display: none;
+}
