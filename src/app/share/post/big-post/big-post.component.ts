@@ -69,6 +69,8 @@ export class BigPostComponent implements OnInit, OnDestroy {
     this.picLoaded++;
     if(this.picLoaded===this.post.images.length){
       this.isImgLoaded = true;
+      this.carousel.pre();
+      this.carousel.next();
     }
   }
 

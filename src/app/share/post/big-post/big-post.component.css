@@ -154,6 +154,7 @@
 ::ng-deep .ant-carousel .slick-dots li button
 {
   background-color: #c9c8c8;
+  border-radius: 20px;
   height: 5px;
 }
 
