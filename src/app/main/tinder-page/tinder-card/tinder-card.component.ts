@@ -65,6 +65,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   isInfoOpened: boolean = false;
 
   isLoading: boolean = true;
+  picLoaded: number = 0;
 
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -241,7 +242,10 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   imgLoaded()
   {
-    this.isLoading = false;
+    this.picLoaded++;
+    if(this.picLoaded===this.post.images.length){
+      this.isLoading = false;
+    }
   }
 
   sleep(ms: number)

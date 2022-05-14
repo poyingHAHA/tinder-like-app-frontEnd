@@ -29,12 +29,14 @@ export class BigPostComponent implements OnInit, OnDestroy {
   shop?: Shop;
 
   isImgLoaded: boolean;
+  picLoaded: number;
 
   constructor(
     private shopService: ShopService
   ) {
     this.destroy$ = new Subject();
     this.isImgLoaded = false;
+    this.picLoaded = 0;
   }
 
   ngOnInit(): void {
@@ -64,7 +66,10 @@ export class BigPostComponent implements OnInit, OnDestroy {
 
   imgLoaded()
   {
-    this.isImgLoaded = true;
+    this.picLoaded++;
+    if(this.picLoaded===this.post.images.length){
+      this.isImgLoaded = true;
+    }
   }
 
   ngOnDestroy(): void {

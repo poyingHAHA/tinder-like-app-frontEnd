@@ -102,9 +102,15 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 50px;
-  height: 50px;
+  width: 25%;
   border-radius: 50%;
+}
+
+.user-pic::after
+{
+  content: '';
+  display: block;
+  padding-bottom: 100%;
 }
 
 .description
@@ -148,7 +154,6 @@
 ::ng-deep .ant-carousel .slick-dots li button
 {
   background-color: #c9c8c8;
-  border-radius: 20px;
   height: 5px;
 }
 
