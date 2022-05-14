@@ -5,6 +5,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 // import Swiper core and required modules
 import Swiper, { SwiperOptions, Pagination } from 'swiper';
 
+Swiper.use([Pagination])
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,6 +15,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   posts: ProductPost[];
 
   destroy$: Subject<any>;
+
+  // make "description" class no swipe, in case of spanding content
+  config: SwiperOptions = {
+    direction: "vertical",
+    noSwipingClass: "description",
+    pagination: {clickable: true}
+  };
 
   constructor(
     private postService: PostService
@@ -31,12 +39,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.posts = posts;
     })
   }
-
-  // make "description" class no swipe, in case of spanding content
-  config: SwiperOptions = {
-    direction: "vertical",
-    noSwipingClass: "description"
-  };
 
   ngOnDestroy(): void {
     this.destroy$.next(null);

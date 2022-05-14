@@ -17,7 +17,7 @@
   <div class="prev" (click)="prevImg()"></div>
   <div class="next" (click)="nextImg()"></div>
   <div class="carousel">
-    <nz-carousel #carousel [nzEnableSwipe]="false" style="border-radius: 10px;" [nzDotPosition]="'top'">
+    <nz-carousel #carousel [nzEnableSwipe]="false" [nzDotPosition]="'top'">
       <div nz-carousel-content *ngFor="let img of post.images">
         <div appImgload (imageLoaded)="imgLoaded()" class="pic"
           [ngStyle]="{
