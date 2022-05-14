@@ -23,7 +23,7 @@
   <div class="card-next" (pan)="handleDrag($event)" (click)="nextImg()"></div>
 
   <div *ngIf="!(superIsDragging || isSuperLikeSpanded)" class="info-group" (pan)="handleDrag($event)">
-    <div class="name">{{ post.name }}</div>
+    <div appMoreContent [text]=" post.name" class="name"></div>
     <div class="info" (click)="openInfo()"></div>
   </div>
 

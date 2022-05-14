@@ -1,14 +1,17 @@
-<swiper
+<div class="my-container">
+  <swiper
   [config]="config"
->
-  <ng-template
-    *ngFor="let post of posts"
-    swiperSlide
-    class="my-slide"
   >
-  <!-- TODO: when spanded text, can't slide until close it -->
-    <app-share-big-post
-      [post]="post"
-    ></app-share-big-post>
-  </ng-template>
-</swiper>
+    <ng-template
+      *ngFor="let post of posts"
+      swiperSlide
+      class="my-slide"
+    >
+    <!-- TODO: when spanded text, can't slide until close it -->
+      <app-share-big-post
+        [post]="post"
+      ></app-share-big-post>
+    </ng-template>
+  </swiper>
+</div>
+

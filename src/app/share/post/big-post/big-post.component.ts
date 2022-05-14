@@ -28,10 +28,13 @@ export class BigPostComponent implements OnInit, OnDestroy {
   imgBase: string = environment.imgBase;
   shop?: Shop;
 
+  isImgLoaded: boolean;
+
   constructor(
     private shopService: ShopService
   ) {
     this.destroy$ = new Subject();
+    this.isImgLoaded = false;
   }
 
   ngOnInit(): void {
@@ -57,6 +60,11 @@ export class BigPostComponent implements OnInit, OnDestroy {
   nextImg()
   {
     this.carousel.next();
+  }
+
+  imgLoaded()
+  {
+    this.isImgLoaded = true;
   }
 
   ngOnDestroy(): void {

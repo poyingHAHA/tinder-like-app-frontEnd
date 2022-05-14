@@ -19,7 +19,7 @@
   <div class="carousel">
     <nz-carousel #carousel [nzEnableSwipe]="false" style="border-radius: 10px;" [nzDotPosition]="'top'">
       <div nz-carousel-content *ngFor="let img of post.images">
-        <div class="pic"
+        <div appImgload (imageLoaded)="imgLoaded()" class="pic"
           [ngStyle]="{
             'background-image': 'url('+imgBase+img+')'
           }"
@@ -50,12 +50,13 @@
     </div>
   </div>
 </div>
-<div class="skeleton">
+<div *ngIf="!isImgLoaded" class="skeleton">
   <div class="sk-info">
-    <div class="fir">
-
+    <div class="sk-item">
+      <div class="sk-pic"></div>
+      <div class="sk-line sk-fir-line"></div>
+      <div class="sk-line sk-sec-line"></div>
+      <div class="sk-line sk-thi-line"></div>
     </div>
-    <div class="sec"></div>
-    <div class="thi"></div>
   </div>
 </div>

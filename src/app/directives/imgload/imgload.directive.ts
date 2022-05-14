@@ -12,6 +12,7 @@ export class ImgloadDirective implements AfterViewInit{
     this.imageLoaded = new EventEmitter<boolean>(true);
   }
 
+  //can't ngif on load img element
   ngAfterViewInit(): void {
     const img = new Image();
     const bgStyle = getComputedStyle(this.el.nativeElement).backgroundImage
