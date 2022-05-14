@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   // make "description" class no swipe, in case of spanding content
   config: SwiperOptions = {
     direction: "vertical",
-    noSwipingClass: "description"
+    noSwipingClass: "description",
+    pagination: true
   };
 
   constructor(
