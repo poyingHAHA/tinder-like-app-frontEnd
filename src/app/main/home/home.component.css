@@ -26,5 +26,5 @@
 
 ::ng-deep .swiper-pagination
 {
-  display: none;
+  right: -10px !important;
 }
