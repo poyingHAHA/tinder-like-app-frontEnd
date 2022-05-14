@@ -1,12 +1,10 @@
-import { ImgloadDirective } from './../../../directives/imgload.directive';
+import { environment } from 'src/environments/environment';
 import { ProductPost, Like } from './../../../model/interface/ProductPost';
-import { Subscription } from 'rxjs';
 import { animate, transition, trigger, keyframes } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, AfterViewInit, SimpleChanges, OnChanges, Renderer2 } from '@angular/core';
 import { TinderLayoutService } from 'src/app/service/layout-service/tinder-layout.service';
 import * as kf from '../../keyframes';
 import { NzCarouselComponent, NzCarouselModule } from 'ng-zorro-antd/carousel';
-import { NzProgressModule } from 'ng-zorro-antd/progress';
 
 @Component({
   selector: 'app-tinder-card',
@@ -40,7 +38,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   superDetecterBottom: string;
 
 
-  imgBaseURL: string = "https://cf.shopee.tw/file/";
+  imgBaseURL: string = environment.imgBase;
 
   animationState?: string;
   lastX!: number;

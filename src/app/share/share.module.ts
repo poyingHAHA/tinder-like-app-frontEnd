@@ -1,4 +1,5 @@
-import { ImgloadDirective } from './../directives/imgload.directive';
+import { MoreContentDirective } from './../directives/more-content/more-content.directive';
+import { ImgloadDirective } from '../directives/imgload/imgload.directive';
 import { LoaderSpinerComponent } from './../layout/loader-spiner/loader-spiner.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FormsModule } from '@angular/forms';
@@ -12,14 +13,15 @@ const exportComponents:any[] = [
   PostComponent,
   BigPostComponent,
   SharePostComponent,
-  LoaderSpinerComponent
+  LoaderSpinerComponent,
 ];
 const exportModules:any[] = [
   FormsModule,
   NzIconModule
 ];
 const exportDirectives: any[]=[
-  ImgloadDirective
+  ImgloadDirective,
+  MoreContentDirective
 ]
 
 @NgModule({
@@ -28,7 +30,8 @@ const exportDirectives: any[]=[
     BigPostComponent,
     SharePostComponent,
     LoaderSpinerComponent,
-    ImgloadDirective
+    ImgloadDirective,
+    MoreContentDirective
   ],
   imports: [
     CommonModule,

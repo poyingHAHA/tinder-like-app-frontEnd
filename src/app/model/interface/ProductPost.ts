@@ -53,6 +53,8 @@ export interface ProductPost
   monthSold: number,
   stock: number,
   shared: Share[],
+  createdAt: string,
+  updatedAt: string,
   tinderLike: TinderUser[],
   tinderDislike: TinderUser[]
 }

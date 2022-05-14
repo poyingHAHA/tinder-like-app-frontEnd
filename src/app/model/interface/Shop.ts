@@ -6,6 +6,7 @@ export interface Shop
   role: string,
   itemcount: number,
   account: string,
+  name: string,
   password: string,
   profilePic: string,
   selfIntro: string,

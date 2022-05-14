@@ -7,5 +7,6 @@ export const environment = {
     buyer: "buyer",
     shop: "shop",
     items: "items"
-  }
+  },
+  imgBase: "https://cf.shopee.tw/file/"
 };

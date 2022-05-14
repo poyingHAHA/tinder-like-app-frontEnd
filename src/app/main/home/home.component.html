@@ -2,10 +2,12 @@
   [config]="config"
 >
   <ng-template
-    *ngFor="let i of [1,2,3,4,5]"
+    *ngFor="let post of posts"
     swiperSlide
     class="my-slide"
   >
-    <app-share-big-post></app-share-big-post>
+    <app-share-big-post
+      [post]="post"
+    ></app-share-big-post>
   </ng-template>
 </swiper>
