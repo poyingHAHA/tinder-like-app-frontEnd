@@ -102,7 +102,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 16vw;
+  width: 16vmin;
   border-radius: 50%;
 }
 
@@ -212,7 +212,7 @@
 
 .sk-pic
 {
-  width: 20vw;
+  width: 16vmin;
   border-radius: 50%;
   background-color: #dedede;
   position: absolute;
