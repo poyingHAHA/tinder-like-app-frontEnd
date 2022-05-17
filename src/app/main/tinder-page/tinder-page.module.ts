@@ -10,6 +10,7 @@ import { TinderCardComponent } from './tinder-card/tinder-card.component';
 import { SwiperModule } from 'swiper/angular';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { ProductInfoComponent } from './tinder-card/product-info/product-info.component';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ProductInfoComponent } from './tinder-card/product-info/product-info.co
     SwiperModule,
     NzCarouselModule,
     NzProgressModule,
+    NzSwitchModule,
     ShareModule
   ]
 })

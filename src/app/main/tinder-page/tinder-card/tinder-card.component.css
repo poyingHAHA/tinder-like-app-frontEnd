@@ -492,19 +492,16 @@ nz-progress
   display: flex;
   align-items: center;
   z-index: 10;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   position: relative;
 }
 
 .name
 {
   color: #ffffff;
-  font-size: 5vmin;
+  font-size: 4vmin;
   padding: 0 10px;
-  /* text-overflow: ellipsis; */
   max-width: 60%;
-  /* overflow: hidden;
-  white-space: nowrap; */
 }
 
 .info
@@ -521,3 +518,14 @@ nz-progress
   z-index: 11;
   bottom: 1vh;
 }
+
+::ng-deep .ant-switch
+{
+  background-color: #fd5252;
+}
+
+::ng-deep .ant-switch-checked
+{
+  background-color: #e5bb27;
+}
+

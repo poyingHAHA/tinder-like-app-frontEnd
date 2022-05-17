@@ -74,7 +74,7 @@
   flex-direction: column;
   align-items: flex-start;
   position: absolute;
-  bottom: 40px;
+  bottom: 20px;
   left: 15px;
   z-index: 2;
   color: #ffffff;
@@ -86,14 +86,14 @@
 {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .user-name
 {
   margin: 0 10px;
   font-weight: 900;
-  font-size: 4vmin;
+  font-size: 3.5vmin;
 }
 
 .user-pic
@@ -102,7 +102,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 16vmin;
+  width: 12vmin;
   border-radius: 50%;
 }
 
@@ -123,7 +123,7 @@
 .tags
 {
   margin: 10px 0;
-  font-size: 4vmin;
+  font-size: 3.5vmin;
 }
 
 .tag

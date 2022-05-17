@@ -19,10 +19,10 @@ export class TinderPageComponent implements OnInit, OnDestroy {
 
   imgBaseURL: string = "https://cf.shopee.tw/file/";
 
-  likes: ProductPost[] = [];
-  dislikes: ProductPost[] = [];
+  likes: {post: ProductPost, like: boolean}[] = [];
+  dislikes: {post: ProductPost, like: boolean}[] = [];
   top: number;
-  hisList: ProductPost[] = [];
+  hisList: {post: ProductPost, like: boolean}[] = [];
 
   likeHis: boolean = true;
   dislikeHis: boolean = false;
@@ -55,11 +55,11 @@ export class TinderPageComponent implements OnInit, OnDestroy {
       let card = this.cardsInfo[this.top];
       if(card && event.type == "like")
       {
-        this.likes.push(card);
+        this.likes.push({post: card, like: true});
         this.top = this.top<1 ? 0 : this.top-1;
       }else if(card && event.type == "dislike")
       {
-        this.dislikes.push(card);
+        this.dislikes.push({post: card, like: false});
         this.top = this.top<1 ? 0 : this.top-1;
       }
     });
@@ -97,6 +97,22 @@ export class TinderPageComponent implements OnInit, OnDestroy {
         this.hisList = this.dislikes;
         break;
     }
+  }
+
+  resetHisList()
+  {
+    let toDis = this.likes.filter(x => x.like==false);
+    let toLik = this.dislikes.filter(x => x.like==true);
+
+    this.likes = this.likes.concat(toLik);
+    this.dislikes = this.dislikes.concat(toDis);
+
+    this.likes = this.likes.filter(x => x.like==true);
+    this.dislikes = this.dislikes.filter(x => x.like==false);
+
+    setTimeout(() => {
+      this.hisList = this.likeHis?this.likes:this.dislikes;
+    }, 300);
   }
 
   ngOnDestroy(): void {

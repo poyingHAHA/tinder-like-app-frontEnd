@@ -35,10 +35,11 @@
         <div class="his-content">
           <div *ngFor="let item of hisList" class="his-item">
             <div class="his-pic">
-              <img [src]="imgBaseURL+item.images[0]" alt="no-pic">
+              <img [src]="imgBaseURL+item.post.images[0]" alt="no-pic">
             </div>
-            <div class="his-name">{{ item.name }}</div>
+            <div class="his-name">{{ item.post.name }}</div>
             <div class="his-time"></div>
+            <div class="switch"><nz-switch [(ngModel)]="item.like" (ngModelChange)="resetHisList()"></nz-switch></div>
           </div>
         </div>
       </div>
