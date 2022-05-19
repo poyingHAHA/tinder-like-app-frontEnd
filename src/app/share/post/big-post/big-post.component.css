@@ -28,13 +28,13 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient(to bottom, transparent, 75%, black 100%);
+  background: linear-gradient(to bottom, transparent, 85%, black 100%);
   z-index: 1;
 }
 
 .pic
 {
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;

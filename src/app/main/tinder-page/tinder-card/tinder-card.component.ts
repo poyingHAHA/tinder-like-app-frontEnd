@@ -127,7 +127,6 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   startAnimation(state: string)
   {
-    console.log(state);
     if(!this.animationState){
       this.animationState = state;
     }
