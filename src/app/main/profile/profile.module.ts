@@ -18,7 +18,8 @@ import { PostComponent } from 'src/app/share/post/post.component';
     ProfileRoutingModule,
     NzIconModule,
     ShareModule,
-    SwiperModule
+    SwiperModule,
+    ShareModule
   ]
 })
 export class ProfileModule { }

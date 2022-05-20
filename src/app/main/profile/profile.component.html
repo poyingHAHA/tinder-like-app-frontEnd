@@ -1,29 +1,29 @@
 <div class="my-container">
   <div class="header">
-    <div class="settings"><i class="fa-solid fa-ellipsis"></i></div>
-    <div class="info-group">
-      <div class="name">Test User</div>
-    </div>
-    <div class="main-info">
-      <div class="follow-group">
-        <div class="follow-item following">
-          <i class="fa-solid fa-user-group"></i>
-          1,073
-        </div>
-        <div class="follow-item rate">
-          <i class="fa-solid fa-star"></i>
-          4.7/5.0
-        </div>
-      </div>
-      <div class="intro">
-        我是一個很奇耙的人<br/>
-        分享的東西都很奇耙...更多
-      </div>
+    <div class="name">CERIOUS PANG</div>
+    <div class="func-group">
+      <div class="func-item add-post"><i class="fa-solid fa-plus"></i></div>
+      <div class="func-item settings"><i class="fa-solid fa-bars"></i></div>
     </div>
   </div>
   <div class="content">
     <div class="main-cont">
       <div class="cont-pic"></div>
+      <div class="info-group">
+        <div class="info-item following">
+          <div class="num">1,073</div>
+          <div class="text">Following</div>
+        </div>
+        <div class="info-item follower">
+          <div class="num">30</div>
+          <div class="text">Followers</div>
+        </div>
+        <div class="info-item posts-tag">
+          <div class="num">4</div>
+          <div class="text">Posts</div>
+        </div>
+      </div>
+      <div appMoreContent [text]="testText" class="description"></div>
       <swiper
         [pagination]="true"
       >
@@ -41,5 +41,8 @@
         </ng-template>
       </swiper>
     </div>
+  </div>
+  <div class="my-cart">
+    <i class="fa-solid fa-cart-shopping"></i>
   </div>
 </div>

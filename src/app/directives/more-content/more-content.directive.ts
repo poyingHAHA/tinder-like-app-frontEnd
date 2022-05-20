@@ -27,7 +27,7 @@ export class MoreContentDirective implements AfterViewInit{
   updateText()
   {
     if(this.isLoadMore){
-      this.showText = this.text;
+      this.showText = this.text+"...less";
     }else{
       if(this.text.length >= 30){
         this.showText = this.text.substring(0, 30)+"...more";
