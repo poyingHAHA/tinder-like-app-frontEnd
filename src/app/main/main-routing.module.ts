@@ -7,7 +7,7 @@ const routes: Routes = [
     path: '',
     component: MainComponent,
     children: [
-      {path: '', redirectTo: 'home', pathMatch: 'full'},
+      {path: '', redirectTo: 'tinder-page', pathMatch: 'full'},
       {path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
       {path: 'tinder-page', loadChildren: () => import('./tinder-page/tinder-page.module').then(m => m.TinderPageModule)},
       {path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule)},
