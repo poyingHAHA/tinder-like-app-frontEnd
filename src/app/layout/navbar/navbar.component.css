@@ -19,15 +19,15 @@
   background-image: url('../../../assets/images/swipe-right.svg');
   background-repeat: no-repeat;
   background-size: contain;
-  width: 5.5vmin;
-  height: 5.5vmin;
+  width: 6vmin;
+  height: 6vmin;
   filter: invert(81%) sepia(15%) saturate(729%) hue-rotate(175deg) brightness(104%) contrast(97%);
 }
 
 i
 {
   color: #9cd5e4;
-  font-size: 5vmin;
+  font-size: 6vmin;
 }
 
 .active
@@ -59,19 +59,4 @@ i
   right: 0;
   bottom: -10px;
   border: 1px solid #0098be;
-}
-
-.add-post
-{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #0098be;
-  padding: 10px 20px;
-  border-radius: 10px;
-}
-
-.add-post > i
-{
-  color: #ffffff;
 }

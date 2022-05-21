@@ -4,7 +4,7 @@ import { tinderEvent } from './../../service/layout-service/tinder-layout.servic
 import { TinderLayoutService } from '../../service/layout-service/tinder-layout.service';
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import 'hammerjs';
-import { Subscription, Subject, Observable, takeUntil, filter } from 'rxjs';
+import { Subscription, Subject, Observable, takeUntil, filter, takeWhile, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-tinder-page',
@@ -31,6 +31,7 @@ export class TinderPageComponent implements OnInit, OnDestroy {
   actionSub$: Subject<tinderEvent>;
   swipeSubs$?: Subscription;
   clickSubs$?: Subscription;
+  loadMoreSub$: BehaviorSubject<any>;
 
   isHistoryOpen: boolean = false;
   isLoading: boolean = true;
@@ -39,13 +40,34 @@ export class TinderPageComponent implements OnInit, OnDestroy {
     private tinderLayoutService: TinderLayoutService,
     private postService: PostService
   ) {
-    this.actionSub$ = new Subject<tinderEvent>();
-    this.destroy$ = new Subject<any>();
     this.cardsInfo = [];
     this.top = 0;
+    this.actionSub$ = new Subject<tinderEvent>();
+    this.destroy$ = new Subject<any>();
+    this.loadMoreSub$ = new BehaviorSubject<any>(this.top);
   }
 
   ngOnInit(): void {
+    //first init top=remain=0
+    this.loadMoreSub$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(remain=>{
+      if(remain<=4){
+        let takedPices = this.cardsInfo.length-(this.top+1); //之前拿過的張數
+        let loadPost = this.postService.getProductPostsRandomly(10)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(posts=>{
+          if(posts!=null)
+          {
+            this.isLoading = false;
+          }
+          this.cardsInfo = posts.concat(this.cardsInfo);
+          this.top = remain===0?this.cardsInfo.length-1:this.cardsInfo.length-takedPices-1;
+          loadPost.unsubscribe();
+        });
+      }
+    });
+
     this.tinderLayoutService.getClickObs().pipe(takeUntil(this.destroy$)).subscribe(this.actionSub$);
     this.tinderLayoutService.getSwipeObs().pipe(takeUntil(this.destroy$)).subscribe(this.actionSub$);
 
@@ -62,17 +84,11 @@ export class TinderPageComponent implements OnInit, OnDestroy {
         this.dislikes.push({post: card, like: false});
         this.top = this.top<1 ? 0 : this.top-1;
       }
-    });
 
-    this.postService.getProductPostsRandomly(15)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(posts=>{
-      if(posts!=null)
-      {
-        this.isLoading = false;
+      //剩下五張時 開始撈新資料
+      if(this.top<=4){
+        this.loadMoreSub$.next(this.top);
       }
-      this.cardsInfo = posts;
-      this.top = this.cardsInfo.length-1;
     });
   }
 

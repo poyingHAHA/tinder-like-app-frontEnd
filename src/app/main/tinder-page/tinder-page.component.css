@@ -76,10 +76,8 @@
   bottom: 8vh;
   left: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
   z-index: 5;
-  /* overflow-y: scroll; */
 }
 
 .his-block
@@ -89,8 +87,9 @@
   align-items: center;
   background-color: #ffffff;
   width: 95%;
-  height: 80%;
+  height: 85%;
   border-radius: 20px;
+  margin-top: 10vh;
 }
 
 .his-header
