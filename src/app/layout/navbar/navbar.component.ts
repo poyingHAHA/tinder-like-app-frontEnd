@@ -8,11 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   activeList: any={
-    'home': true,
-    'tinder-page': false,
-    'shop': false,
+    'home': false,
+    'tinder-page': true,
     'search': false,
-    'like': false,
     'profile': false
   };
 

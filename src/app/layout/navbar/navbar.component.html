@@ -1,10 +1,10 @@
 <div class="mynav">
-  <div class="icon-div" (click)="activeIcon('home')">
+  <div class="icon-div" (click)="activeIcon('tinder-page')">
     <a [routerLink]="['tinder-page']" >
-      <i routerLinkActive="active" nz-icon nzType="home" [nzTheme]="activeList.home?'fill':'outline'"></i>
+      <i routerLinkActive="active" nz-icon nzType="home" [nzTheme]="activeList['tinder-page']?'fill':'outline'"></i>
     </a>
   </div>
-  <div routerLinkActive="active-tinder-div" class="icon-div" (click)="activeIcon('tinder-page')">
+  <div routerLinkActive="active-tinder-div" class="icon-div" (click)="activeIcon('home')">
     <a [routerLink]="['home']" >
       <i routerLinkActive="active" class="fa-solid fa-mobile-screen-button"></i>
     </a>
