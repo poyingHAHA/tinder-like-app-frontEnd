@@ -16,14 +16,14 @@
 {
   width: 100%;
   margin-top: 50px;
+  padding: 0 3vmin;
 }
 
 .grid
 {
   width: 100%;
-  padding-top: 100%;
+  padding-top: calc(100% + 3 * 5vh - 0.7rem);
   position: relative;
-  padding-bottom: 0.2rem;
 }
 
 input

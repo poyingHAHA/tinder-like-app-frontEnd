@@ -2,67 +2,66 @@
 {
   position: relative;
   width: 100%;
+  height: 100%;
   overflow: hidden;
-}
-
-.my-container::after
-{
-  /* padding depends on the width not the height */
-  content: "";
-  display: block;
-  padding-bottom: 100%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .cover
 {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
+  flex: 1; /*透過after 撐起treemap高度, 在用flex把大版面撐滿*/
+}
+
+.cover::after
+{
+  content: '';
+  display: block;
+  padding-bottom: 100%;
 }
 
 .tag
 {
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2;
-  padding: 0px 7px;
-  color: #000000;
 }
 
 .tag > span
 {
   display: block;
+  margin-left: 5px;
 }
 
 .rate
 {
-  position: absolute;
-  background-color: #e5bb27;
-  border-radius: 20px;
-  padding: 2px 10px;
-  font-size: 3.5vmin;
+  font-size: 1rem;
   font-weight: 500;
-  top: 7px;
-  left: 7px;
 }
 
-.rate::after
+.info
 {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  border-radius: 20px;
-  border: 4px solid #f5f5f3;
-  opacity: 0.5;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: #ffffff;
+  color: #0098be;
+  width: 100%;
+  height: 4vh;
+  border-radius: 0 0 20px 20px;
+  padding: 0 0.7rem;
+}
+
+.greatest
+{
+  background-color: #0098be !important;
+  color: #ffffff !important;
 }

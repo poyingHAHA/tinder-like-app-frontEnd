@@ -15,7 +15,9 @@ export class TreeMapComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
+    this.posts?.sort((x, y)=>{
+      return y.rating.rating_star - x.rating.rating_star; //最高分排前面
+    });
   }
 
 }

@@ -55,7 +55,6 @@ export class TinderPageComponent implements OnInit, OnDestroy {
       if(remain<=4){
         let takedPices = this.cardsInfo.length-(this.top+1); //之前拿過的張數
         let loadPost = this.postService.getProductPostsRandomly(10)
-        .pipe(takeUntil(this.destroy$))
         .subscribe(posts=>{
           if(posts!=null)
           {

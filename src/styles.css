@@ -3,3 +3,17 @@ p
 {
   color: white;
 }
+
+/* rem rwd font */
+:root
+{
+  font-size: 15px;
+}
+
+@media(min-width: 576px)
+{
+  :root
+  {
+    font-size: 20px;
+  }
+}

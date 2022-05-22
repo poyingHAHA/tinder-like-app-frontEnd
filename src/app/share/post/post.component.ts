@@ -10,6 +10,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 })
 export class PostComponent implements OnInit {
   @Input('post') post!: ProductPostModel.ProductPost; //to get product info
+  @Input('isGreatest') isGreatest: boolean;
 
   imgBaseURL: string = `https://cf.shopee.tw/file/`;
   cover!: string;
@@ -17,6 +18,7 @@ export class PostComponent implements OnInit {
 
   constructor() {
     this.rate = 0;
+    this.isGreatest = false;
   }
 
   //field change
