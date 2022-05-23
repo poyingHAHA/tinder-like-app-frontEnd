@@ -43,6 +43,11 @@
   z-index: 1;
 }
 
+.mask-up
+{
+  background: linear-gradient(to bottom, transparent, 20%, black 100%);
+}
+
 .pic
 {
   background-size: contain;

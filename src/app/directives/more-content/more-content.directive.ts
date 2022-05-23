@@ -1,10 +1,11 @@
-import { Directive, ElementRef, HostListener, Input, AfterViewInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 
 @Directive({
   selector: '[appMoreContent]'
 })
 export class MoreContentDirective implements AfterViewInit{
   @Input('text') text: string;
+  @Output('moreText') moreText: EventEmitter<boolean>;
 
   showText: string
 
@@ -16,6 +17,7 @@ export class MoreContentDirective implements AfterViewInit{
     this.text = "";
     this.showText = this.text;
     this.isLoadMore = false;
+    this.moreText = new EventEmitter<boolean>();
   }
 
   //onChange
@@ -42,6 +44,7 @@ export class MoreContentDirective implements AfterViewInit{
   onClick($event: Event)
   {
     this.isLoadMore = !this.isLoadMore;
+    this.moreText.emit(this.isLoadMore);
     this.updateText();
   }
 }

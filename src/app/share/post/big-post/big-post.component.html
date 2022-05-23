@@ -1,6 +1,6 @@
 <div class="my-container">
   <div class="mask-top"></div>
-  <div class="mask-bottom"></div>
+  <div [ngClass]="{'mask-up': isMoreText}" class="mask-bottom"></div>
   <div class="option-group">
     <div class="option like">
       <i [ngStyle]="{'color': iconState['like']?'#f61313':'#ffffff'}" class="fa-solid fa-heart" (click)="changeMode('like')"></i>
@@ -38,7 +38,12 @@
       ></div>
       <div class="user-name">{{ shop?.name }}</div>
     </div>
-    <div appMoreContent class="description" [text]="post.content">
+    <div
+      appMoreContent
+      class="description"
+      [text]="post.content"
+      (moreText)="moreText($event)"
+    >
       {{ post.content.substring(0,20) }}
     </div>
     <div class="tags">
