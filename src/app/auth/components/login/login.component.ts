@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
-import { AuthService } from './../../services/auth.service';
-import { Subscription } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { Subscription, switchMap } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
@@ -43,6 +43,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   seePassword()
   {
     this.isSeePassword = !this.isSeePassword;
+  }
+
+  switchToSignUp()
+  {
+    this.router.navigate(['/register']);
   }
 
   ngOnDestroy(): void {

@@ -1,0 +1,53 @@
+<div class="my-container">
+  <div class="back">
+    <div class="icon"><i class="fa-solid fa-arrow-left" (click)="switchToLogin()"></i></div>
+  </div>
+  <div class="content">
+    <div class="title">Create an account</div>
+    <div class="info-group">
+      <div class="input-group">
+        <div class="label">
+          <i class="fa-solid fa-user"></i>Name
+        </div>
+        <div class="input"><input type="text" placeholder="nickname"></div>
+      </div>
+      <div class="input-group">
+        <div class="label">
+          <i class="fa-solid fa-envelope"></i>Email
+        </div>
+        <div class="input"><input type="text" placeholder="example@mail.com"></div>
+      </div>
+      <div class="input-group">
+        <div class="label">
+          <i class="fa-solid fa-venus-mars"></i>Gender
+        </div>
+        <div class="input">
+          <a class="gender" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+            {{ gender }}
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item (click)="changeGender('Male')">Male</li>
+              <li nz-menu-item (click)="changeGender('Female')">Female</li>
+              <li nz-menu-item (click)="changeGender('Other')">Other</li>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+      </div>
+      <div class="input-group">
+        <div class="label">
+          <i class="fa-solid fa-lock"></i>Password
+        </div>
+        <div class="input">
+          <input [type]="isSeePassword ? 'text' : 'password'" [(ngModel)]="password" placeholder="******">
+          <div class="eye" (click)="seePassword()"><i nz-icon [nzType]="isSeePassword ? 'eye' : 'eye-invisible'" nzTheme="outline"></i></div>
+        </div>
+      </div>
+    </div>
+    <div class="sign-up" (click)="signup()">SIGN UP</div>
+    <div class="sign-in-block">
+      Already have an account? <em style="font-weight: bolder; margin-left: 5px;" (click)="switchToLogin()">Sign in</em>
+    </div>
+  </div>
+</div>

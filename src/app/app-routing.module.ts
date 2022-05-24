@@ -1,8 +1,9 @@
+import { RegisterComponent } from './auth/components/register/register.component';
 import { RouteAuthGuard } from './auth/guards/route-auth.guard';
 import { AuthGuard } from './auth/guards/auth.guard';
-import { LoginComponent } from './auth/compoenents/login/login.component';
+import { LoginComponent } from './auth/components/login/login.component';
 import { AppComponent } from './app.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
@@ -21,6 +22,10 @@ const routes: Routes = [
         loadChildren: () => import('./main/main.module').then(m => m.MainModule),
         canActivate: [RouteAuthGuard],
         canLoad: [RouteAuthGuard]
+      },
+      {
+        path: 'register',
+        component: RegisterComponent
       }
     ]
   }
