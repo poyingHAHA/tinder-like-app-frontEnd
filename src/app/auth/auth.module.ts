@@ -1,5 +1,5 @@
 import { RegisterComponent } from './components/register/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TokenInterceptor } from './token.interceptor';
@@ -27,7 +27,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
     CommonModule,
     NzIconModule,
     FormsModule,
-    NzDropDownModule
+    NzDropDownModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

@@ -58,6 +58,16 @@
   align-items: center;
 }
 
+.info-form
+{
+  width: 100%;
+  flex: 1;
+  margin: 10px 0;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .input-group
 {
   width: 100%;
@@ -145,6 +155,12 @@
   padding: 2rem 3rem;
   margin-top: 50px;
   cursor: pointer;
+  border: none;
+}
+
+.sign-up:disabled
+{
+  opacity: 0.5;
 }
 
 .sign-in-block
@@ -158,4 +174,11 @@
   align-items: center;
   justify-content: center;
   color: #0098be;
+}
+
+.error
+{
+  color: red;
+  font-size: 0.9rem;
+  margin-left: auto;
 }
