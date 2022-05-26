@@ -2,23 +2,34 @@
   <div class="logo"></div>
   <div class="content">
     <div class="text">start explore</div>
-    <div class="my-input-group">
-      <div class="input-item email">
-        <div class="lab"><i nz-icon nzType="mail" nzTheme="outline"></i>Email</div>
-        <input type="text" [(ngModel)]="email">
-      </div>
-      <div class="input-item password">
-        <div class="lab"><i nz-icon nzType="lock" nzTheme="outline"></i>Password</div>
-        <div class="pass-input">
-          <input [type]="isSeePassword ? 'text' : 'password'" [(ngModel)]="password">
-          <div class="eye" (click)="seePassword()"><i nz-icon [nzType]="isSeePassword ? 'eye' : 'eye-invisible'" nzTheme="outline"></i></div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="my-input-group">
+        <div class="input-item email">
+          <div class="lab">
+            <i nz-icon nzType="mail" nzTheme="outline"></i>
+            Email
+            <div class="error" *ngIf="email?.invalid && email?.touched">email is invalid</div>
+          </div>
+          <input formControlName="email" type="email">
+        </div>
+        <div class="input-item password">
+          <div class="lab">
+            <i nz-icon nzType="lock" nzTheme="outline"></i>
+            Password
+            <div class="error" *ngIf="password?.invalid && password?.touched">password is invalid</div>
+          </div>
+          <div class="pass-input">
+            <input formControlName="password" [type]="isSeePassword ? 'text' : 'password'">
+            <div class="eye" (click)="seePassword()"><i nz-icon [nzType]="isSeePassword ? 'eye' : 'eye-invisible'" nzTheme="outline"></i></div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="forget">Forget Password</div>
-    <div class="login" (click)="login()">
-      LOG IN
-    </div>
+      <div class="forget">Forget Password</div>
+      <div class="submit-wrapper">
+        <button type="submit" [disabled]="loginForm.invalid" class="login" >LOG IN</button>
+      </div>
+    </form>
+
     <div class="signup">
       Don't have an account? <em style="font-weight: bolder;" (click)="switchToSignUp()">Sign up</em>
     </div>

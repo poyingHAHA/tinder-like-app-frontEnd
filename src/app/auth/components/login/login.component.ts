@@ -1,3 +1,4 @@
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subscription, switchMap } from 'rxjs';
@@ -11,13 +12,17 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class LoginComponent implements OnInit, OnDestroy {
   public test: any[] = [];
   loginSubscription: Subscription;
-  email: string;
-  password: string;
   isSeePassword: boolean;
 
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required,Validators.email]),
+    password: new FormControl('', [Validators.required])
+  });
+
+  get email() { return this.loginForm.get('email'); }
+  get password() { return this.loginForm.get('password') }
+
   constructor(private authService: AuthService, private router: Router) {
-    this.email = "";
-    this.password = "";
     this.loginSubscription = new Subscription();
     this.isSeePassword = false;
   }
@@ -28,7 +33,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login()
   {
-    this.loginSubscription = this.authService.login({email: this.email, password: this.password})
+    let info = this.loginForm.value;
+    this.loginSubscription = this.authService.login({email: info.email, password: info.password})
     .subscribe(success=>{
       if(success){
         console.log("OK");
