@@ -1,3 +1,4 @@
+import { CheckEmailComponent } from './auth/components/check-email/check-email.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { RouteAuthGuard } from './auth/guards/route-auth.guard';
 import { AuthGuard } from './auth/guards/auth.guard';
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent
+      },
+      {
+        path: 'check-email',
+        component: CheckEmailComponent
       }
     ]
   }

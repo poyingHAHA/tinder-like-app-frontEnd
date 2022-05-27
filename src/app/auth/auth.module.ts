@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { CheckEmailComponent } from './components/check-email/check-email.component';
 
 @NgModule({
   providers:[
@@ -21,7 +22,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
   ],
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CheckEmailComponent
   ],
   imports: [
     CommonModule,

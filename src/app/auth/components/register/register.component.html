@@ -41,7 +41,7 @@
         <div class="input-group">
           <div class="label">
             <i class="fa-solid fa-lock"></i>Password
-            <span class="error" *ngIf="password?.invalid && password?.touched">password is invalid</span>
+            <span class="error" *ngIf="password?.invalid && password?.touched">at least 6 character</span>
           </div>
           <div class="input">
             <input formControlName="password" [type]="isSeePassword ? 'text' : 'password'" placeholder="******">

@@ -1,3 +1,5 @@
+import { Register } from './../../models/register';
+import { RegisterService } from './../../services/register.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -9,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  gender: String;
+  gender: string;
 
   isSeePassword: boolean = false;
 
@@ -24,7 +26,8 @@ export class RegisterComponent implements OnInit {
   get password() { return this.registerForm.get('password'); }
 
   constructor(
-    private router: Router
+    private router: Router,
+    private registerService: RegisterService
   ) {
     this.gender = "Male";
   }
@@ -34,10 +37,21 @@ export class RegisterComponent implements OnInit {
 
   signup()
   {
-    //regex email and password
-    console.log("sign up!");
-    console.log(this.registerForm.value);
-    console.log(this.gender);
+    let register: Register={
+      name: this.registerForm.value.name,
+      email: this.registerForm.value.email,
+      gender: this.gender,
+      password: this.registerForm.value.password,
+    };
+
+    this.registerService.register(register).subscribe(res=>{
+      if(res.success){
+        // check email
+        this.router.navigate(['check-email']);
+      }else{
+        console.log(res);
+      }
+    });
   }
 
   switchToLogin()
@@ -45,7 +59,7 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
-  changeGender(gender: String)
+  changeGender(gender: string)
   {
     this.gender = gender;
   }
