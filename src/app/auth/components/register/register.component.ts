@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
   signup()
   {
     let register: Register={
-      name: this.registerForm.value.name,
+      account: this.registerForm.value.name,
       email: this.registerForm.value.email,
       gender: this.gender,
       password: this.registerForm.value.password,
