@@ -1,6 +1,6 @@
 export interface Response
 {
-  success: boolean;
+  status: boolean;
   code: number;
   message: string;
   data?: object;

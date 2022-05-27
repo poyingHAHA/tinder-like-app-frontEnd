@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
     };
 
     this.registerService.register(register).subscribe(res=>{
-      if(res.success){
+      if(res.status){
         // check email
         this.router.navigate(['check-email']);
       }else{
