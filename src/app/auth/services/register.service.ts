@@ -16,7 +16,6 @@ export class RegisterService {
 
   register(registerInfo: Register): Observable<Response>
   {
-    console.log(registerInfo);
     return this.http.post<Response>(`${environment.domain}/register`, registerInfo);
   }
 }
