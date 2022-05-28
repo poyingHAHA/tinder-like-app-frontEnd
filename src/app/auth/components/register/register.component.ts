@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
         // check email
         this.router.navigate(['check-email']);
       }else{
-        console.log(res);
+        alert(res.message);
       }
     });
   }
