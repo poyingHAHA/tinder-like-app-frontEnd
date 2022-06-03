@@ -199,13 +199,6 @@
   position: relative;
 }
 
-.his-pic::after
-{
-  content: '';
-  display: block;
-  padding-bottom: 100%;
-}
-
 .his-pic > img
 {
   position: absolute;
