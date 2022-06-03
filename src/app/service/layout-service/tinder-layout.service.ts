@@ -4,7 +4,7 @@ import { Subject, Observable } from 'rxjs';
 
 export interface tinderEvent
 {
-  type: "like" | "dislike",
+  type: "like" | "dislike" | "superlike",
   cardInfo: ProductPost
 }
 

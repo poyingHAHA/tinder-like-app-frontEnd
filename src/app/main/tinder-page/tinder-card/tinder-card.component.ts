@@ -56,6 +56,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
   isDragging: boolean = false;
   isOutRight: boolean = false;
   isOutLeft: boolean = false;
+  isOutTop: boolean = false;
   isDelete: boolean = false;
   isDeleting: boolean = false;
   isReset: boolean = false;
@@ -121,6 +122,11 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
       this.isFading = true;
       this.isOutLeft = true;
       this.tinderLayoutService.setClickEvent({type: "dislike", cardInfo: this.post});
+      this.sleep(800).then(()=>{this.isDelete=true;});
+    }else if(action=="superlike" && this.isSuperLikeSpanded){
+      this.isFading = true;
+      this.isOutTop = true;
+      this.tinderLayoutService.setClickEvent({type: "superlike", cardInfo: this.post});
       this.sleep(800).then(()=>{this.isDelete=true;});
     }
   }
@@ -222,7 +228,7 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
         this.isSuperLikeSpanded = false;
       }
       this.statusHeight = finalHeight+"px";
-      this.superDetecterBottom = finalHeight+"px";
+      this.superDetecterBottom = this.isSuperLikeSpanded? finalHeight-50+"px" : finalHeight+"px";
 
       this.statusLastHeight = finalHeight;
       this.superIsDragging = false;

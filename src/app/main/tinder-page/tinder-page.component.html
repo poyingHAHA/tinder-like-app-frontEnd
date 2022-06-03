@@ -30,16 +30,47 @@
       <div class="his-block">
         <div class="his-header">
           <div [ngClass]="dislikeHis?'dislike-active':''" class="his-option his-dislike" (click)="changeHistoryMode('dislike')"><i class="fa-solid fa-xmark"></i></div>
+          <div [ngClass]="superlikeHis?'superlike-active':''" class="his-option his-superlike" (click)="changeHistoryMode('superlike')"><i class="fa-regular fa-star"></i></div>
           <div [ngClass]="likeHis?'like-active':''" class="his-option his-like" (click)="changeHistoryMode('like')"><i class="fa-solid fa-heart"></i></div>
         </div>
         <div class="his-content">
-          <div *ngFor="let item of hisList" class="his-item">
-            <div class="his-pic">
-              <img [src]="imgBaseURL+item.post.images[0]" alt="no-pic">
+          <div
+            *ngFor="let item of hisList"
+            [ngClass]="{
+              'his-item': item.like!='superlike',
+              'his-super-item': item.like=='superlike'
+            }"
+          >
+            <div class="his-normal-item-content" *ngIf="item.like!='superlike'">
+              <div class="his-pic">
+                <img [src]="imgBaseURL+item.post.images[0]" alt="no-pic">
+              </div>
+              <div class="his-name">{{ item.post.name }}</div>
+              <div class="switch"><nz-switch [ngModel]="item.like=='like'" (ngModelChange)="resetHisList(item)"></nz-switch></div>
             </div>
-            <div class="his-name">{{ item.post.name }}</div>
-            <div class="his-time"></div>
-            <div class="switch"><nz-switch [(ngModel)]="item.like" (ngModelChange)="resetHisList()"></nz-switch></div>
+
+            <div class="his-super-item-content" *ngIf="item.like=='superlike'">
+              <div class="his-super-pic">
+                <img [src]="imgBaseURL+item.post.images[0]" alt="no-pic">
+              </div>
+              <div class="his-super-info">
+                <div class="his-super-info-item">
+                  <div class="his-super-name">{{ item.post.name }}</div>
+                </div>
+                <div class="his-super-info-item target">
+                  <div class="his-super-icon-title"><img class="his-super-icon" src="assets/images/target.svg">Target</div>
+                  <div class="his-super-text">10% discount</div>
+                </div>
+                <div class="his-super-info-item completeness">
+                  <div class="his-super-icon-title"><img class="his-super-icon" src="assets/images/completeness.svg">Completeness</div>
+                  <div class="his-super-text">8/10</div>
+                </div>
+                <div class="his-super-info-item time-left">
+                  <div class="his-super-icon-title"><img class="his-super-icon" src="assets/images/time-left.svg">Time left</div>
+                  <div class="his-super-text">03:10</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

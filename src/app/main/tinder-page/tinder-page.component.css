@@ -122,12 +122,22 @@
 
 .his-dislike
 {
-  color: #33b9cf;
+  color: #fe5353;
 }
 
 .dislike-active
 {
-  border-bottom: 2px solid #33b9cf;
+  border-bottom: 2px solid #fe5353;
+}
+
+.his-superlike
+{
+  color: #0098be;
+}
+
+.superlike-active
+{
+  border-bottom: 2px solid #0098be;
 }
 
 .his-content
@@ -143,15 +153,47 @@
 
 .his-item
 {
+  height: 15%;
+}
+
+.his-super-item
+{
+  height: 23%;
+  background-color: #e8e8e8;
+  border-radius: 20px;
+  margin: 10px 0;
+}
+
+.his-normal-item-content
+{
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
-  padding: 5px 10px;
-  height: 15%;
+}
+
+.his-super-item-content
+{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.his-name
+{
+  flex: 8;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #0098be;
+  padding-left: 15px;
 }
 
 .his-pic
 {
-  flex: 2;
+  width: 20%;
   border-radius: 10px;
   background-color: #0098be;
   position: relative;
@@ -167,6 +209,25 @@
   border-radius: 50%;
 }
 
+.his-super-pic
+{
+  position: relative;
+  flex: 2;
+}
+.his-super-pic > img
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px 0 #ababab;
+}
+
+.his-super-pic::after
 .his-pic::after
 {
   content: '';
@@ -174,12 +235,49 @@
   padding-top: 100%;
 }
 
-.his-name
+.his-super-info
 {
-  flex: 8;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  padding: 5px 20px;
+  color: #0098be;
+}
+
+.his-super-info-item
+{
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 2vmin;
+  margin: 5px 0;
+}
+
+.his-super-name
+{
+  display: block;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  color: #4fb0cd;
-  padding-left: 15px;
+}
+
+.his-super-icon-title
+{
+  width: 50%;
+}
+
+.his-super-icon
+{
+  filter: invert(42%) sepia(51%) saturate(4755%) hue-rotate(166deg) brightness(97%) contrast(101%);
+  width: 12%;
+  margin: 0 5px;
+}
+
+.his-super-text
+{
+  flex: 1;
+  text-align: center;
 }

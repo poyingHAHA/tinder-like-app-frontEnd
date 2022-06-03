@@ -5,7 +5,7 @@
   [style.top.px]="y"
   [style.transform]="'rotateZ('+rotateDeg+'deg)'"
   [style.opacity]="opacityPercent"
-  [ngClass]="{'swipe-out-right': isOutRight, 'swipe-out-left': isOutLeft, 'reset': isReset}"
+  [ngClass]="{'swipe-out-right': isOutRight, 'swipe-out-left': isOutLeft, 'super-like-action': isOutTop, 'reset': isReset}"
   [@cardAnimator]="animationState"
   (@cardAnimator.done)="resetAnimationState()"
   *ngIf="!isDelete"
@@ -34,8 +34,8 @@
         <i class="fa-solid fa-xmark"></i>
       </div>
     </div>
-    <div class="action super-like" (click)="clickAction('superlike')">
-      <div [ngClass]="{'super-like-spanded': superIsDragging || isSuperLikeSpanded}" class="btn-wrapper">
+    <div class="action super-like">
+      <div [ngClass]="{'super-like-spanded': superIsDragging || isSuperLikeSpanded}" class="btn-wrapper" (click)="clickAction('superlike')">
         <i class="fa-regular fa-star"></i>
         <div class="remain-num"><div class="remain-num-inner">5</div></div>
       </div>
@@ -53,7 +53,7 @@
     class="super-like-status"
     (pan)="handleDrag($event)"
   >
-    <div class="super-like-btn"></div>
+    <div *ngIf="!isSuperLikeSpanded" class="super-like-btn"></div>
     <div *ngIf="!superIsDragging && !isSuperLikeSpanded" class="status-wrapper">
       <div class="status-item my-progress-bar">
         <nz-progress

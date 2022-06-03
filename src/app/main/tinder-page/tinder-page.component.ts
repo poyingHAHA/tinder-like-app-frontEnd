@@ -6,6 +6,11 @@ import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/co
 import 'hammerjs';
 import { Subscription, Subject, Observable, takeUntil, filter, takeWhile, BehaviorSubject } from 'rxjs';
 
+interface swipeCard{
+  post: ProductPost,
+  like: "like"|"dislike"|"superlike"
+}
+
 @Component({
   selector: 'app-tinder-page',
   templateUrl: './tinder-page.component.html',
@@ -19,13 +24,15 @@ export class TinderPageComponent implements OnInit, OnDestroy {
 
   imgBaseURL: string = "https://cf.shopee.tw/file/";
 
-  likes: {post: ProductPost, like: boolean}[] = [];
-  dislikes: {post: ProductPost, like: boolean}[] = [];
+  likes: swipeCard[] = [];
+  dislikes:  swipeCard[] = [];
+  superlikes:  swipeCard[] = [];
   top: number;
-  hisList: {post: ProductPost, like: boolean}[] = [];
+  hisList:  swipeCard[] = [];
 
   likeHis: boolean = true;
   dislikeHis: boolean = false;
+  superlikeHis: boolean = false;
 
   destroy$: Subject<any>;
   actionSub$: Subject<tinderEvent>;
@@ -76,11 +83,14 @@ export class TinderPageComponent implements OnInit, OnDestroy {
       let card = this.cardsInfo[this.top];
       if(card && event.type == "like")
       {
-        this.likes.push({post: card, like: true});
+        this.likes.push({post: card, like: "like"});
         this.top = this.top<1 ? 0 : this.top-1;
       }else if(card && event.type == "dislike")
       {
-        this.dislikes.push({post: card, like: false});
+        this.dislikes.push({post: card, like: "dislike"});
+        this.top = this.top<1 ? 0 : this.top-1;
+      }else if(card && event.type == "superlike"){
+        this.superlikes.push({post: card, like: "superlike"});
         this.top = this.top<1 ? 0 : this.top-1;
       }
 
@@ -104,26 +114,41 @@ export class TinderPageComponent implements OnInit, OnDestroy {
       case "like":
         this.likeHis = true;
         this.dislikeHis = false;
+        this.superlikeHis = false;
         this.hisList = this.likes;
         break;
       case "dislike":
         this.dislikeHis = true;
         this.likeHis = false;
+        this.superlikeHis = false;
         this.hisList = this.dislikes;
+        break;
+      case "superlike":
+        this.superlikeHis = true;
+        this.likeHis = false;
+        this.dislikeHis = false;
+        this.hisList = this.superlikes;
         break;
     }
   }
 
-  resetHisList()
+  resetHisList(item?: swipeCard)
   {
-    let toDis = this.likes.filter(x => x.like==false);
-    let toLik = this.dislikes.filter(x => x.like==true);
+    //switch item 一次只能更動一個
+    if(item && item.like === "like"){
+      item.like = "dislike";
+    }else if(item && item.like === "dislike"){
+      item.like = "like";
+    }
+
+    let toDis = this.likes.filter(x => x.like=="dislike");
+    let toLik = this.dislikes.filter(x => x.like=="like");
 
     this.likes = this.likes.concat(toLik);
     this.dislikes = this.dislikes.concat(toDis);
 
-    this.likes = this.likes.filter(x => x.like==true);
-    this.dislikes = this.dislikes.filter(x => x.like==false);
+    this.likes = this.likes.filter(x => x.like=="like");
+    this.dislikes = this.dislikes.filter(x => x.like=="dislike");
 
     setTimeout(() => {
       this.hisList = this.likeHis?this.likes:this.dislikes;

@@ -30,7 +30,7 @@
 .swipe-out-right
 {
   transition: all 1s;
-  left: 500px !important;
+  left: calc(100vw + 200px) !important;
   transform: rotateZ(30deg) !important;
   opacity: 0 !important;
 }
@@ -38,8 +38,15 @@
 .swipe-out-left
 {
   transition: all 1s;
-  left: -500px !important;
+  left: calc(-100vw - 200px) !important;
   transform: rotateZ(-30deg) !important;
+  opacity: 0 !important;
+}
+
+.super-like-action
+{
+  transition: all 1.5s;
+  top: calc(-100vh - 200px) !important;
   opacity: 0 !important;
 }
 
