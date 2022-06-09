@@ -43,6 +43,9 @@ export class TinderPageComponent implements OnInit, OnDestroy {
   isHistoryOpen: boolean = false;
   isLoading: boolean = true;
 
+  isInfoPopup: boolean = false;
+  popupPost!: ProductPost;
+
   constructor(
     private tinderLayoutService: TinderLayoutService,
     private postService: PostService
@@ -153,6 +156,17 @@ export class TinderPageComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.hisList = this.likeHis?this.likes:this.dislikes;
     }, 300);
+  }
+
+  popupInfo(post: ProductPost)
+  {
+    this.popupPost = post;
+    this.isInfoPopup = true;
+  }
+
+  closeInfo()
+  {
+    this.isInfoPopup = false;
   }
 
   ngOnDestroy(): void {

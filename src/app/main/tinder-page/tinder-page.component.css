@@ -154,7 +154,7 @@
 .his-item
 {
   height: 15%;
-  margin: 10px;
+  margin: 2px 5px;
 }
 
 .his-super-item
@@ -282,4 +282,14 @@
 {
   flex: 1;
   text-align: center;
+}
+
+.info
+{
+  z-index: 10;
+  position: absolute;
+  right: 10px;
+  left: 10px;
+  top: 10%;
+  bottom: calc( 8vh + 20px );
 }
