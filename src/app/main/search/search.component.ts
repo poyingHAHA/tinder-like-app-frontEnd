@@ -1,3 +1,4 @@
+import { BuyerService } from './../../service/buyer-service/buyer.service';
 import { TreemapService } from './../../service/treemap-service/treemap.service';
 import * as ProductPostModel from './../../model/interface/ProductPost';
 import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, debounceTime, first, Observable, forkJoin, fromEvent } from 'rxjs';
@@ -29,7 +30,8 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private postService: PostService,
-    private treemapService: TreemapService
+    private treemapService: TreemapService,
+    private buyerService: BuyerService
   ) {
     this.isLoading = true;
     this.searchTxt = "";
@@ -145,7 +147,9 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    if(!this.buyerService.isHasBuyerId()){
+      this.buyerService.setBuyerId();
+    }
   }
 
   ngAfterViewInit(): void {
