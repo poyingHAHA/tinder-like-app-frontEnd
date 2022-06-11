@@ -1,6 +1,4 @@
 import * as ProductPostModel from './../../model/interface/ProductPost';
-import { IProduct } from 'src/app/model/interface/IProduct';
-import { IPost } from '../../model/interface/IPost';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IPost } from 'src/app/model/interface/IPost';
 import * as ProductPostModel from 'src/app/model/interface/ProductPost';
 
 

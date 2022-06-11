@@ -1,3 +1,5 @@
+import { BuyerService } from './../../service/buyer-service/buyer.service';
+import { TinderService } from './../../service/tinder-service/tinder.service';
 import { ProductPost } from './../../model/interface/ProductPost';
 import { PostService } from './../../service/post-service/post.service';
 import { tinderEvent } from './../../service/layout-service/tinder-layout.service';
@@ -48,7 +50,9 @@ export class TinderPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private tinderLayoutService: TinderLayoutService,
-    private postService: PostService
+    private postService: PostService,
+    private tinderService: TinderService,
+    private buyerService: BuyerService
   ) {
     this.cardsInfo = [];
     this.top = 0;
@@ -58,6 +62,11 @@ export class TinderPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    //need buyer id
+    if(!this.buyerService.isHasBuyerId()){
+      this.buyerService.setBuyerId();
+    }
+
     //first init top=remain=0
     this.loadMoreSub$
     .pipe(takeUntil(this.destroy$))
@@ -86,10 +95,23 @@ export class TinderPageComponent implements OnInit, OnDestroy {
       let card = this.cardsInfo[this.top];
       if(card && event.type == "like")
       {
+        //put related like post in recommendpool
+        this.tinderService.tinderLike(card)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(post=>{
+          //console.log(post);
+        });
+
         this.likes.push({post: card, like: "like"});
         this.top = this.top<1 ? 0 : this.top-1;
       }else if(card && event.type == "dislike")
       {
+        this.tinderService.tinderDisLike(card)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(updated=>{
+          //console.log(updated);
+        });
+
         this.dislikes.push({post: card, like: "dislike"});
         this.top = this.top<1 ? 0 : this.top-1;
       }else if(card && event.type == "superlike"){

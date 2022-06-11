@@ -1,5 +1,6 @@
+import { TreemapService } from './../../service/treemap-service/treemap.service';
 import * as ProductPostModel from './../../model/interface/ProductPost';
-import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, fromEvent, debounceTime } from 'rxjs';
+import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, debounceTime, first, Observable, forkJoin, fromEvent } from 'rxjs';
 import { PostService } from './../../service/post-service/post.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListener, Type } from '@angular/core';
 
@@ -27,7 +28,8 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   isScrollToBottom: boolean;
 
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    private treemapService: TreemapService
   ) {
     this.isLoading = true;
     this.searchTxt = "";
@@ -42,18 +44,14 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   initTreeMaps()
   {
-    //testing subscribe, random shop
-    let num = 18;
-    this.postService.getProductPostsRandomly(num)
-    .pipe(
-      takeUntil(this.destroy$)
-    )
-    .subscribe(posts => {
+    this.treemapService.getTreemapRecommendPost()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(posts=>{
       if(posts){
         this.isLoading = false;
       }
 
-      //after loading data to put labels
+      //   //after loading data to put labels
       this.testTags = [
         {
           label: "All",
@@ -61,22 +59,56 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       ]
 
-      //test, choose 3 post's labels
       this.generateAndAddTags(this.selectFromArrayRandomly(posts, 3));
 
-      //每6個一組
       this.addTreeMaps(this.slicePosts(posts));
     });
+
+    //testing subscribe, random shop
+    // let num = 18;
+    // this.postService.getProductPostsRandomly(num)
+    // .pipe(
+    //   takeUntil(this.destroy$)
+    // )
+    // .subscribe(posts => {
+    //   if(posts){
+    //     this.isLoading = false;
+    //   }
+
+    //   //after loading data to put labels
+    //   this.testTags = [
+    //     {
+    //       label: "All",
+    //       isActive: true
+    //     }
+    //   ]
+
+    //   //test, choose 3 post's labels
+    //   this.generateAndAddTags(this.selectFromArrayRandomly(posts, 3));
+
+    //   //每6個一組
+    //   this.addTreeMaps(this.slicePosts(posts));
+    // });
   }
 
   loadMoreTreeMaps(num: number)
   {
     //can randomly choose shop, so that productpost won't run out
-    this.postService.getProductPostsRandomly(num)
-    .pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(posts =>{
-      this.addTreeMaps(this.slicePosts(posts));
+    //60/96 recommend, 36/num random
+    let morePosts: ProductPostModel.ProductPost[] = [];
+
+    /* **use fork join to subscribe multiple subscription** */
+    let morePosts$ = forkJoin({
+      random: this.postService.getProductPostsRandomly(num),
+      recommend: this.treemapService.getTreemapRecommendPost()
+    });
+
+    morePosts$
+    .pipe(first())
+    .subscribe(posts=>{
+      morePosts = morePosts.concat(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(posts.random, 36));
+      morePosts = morePosts.concat(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(posts.recommend, 60));
+      this.addTreeMaps(this.slicePosts(morePosts));
     });
   }
 
@@ -128,7 +160,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
       filter(()=>this.container.nativeElement.offsetHeight + this.container.nativeElement.scrollTop >= this.container.nativeElement.scrollHeight-80)
     ).subscribe(()=>{
       this.cleanTagsAndKeepFirst();
-      this.loadMoreTreeMaps(18);
+      this.loadMoreTreeMaps(36);
       let randTreemaps: ProductPostModel.ProductPost[][] = this.selectFromArrayRandomly<ProductPostModel.ProductPost[]>(this.treemaps, 3);
       let randPosts: ProductPostModel.ProductPost[] = [];
       randTreemaps.forEach(treemap=>{

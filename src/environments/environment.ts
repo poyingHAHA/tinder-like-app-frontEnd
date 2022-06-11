@@ -11,7 +11,9 @@ export const environment = {
   baseRoute: {
     buyer: "buyer",
     shop: "shop",
-    items: "items"
+    items: "items",
+    tinder: "tinder",
+    treemap: "treemap"
   },
   imgBase: "https://cf.shopee.tw/file/"
 };

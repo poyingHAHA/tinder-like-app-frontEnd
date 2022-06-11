@@ -1,6 +1,6 @@
+import { BuyerService } from './../service/buyer-service/buyer.service';
 import { AuthService } from './../auth/services/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { IUser } from 'src/app/model/interface/IUser';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
     // <<key point>>

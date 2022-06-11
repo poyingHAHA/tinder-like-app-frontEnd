@@ -61,7 +61,7 @@ export class AuthService {
   refreshToken()
   {
     //index route may change
-    return this.http.post<any>(`${environment.domain}/index/refresh`,
+    return this.http.post<any>(`${environment.domain}/refresh`,
     {email: this.getLoggedUser(), refreshToken: this.getRefreshToken()})
     .pipe(
       tap((token: any)=>{
@@ -120,4 +120,6 @@ export class AuthService {
   private removeUser(){
     localStorage.removeItem(this.LOGGED_USER);
   }
+
+
 }

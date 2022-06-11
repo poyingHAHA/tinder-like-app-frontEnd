@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { UserService } from 'src/app/service/user-service/user.service';
 import SwiperCore, { Pagination, SwiperOptions } from "swiper";
 
 SwiperCore.use([Pagination]);
@@ -21,7 +20,6 @@ export class ProfileComponent implements OnInit {
   //need to handle buyer and shop
 
   constructor(
-    private _userService: UserService,
     private _route: Router
   )
   {
