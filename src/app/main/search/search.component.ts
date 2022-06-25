@@ -1,7 +1,7 @@
 import { BuyerService } from './../../service/buyer-service/buyer.service';
 import { TreemapService } from './../../service/treemap-service/treemap.service';
 import * as ProductPostModel from './../../model/interface/ProductPost';
-import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, debounceTime, first, Observable, forkJoin, fromEvent } from 'rxjs';
+import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, debounceTime, first, Observable, forkJoin, switchMap, map, mergeMap, fromEvent, of } from 'rxjs';
 import { PostService } from './../../service/post-service/post.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListener, Type } from '@angular/core';
 
@@ -47,13 +47,23 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   initTreeMaps()
   {
     this.treemapService.getTreemapRecommendPost()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(posts=>{
+    .pipe(
+      takeUntil(this.destroy$),
+      mergeMap((items: ProductPostModel.ProductPost[])=>{
+        if(items.length<=0){
+          return this.postService.getProductPostsRandomly(18);
+        }else{
+          return of(items); //as an observable or it will emit only one value
+        }
+      })
+    )
+    .subscribe((posts)=>{
+      console.log(posts);
       if(posts){
         this.isLoading = false;
       }
 
-      //   //after loading data to put labels
+      //after loading data to put labels
       this.testTags = [
         {
           label: "All",
@@ -62,7 +72,6 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
       ]
 
       this.generateAndAddTags(this.selectFromArrayRandomly(posts, 3));
-
       this.addTreeMaps(this.slicePosts(posts));
     });
 
