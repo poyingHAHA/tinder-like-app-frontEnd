@@ -74,32 +74,6 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
       this.generateAndAddTags(this.selectFromArrayRandomly(posts, 3));
       this.addTreeMaps(this.slicePosts(posts));
     });
-
-    //testing subscribe, random shop
-    // let num = 18;
-    // this.postService.getProductPostsRandomly(num)
-    // .pipe(
-    //   takeUntil(this.destroy$)
-    // )
-    // .subscribe(posts => {
-    //   if(posts){
-    //     this.isLoading = false;
-    //   }
-
-    //   //after loading data to put labels
-    //   this.testTags = [
-    //     {
-    //       label: "All",
-    //       isActive: true
-    //     }
-    //   ]
-
-    //   //test, choose 3 post's labels
-    //   this.generateAndAddTags(this.selectFromArrayRandomly(posts, 3));
-
-    //   //每6個一組
-    //   this.addTreeMaps(this.slicePosts(posts));
-    // });
   }
 
   loadMoreTreeMaps(num: number)
