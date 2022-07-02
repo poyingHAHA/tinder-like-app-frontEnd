@@ -1,0 +1,45 @@
+<div class="my-container">
+  <div class="back" (click)="back()">
+    <i class="fa-solid fa-arrow-left"></i>
+  </div>
+
+  <div class="options">
+    <div class="option">
+      <div class="icon"><i class="fa-solid fa-gear"></i></div>
+      <div class="txt">Setting</div>
+    </div>
+    <div class="option">
+      <div class="icon"><i class="fa-solid fa-pen-to-square"></i></div>
+      <div class="txt">Edit profile</div>
+    </div>
+    <div class="option">
+      <div class="icon"><i class="fa-solid fa-qrcode"></i></div>
+      <div class="txt">QRcode</div>
+    </div>
+    <div class="option">
+      <div class="icon"><i class="fa-solid fa-clock"></i></div>
+      <div class="txt">History</div>
+    </div>
+    <div class="option">
+      <div class="icon"><i class="fa-solid fa-cart-shopping"></i></div>
+      <div class="txt">Shopping cart</div>
+    </div>
+  </div>
+
+  <div class="logout-container">
+    <div class="logout" (click)="this.isVisible=true">LOG OUT</div>
+  </div>
+</div>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="LOG OUT"
+  (nzOnCancel)="this.isVisible=false"
+  (nzOnOk)="logout()"
+  nzOkText="Ok"
+  nzCancelText="Cancel"
+>
+  <ng-container *nzModalContent>
+    <div style="color: black; font-size: 4vmin;">Are you sure to log out?</div>
+  </ng-container>
+</nz-modal>

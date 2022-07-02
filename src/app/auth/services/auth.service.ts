@@ -13,6 +13,7 @@ export class AuthService {
   private readonly ACCESS_TOKEN = "ACCESS_TOKEN";
   private readonly REFRESH_TOKEN = "REFRESH_TOKEN";
   private readonly LOGGED_USER = "LOGGED_USER";
+  private readonly BUYER_ID="BUYER_ID";
 
   // private loggedUser: string = "";
   // public get LoggedUser(){
@@ -39,16 +40,7 @@ export class AuthService {
 
   logout()
   {
-    this.http.post<any>(`${environment.production}/logout`, {
-      'refreshToken': this.getRefreshToken
-    }).pipe(
-      tap(()=>{this.doLogoutUser()}),
-      mapTo(true),
-      catchError(err=>{
-        alert(err.error.error);
-        return of(false);
-      })
-    );
+   this.doLogoutUser();
   }
 
   isLoggedIn()
@@ -119,7 +111,6 @@ export class AuthService {
 
   private removeUser(){
     localStorage.removeItem(this.LOGGED_USER);
+    localStorage.removeItem(this.BUYER_ID);
   }
-
-
 }

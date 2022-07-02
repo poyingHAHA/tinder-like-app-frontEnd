@@ -26,6 +26,7 @@ export interface Share
 
 export interface ProductPost
 {
+  _id: string,
   shopid: string,
   sp_itemid: number,
   sp_shopid: number,

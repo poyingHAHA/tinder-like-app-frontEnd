@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NgModule } from '@angular/core';
@@ -7,11 +8,13 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { ShareModule } from 'src/app/share/share.module';
 import { PostComponent } from 'src/app/share/post/post.component';
-
+import { SettingsComponent } from './settings/settings.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
   declarations: [
-    ProfileComponent
+    ProfileComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +22,8 @@ import { PostComponent } from 'src/app/share/post/post.component';
     NzIconModule,
     ShareModule,
     SwiperModule,
-    ShareModule
+    ShareModule,
+    NzModalModule
   ]
 })
 export class ProfileModule { }

@@ -17,17 +17,28 @@ export class ProfileComponent implements OnInit {
     看看別人，再想想自己，會發現問題的核心其實就在你身旁。
   `;
 
+  isSpandSettings: boolean;
+
   //need to handle buyer and shop
 
   constructor(
     private _route: Router
   )
   {
-
+   this.isSpandSettings = false;
   }
 
   ngOnInit(): void {
 
   }
 
+  spandSetting()
+  {
+    this.isSpandSettings = true;
+  }
+
+  collapseSettings(event: boolean)
+  {
+    this.isSpandSettings = event;
+  }
 }

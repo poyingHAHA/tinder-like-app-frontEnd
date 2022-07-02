@@ -23,7 +23,9 @@ export class TinderService {
    return this.http.post<ProductPost>(`${this.baseURI}/tinderLike`,{
       "buyerid": this.buyerService.getBuyerId(),
       "labels": post.labels.map(x=>x.display_name),
-      "feLabels": post.feLabels.map(x=>x.display_name)
+      "feLabels": post.feLabels.map(x=>x.display_name),
+      "itemid": post._id,
+      "name": post.name
     });
   }
 
@@ -32,8 +34,16 @@ export class TinderService {
     return this.http.patch<{updated: number, deleted: number}>(`${this.baseURI}/tinderDislike`,{
       "buyerid": this.buyerService.getBuyerId(),
       "labels": post.labels.map(x=>x.display_name),
-      "feLabels": post.feLabels.map(x=>x.display_name)
+      "feLabels": post.feLabels.map(x=>x.display_name),
+      "itemid": post._id,
+      "name": post.name
     });
+  }
+
+  tinderSuperLike(post: ProductPost)
+  {
+    //return this.http.post<{msg: string}>(`${this.baseURI}/`);
+
   }
 
   switchPageFromTinder(): Observable<{msg: string}>

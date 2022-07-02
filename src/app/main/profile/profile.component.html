@@ -3,7 +3,7 @@
     <div class="name">CERIOUS PANG</div>
     <div class="func-group">
       <div class="func-item add-post"><i class="fa-solid fa-plus"></i></div>
-      <div class="func-item settings"><i class="fa-solid fa-bars"></i></div>
+      <div class="func-item settings"><i class="fa-solid fa-bars" (click)="spandSetting()"></i></div>
     </div>
   </div>
   <div class="content">
@@ -46,3 +46,10 @@
     <i class="fa-solid fa-cart-shopping"></i>
   </div>
 </div>
+
+<div class="settings-wrapper" [ngClass]="isSpandSettings?'spand-settings':''">
+  <div class="settings-area">
+    <app-settings (collapse-settings)="collapseSettings($event)"></app-settings>
+  </div>
+</div>
+

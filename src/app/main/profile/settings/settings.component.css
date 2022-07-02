@@ -1,0 +1,94 @@
+.my-container
+{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.options
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80%;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.logout-container
+{
+  display: flex;
+  height: 20%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout
+{
+  font-size: 5vmin;
+  height: 60%;
+  width: 60%;
+  background: linear-gradient(to right, #0098be, #ffffff 180%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+}
+
+.option
+{
+  display: flex;
+  align-items: center;
+  color: #0098be;
+  width: 100%;
+  height: 10%;
+  font-size: 6vmin;
+  padding: 0 10px;
+  margin: 5px 0;
+}
+
+.option>.icon
+{
+  margin: 0 10px;
+}
+
+.option>.txt
+{
+  text-align: center;
+  flex: 1;
+}
+
+.back
+{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 50%;
+  background-color: #97b5bd;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back::after
+{
+  content: '';
+  display: block;
+  padding-bottom: 100%;
+}
+
+.back>i
+{
+  color: #ffffff;
+}
