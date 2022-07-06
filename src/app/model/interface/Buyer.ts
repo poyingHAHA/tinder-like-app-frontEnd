@@ -14,6 +14,7 @@ export interface Buyer
   gender: string,
   profilePic: string
   selfIntro: string,
+  public: boolean,
   followerCount: number,
   followingCount: number,
   superLikeLeft: number,

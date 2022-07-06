@@ -1,3 +1,4 @@
+import { Buyer } from './../../model/interface/Buyer';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -14,6 +15,11 @@ export class BuyerService {
 
   constructor(private http: HttpClient) {
     this.baseURI = `${environment.domain}/${environment.baseRoute.buyer}`;
+  }
+
+  getBuyer(): Observable<Buyer>
+  {
+    return this.http.get<Buyer>(`${this.baseURI}/buyer?buyerid=${this.getBuyerId()}`);
   }
 
   setBuyerId(): void

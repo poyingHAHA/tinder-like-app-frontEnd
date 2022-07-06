@@ -44,26 +44,20 @@
 
 .add-post
 {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: calc(8vh + 20px);
+  right: 20px;
+  z-index: 10;
+  color: #0098be;
+  font-size: 7vmin;
+  border: 3px solid #0098be;
   border-radius: 50%;
-  border: 2px solid #ffffff;
-  padding: 2px;
-  width: 9vmin;
-  position: relative;
-}
-
-.add-post::after
-{
-  content: '';
-  display: block;
-  padding-bottom: 100%;
-}
-
-.add-post>i
-{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  height: 11vmin;
+  width: 11vmin;
+  padding: 25px;
 }
 
 .content
@@ -169,24 +163,6 @@
 ::ng-deep .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction
 {
   bottom: 15px;
-}
-
-.my-cart
-{
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  bottom: calc(8vh + 20px);
-  right: 20px;
-  z-index: 10;
-  color: #0098be;
-  font-size: 6vmin;
-  border: 3px solid #0098be;
-  border-radius: 50%;
-  height: 11vmin;
-  width: 11vmin;
-  padding: 25px;
 }
 
 .spand-settings

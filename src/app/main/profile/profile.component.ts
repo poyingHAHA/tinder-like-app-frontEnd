@@ -1,3 +1,6 @@
+import { Buyer } from './../../model/interface/Buyer';
+import { first } from 'rxjs';
+import { BuyerService } from './../../service/buyer-service/buyer.service';
 import { Router } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import SwiperCore, { Pagination, SwiperOptions } from "swiper";
@@ -17,19 +20,26 @@ export class ProfileComponent implements OnInit {
     看看別人，再想想自己，會發現問題的核心其實就在你身旁。
   `;
 
+  buyer?: Buyer;
+
   isSpandSettings: boolean;
 
   //need to handle buyer and shop
 
   constructor(
-    private _route: Router
+    private _route: Router,
+    private buyerService: BuyerService
   )
   {
    this.isSpandSettings = false;
   }
 
   ngOnInit(): void {
-
+    this.buyerService.getBuyer()
+    .pipe(first())
+    .subscribe(buyer=>{
+      this.buyer = buyer;
+    });
   }
 
   spandSetting()
