@@ -10,11 +10,15 @@ import { ShareModule } from 'src/app/share/share.module';
 import { PostComponent } from 'src/app/share/post/post.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { OptionContentComponent } from './option-content/option-content.component';
+import { EditProfileComponent } from './option-content/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
     ProfileComponent,
-    SettingsComponent
+    SettingsComponent,
+    OptionContentComponent,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,

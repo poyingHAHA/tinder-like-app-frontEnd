@@ -191,3 +191,20 @@
   width: 70%;
   z-index: 10;
 }
+
+.active-option-content
+{
+  left: 0 !important;
+  right: 0 !important;
+}
+
+.option-content
+{
+  position: absolute;
+  top: 0;
+  bottom: calc(8vh - 1px);
+  left: 100%;
+  width: 100%;
+  z-index: 11;
+  transition: left .5s;
+}

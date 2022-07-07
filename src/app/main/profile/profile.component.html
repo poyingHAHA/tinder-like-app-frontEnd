@@ -53,3 +53,8 @@
   </div>
 </div>
 
+<div class="option-content" [ngClass]="isSpandOptionContent? 'active-option-content': ''">
+  <app-option-content
+    (collapse)="collapseOptionContent($event)"
+  ></app-option-content>
+</div>
