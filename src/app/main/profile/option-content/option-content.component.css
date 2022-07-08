@@ -11,15 +11,16 @@
 
   display: flex;
   flex-direction: column;
-
-  padding: 5px 10px;
 }
 
-.back
+.top-bar
 {
+  padding: 0 10px;
   position: relative;
   width: 100%;
   height: 8%;
+  display: flex;
+  align-items: center;
 }
 
 .component-container
@@ -42,9 +43,6 @@
 
 .back-btn
 {
-  position: absolute;
-  top: 10px;
-  left: 10px;
   border-radius: 50%;
   background-color: #97b5bd;
   width: 25px;
@@ -62,4 +60,19 @@
 .back-btn>i
 {
   color: #ffffff;
+}
+
+.type-info-wrapper
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+  height: 100%;
+}
+
+.type-info
+{
+  color: #ffffff;
+  font-size: 6vmin;
 }

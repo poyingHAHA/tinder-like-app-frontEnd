@@ -1,7 +1,10 @@
 <div class="my-container">
-  <div class="back">
+  <div class="top-bar">
     <div class="back-btn" (click)="back()">
       <i class="fa-solid fa-arrow-left"></i>
+    </div>
+    <div class="type-info-wrapper">
+      <div class="type-info" [ngClass]="typeInfoDict[thisType]"></div>
     </div>
   </div>
   <div class="component-container">

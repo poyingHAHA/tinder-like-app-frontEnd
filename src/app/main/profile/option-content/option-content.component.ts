@@ -20,11 +20,22 @@ export class OptionContentComponent implements OnInit{
     "edit-profile": EditProfileComponent
   }
 
+  //type info icon
+  typeInfoDict: {[type: string]: string} = {
+    "switch-account": "fa-solid fa-people-arrows-left-right",
+    "edit-profile": "fa-solid fa-pen-to-square",
+    "QRcode": "fa-solid fa-qrcode",
+    "History": "fa-solid fa-clock"
+  };
+
+  thisType: string;
+
   constructor(
     private profileLayoutService: ProfileLayoutService
   ) {
     this.destroy$ = new Subject<string>();
     this.collapse = new EventEmitter<boolean>();
+    this.thisType = "";
   }
 
   ngOnInit(): void {
@@ -33,7 +44,8 @@ export class OptionContentComponent implements OnInit{
     .pipe(takeUntil(this.destroy$))
     .subscribe(type=>{
       let classType = this.typeDict[type];
-      if(classType){
+      if(classType!=undefined){
+        this.thisType = type;
         this.container.clear();
         this.container.createComponent<typeof classType>(classType);
       }
