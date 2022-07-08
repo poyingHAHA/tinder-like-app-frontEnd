@@ -1,5 +1,42 @@
 <div class="my-container">
   <div class="content">
+    <div class="pic-wrapper">
+      <div class="pic">
+        <div class="add"><i class="fa-solid fa-plus"></i></div>
+      </div>
+    </div>
+    <div class="form">
+      <form [formGroup]="editForm" (ngSubmit)="editProfile()">
+        <div class="my-input-group">
+          <div class="input-item">
+            <div class="lab">
+              Display Name
+              <div class="error" *ngIf="name?.invalid && email?.touched">name is invalid</div>
+            </div>
+            <input formControlName="name" type="text">
+          </div>
+          <div class="input-item">
+            <div class="lab">
+              Status
+            </div>
+            <input formControlName="status" type="text">
+          </div>
+          <div class="input-item email">
+            <div class="lab">
+              Email
+              <div class="error" *ngIf="email?.invalid && email?.touched">email is invalid</div>
+            </div>
+            <input formControlName="email" type="email">
+          </div>
+          <div class="input-item">
+            <div class="lab">
+              Birthday
+            </div>
+            <input formControlName="birthday" type="date">
+          </div>
+        </div>
+      </form>
+    </div>
 
   </div>
 </div>

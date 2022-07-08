@@ -10,7 +10,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  public test: any[] = [];
   loginSubscription: Subscription;
   isSeePassword: boolean;
 

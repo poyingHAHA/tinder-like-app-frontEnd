@@ -27,7 +27,8 @@ import { EditProfileComponent } from './option-content/edit-profile/edit-profile
     ShareModule,
     SwiperModule,
     ShareModule,
-    NzModalModule
+    NzModalModule,
+    ReactiveFormsModule
   ]
 })
 export class ProfileModule { }
