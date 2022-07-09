@@ -1,3 +1,4 @@
+import { PatchBuyer } from './../../../../model/DTO/PatchBuyer';
 import { Buyer } from './../../../../model/interface/Buyer';
 import { Observable, first } from 'rxjs';
 import { BuyerService } from './../../../../service/buyer-service/buyer.service';
@@ -14,21 +15,21 @@ export class EditProfileComponent implements OnInit {
   editForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     status: new FormControl(''),
-    email: new FormControl('', [Validators.required, Validators.email]),
     birthday: new FormControl('')
   });
 
   get name() { return this.editForm.get('name'); }
   get status() { return this.editForm.get('status') }
-  get email() { return this.editForm.get('email'); }
   get birthday() { return this.editForm.get('birthday') }
 
   buyer$: Observable<Buyer>;
+  isStatusActive: boolean;
 
   constructor(
     private buyerService: BuyerService
   ) {
     this.buyer$ = buyerService.getBuyer();
+    this.isStatusActive = false;
   }
 
   ngOnInit(): void {
@@ -37,14 +38,37 @@ export class EditProfileComponent implements OnInit {
     .subscribe(buyer=>{
       this.editForm.patchValue({
         name: buyer.account,
-        status: buyer.selfIntro,
-        email: buyer.email
+        status: buyer.selfIntro
       })
     });
   }
 
+  editStatus()
+  {
+    this.isStatusActive = true;
+  }
+
+  saveStatus(event: string)
+  {
+    this.editForm.patchValue({
+      status: event
+    })
+  }
+
   editProfile()
   {
+    let patch: PatchBuyer = {
+      _id: this.buyerService.getBuyerId(),
+      name: this.editForm.value.name,
+      status: this.editForm.value.status,
+      birthday: this.editForm.value.birthday
+    }
 
+    this.buyerService.patchBuyer(patch).subscribe(buyer=>{
+      if(buyer){
+
+      }
+    });
   }
+
 }
