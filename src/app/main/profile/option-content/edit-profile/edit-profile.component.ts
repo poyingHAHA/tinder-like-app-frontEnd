@@ -83,6 +83,7 @@ export class EditProfileComponent implements OnInit {
           this.createPopUp("Update Profile", "Error occurs while updating profile");
         }
         this.isSaving = false;
+        location.reload();
       }, 1500);
     });
   }
