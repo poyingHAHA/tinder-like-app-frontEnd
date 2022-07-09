@@ -1,0 +1,30 @@
+<div class="my-container">
+  <div class="back-wrapper">
+    <div class="back" (click)="back()"><i class="fa-solid fa-arrow-left"></i></div>
+    <div class="title">Status</div>
+  </div>
+  <div class="content">
+    <div class="input-wrapper">
+      <textarea [(ngModel)]="content" id="status" cols="50" rows="50"></textarea>
+      <div class="left-words">{{ content?.length+'/'+maxWords }}</div>
+    </div>
+    <div class="save" (click)="save()">Save</div>
+  </div>
+</div>
+
+<div *ngIf="isSaving" class="loader">
+  <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="popupTitle"
+  nzOkText="Ok"
+  nzCancelText="Cancel"
+  (nzOnCancel)="this.isVisible=false"
+  (nzOnOk)="this.isVisible=false"
+>
+  <ng-container *nzModalContent>
+    <div style="color: black; font-size: 4vmin;">{{ popupContent }}</div>
+  </ng-container>
+</nz-modal>

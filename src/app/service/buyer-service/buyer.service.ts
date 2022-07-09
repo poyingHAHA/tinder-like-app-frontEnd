@@ -1,3 +1,4 @@
+import { PatchBuyer } from './../../model/DTO/PatchBuyer';
 import { Buyer } from './../../model/interface/Buyer';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -20,6 +21,11 @@ export class BuyerService {
   getBuyer(): Observable<Buyer>
   {
     return this.http.get<Buyer>(`${this.baseURI}/buyer?buyerid=${this.getBuyerId()}`);
+  }
+
+  patchBuyer(patchBuyer: PatchBuyer): Observable<Buyer>
+  {
+    return this.http.patch<Buyer>(`${this.baseURI}/profile`, patchBuyer);
   }
 
   setBuyerId(): void

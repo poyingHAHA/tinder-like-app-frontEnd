@@ -11,22 +11,16 @@
           <div class="input-item">
             <div class="lab">
               Display Name
-              <div class="error" *ngIf="name?.invalid && email?.touched">name is invalid</div>
+              <div class="error" *ngIf="name?.invalid && name?.touched">name is invalid</div>
             </div>
             <input formControlName="name" type="text">
           </div>
-          <div class="input-item">
+          <div class="input-item" (click)="editStatus()">
             <div class="lab">
               Status
             </div>
             <input formControlName="status" type="text">
-          </div>
-          <div class="input-item email">
-            <div class="lab">
-              Email
-              <div class="error" *ngIf="email?.invalid && email?.touched">email is invalid</div>
-            </div>
-            <input formControlName="email" type="email">
+            <i class="fa-solid fa-arrow-right"></i>
           </div>
           <div class="input-item">
             <div class="lab">
@@ -35,8 +29,18 @@
             <input formControlName="birthday" type="date">
           </div>
         </div>
+        <div class="confirm">
+          <input type="submit" value="Confirm">
+        </div>
       </form>
     </div>
-
   </div>
+</div>
+
+<div *ngIf="isStatusActive" class="edit-status" [ngClass]="isStatusActive?'edit-status-active':''">
+  <app-edit-status
+    [originalContent]="status?.value"
+    (collapse)="isStatusActive=$event"
+    (saveStatus)="saveStatus($event)"
+  ></app-edit-status>
 </div>

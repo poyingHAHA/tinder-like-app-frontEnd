@@ -12,13 +12,15 @@ import { SettingsComponent } from './settings/settings.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { OptionContentComponent } from './option-content/option-content.component';
 import { EditProfileComponent } from './option-content/edit-profile/edit-profile.component';
+import { EditStatusComponent } from './option-content/edit-profile/edit-status/edit-status.component';
 
 @NgModule({
   declarations: [
     ProfileComponent,
     SettingsComponent,
     OptionContentComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    EditStatusComponent
   ],
   imports: [
     CommonModule,
