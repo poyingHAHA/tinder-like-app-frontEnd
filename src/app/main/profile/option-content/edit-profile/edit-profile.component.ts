@@ -25,11 +25,21 @@ export class EditProfileComponent implements OnInit {
   buyer$: Observable<Buyer>;
   isStatusActive: boolean;
 
+  isSaving: boolean;
+  isVisible: boolean;
+
+  popupTitle: string;
+  popupContent: string;
+
   constructor(
     private buyerService: BuyerService
   ) {
     this.buyer$ = buyerService.getBuyer();
     this.isStatusActive = false;
+    this.isSaving = false;
+    this.isVisible = false;
+    this.popupTitle = "";
+    this.popupContent = "";
   }
 
   ngOnInit(): void {
@@ -65,10 +75,22 @@ export class EditProfileComponent implements OnInit {
     }
 
     this.buyerService.patchBuyer(patch).subscribe(buyer=>{
-      if(buyer){
-
-      }
+      this.isSaving = true;
+      setTimeout(() => {
+        if(buyer){
+          this.createPopUp("Update Profile", "Upadte profile successfully!");
+        }else{
+          this.createPopUp("Update Profile", "Error occurs while updating profile");
+        }
+        this.isSaving = false;
+      }, 1500);
     });
   }
 
+  createPopUp(title: string, content: string)
+  {
+    this.popupTitle = title;
+    this.popupContent = content;
+    this.isVisible = true;
+  }
 }

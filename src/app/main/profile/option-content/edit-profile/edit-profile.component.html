@@ -44,3 +44,23 @@
     (saveStatus)="saveStatus($event)"
   ></app-edit-status>
 </div>
+
+<!-- entire window -->
+<div *ngIf="isSaving" class="loader">
+  <app-entire-loader-roller
+    [isLoading]="isSaving"
+  ></app-entire-loader-roller>
+</div>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="popupTitle"
+  nzOkText="Ok"
+  nzCancelText="Cancel"
+  (nzOnCancel)="this.isVisible=false"
+  (nzOnOk)="this.isVisible=false"
+>
+  <ng-container *nzModalContent>
+    <div style="color: black; font-size: 4vmin;">{{ popupContent }}</div>
+  </ng-container>
+</nz-modal>

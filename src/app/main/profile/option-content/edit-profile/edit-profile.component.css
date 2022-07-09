@@ -207,3 +207,14 @@ form
   right: 0 !important;
   left: 0 !important;
 }
+
+.loader
+{
+  position: absolute;
+  top: calc((8vh - 100vh) * ( 8 / 100 ));
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  z-index: 11;
+}

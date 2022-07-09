@@ -1,3 +1,4 @@
+import { EntireLoaderRollerComponent } from './../layout/entire-loader-roller/entire-loader-roller.component';
 import { MoreContentDirective } from './../directives/more-content/more-content.directive';
 import { ImgloadDirective } from '../directives/imgload/imgload.directive';
 import { LoaderSpinerComponent } from './../layout/loader-spiner/loader-spiner.component';
@@ -15,6 +16,7 @@ const exportComponents:any[] = [
   BigPostComponent,
   SharePostComponent,
   LoaderSpinerComponent,
+  EntireLoaderRollerComponent
 ];
 const exportModules:any[] = [
   FormsModule,
@@ -32,7 +34,8 @@ const exportDirectives: any[]=[
     SharePostComponent,
     LoaderSpinerComponent,
     ImgloadDirective,
-    MoreContentDirective
+    MoreContentDirective,
+    EntireLoaderRollerComponent
   ],
   imports: [
     CommonModule,

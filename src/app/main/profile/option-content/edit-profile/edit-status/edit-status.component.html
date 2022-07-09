@@ -12,9 +12,9 @@
   </div>
 </div>
 
-<div *ngIf="isSaving" class="loader">
-  <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-</div>
+<app-entire-loader-roller
+  [isLoading]="isSaving"
+></app-entire-loader-roller>
 
 <nz-modal
   [(nzVisible)]="isVisible"
