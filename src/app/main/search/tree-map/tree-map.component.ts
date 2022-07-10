@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import * as ProductPostModel from 'src/app/model/interface/ProductPost';
 
 
@@ -11,7 +11,11 @@ export class TreeMapComponent implements OnInit {
   @Input('posts') posts?: ProductPostModel.ProductPost[];
   @Input('evenOrOdd') evenOrOdd!: number;
 
-  constructor() { }
+  @Output('openPost') openPost: EventEmitter<ProductPostModel.ProductPost>;
+
+  constructor() {
+    this.openPost = new EventEmitter<ProductPostModel.ProductPost>();
+   }
 
   ngOnInit(): void {
     this.posts?.sort((x, y)=>{
@@ -19,4 +23,8 @@ export class TreeMapComponent implements OnInit {
     });
   }
 
+  clickPost(post: ProductPostModel.ProductPost)
+  {
+    this.openPost.emit(post);
+  }
 }

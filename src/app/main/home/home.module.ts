@@ -5,7 +5,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -15,7 +14,6 @@ import { SwiperModule } from 'swiper/angular';
     CommonModule,
     HomeRoutingModule,
     NzIconModule,
-    SwiperModule,
     ShareModule
   ]
 })

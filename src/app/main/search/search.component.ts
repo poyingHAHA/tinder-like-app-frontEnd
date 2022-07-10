@@ -4,6 +4,7 @@ import * as ProductPostModel from './../../model/interface/ProductPost';
 import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, debounceTime, first, Observable, forkJoin, switchMap, map, mergeMap, fromEvent, of } from 'rxjs';
 import { PostService } from './../../service/post-service/post.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListener, Type } from '@angular/core';
+import { BigPostsComponent } from 'src/app/share/post/big-posts/big-posts.component';
 
 @Component({
   selector: 'app-search',
@@ -21,6 +22,10 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   searchTxt: string;
   isSearchMode: boolean;
+
+  isOpening: boolean;
+  isBigPost: boolean;
+  startBigPost?: ProductPostModel.ProductPost;
 
   destroy$: Subject<any>;
   treemaps: ProductPostModel.ProductPost[][]=[];
@@ -41,6 +46,8 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     //let shop: string = "624941b301a9a3c75d9d26d6";
 
     this.isScrollToBottom = false;
+    this.isOpening = false;
+    this.isBigPost = false;
     this.initTreeMaps();
   }
 
@@ -58,7 +65,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     )
     .subscribe((posts)=>{
-      console.log(posts);
+
       if(posts){
         this.isLoading = false;
       }
@@ -207,6 +214,28 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       });
     }
+  }
+
+  openPost(event: ProductPostModel.ProductPost)
+  {
+    this.isOpening = true;
+
+    setTimeout(() => {
+      this.isBigPost = true;
+      this.startBigPost = event
+      this.isOpening = false;
+    }, 1000);
+  }
+
+  backBigPost()
+  {
+    this.isBigPost = false;
+  }
+
+  flatten2DArray(arr: any[][]): any[]
+  {
+    const res = arr.reduce((accumulator, value)=>accumulator.concat(value), []);
+    return res;
   }
 
   ngOnDestroy(): void {

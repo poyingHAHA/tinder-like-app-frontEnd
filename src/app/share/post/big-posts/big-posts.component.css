@@ -1,0 +1,30 @@
+@import "~swiper/swiper-bundle.css";
+
+.my-container
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+}
+
+.swiper {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.my-slide
+{
+  position: relative;
+}
+
+::ng-deep .swiper-pagination
+{
+  right: -10px !important;
+}

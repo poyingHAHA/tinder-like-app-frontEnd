@@ -33,8 +33,22 @@
       <app-tree-map
         [posts]="treemap"
         [evenOrOdd]="i"
+        (openPost)="openPost($event)"
       ></app-tree-map>
     </div>
+  </div>
+
+  <app-entire-loader-roller [isLoading]="isOpening"></app-entire-loader-roller>
+  <div class="big-post" [ngClass]="isBigPost?'big-post-active':''">
+    <div class="bp-back">
+      <div class="bp-back-btn" (click)="backBigPost()"><i class="fa-solid fa-arrow-left"></i></div>
+    </div>
+    <!-- all settings in ts file, openPost function -->
+    <app-share-big-posts
+      *ngIf="isBigPost"
+      [posts]="flatten2DArray(treemaps)"
+      [initialSlide]="flatten2DArray(treemaps).indexOf(startBigPost)"
+    ></app-share-big-posts>
   </div>
 
   <div *ngIf="!isLoading" class="loader-wrapper">

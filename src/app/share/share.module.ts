@@ -10,17 +10,21 @@ import { PostComponent } from './post/post.component';
 import { BigPostComponent } from './post/big-post/big-post.component';
 import { SharePostComponent } from './post/share-post/share-post.component';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { BigPostsComponent } from './post/big-posts/big-posts.component';
+import { SwiperModule } from 'swiper/angular';
 
 const exportComponents:any[] = [
   PostComponent,
   BigPostComponent,
   SharePostComponent,
   LoaderSpinerComponent,
-  EntireLoaderRollerComponent
+  EntireLoaderRollerComponent,
+  BigPostsComponent
 ];
 const exportModules:any[] = [
   FormsModule,
-  NzIconModule
+  NzIconModule,
+  SwiperModule
 ];
 const exportDirectives: any[]=[
   ImgloadDirective,
@@ -35,13 +39,15 @@ const exportDirectives: any[]=[
     LoaderSpinerComponent,
     ImgloadDirective,
     MoreContentDirective,
-    EntireLoaderRollerComponent
+    EntireLoaderRollerComponent,
+    BigPostsComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     NzIconModule,
-    NzCarouselModule
+    NzCarouselModule,
+    SwiperModule
   ],
   exports:[
     exportComponents,
