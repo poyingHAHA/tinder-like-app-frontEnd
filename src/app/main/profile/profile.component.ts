@@ -33,15 +33,14 @@ export class ProfileComponent implements OnInit {
    this.isSpandSettings = false;
    this.isSpandOptionContent = false;
    this.destroy$ = new Subject<any>();
-  }
-
-  ngOnInit(): void {
-    this.buyerService.getBuyer()
+   this.buyerService.getBuyer()
     .pipe(first())
     .subscribe(buyer=>{
       this.buyer = buyer;
     });
+  }
 
+  ngOnInit(): void {
     this.profileLayoutService.getOption$()
     .pipe(takeUntil(this.destroy$))
     .subscribe(type=>{
