@@ -32,7 +32,7 @@ export class BigPostsComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit(): void {
     if(this.initSlide){
-      this.swiper?.swiperRef.slideNext(this.initSlide);
+      this.swiper?.swiperRef.slideTo(this.initSlide);
     }
   }
 }
