@@ -1,6 +1,6 @@
-<div class="my-container">
+<div class="my-container" *ngIf="(buyer$ | async) as buyer">
   <div class="header">
-    <div class="name">{{ buyer?.account }}</div>
+    <div class="name">{{ buyer.account }}</div>
     <div class="func-group">
       <div class="func-item my-cart"><i class="fa-solid fa-cart-shopping"></i></div>
       <div class="func-item settings"><i class="fa-solid fa-bars" (click)="spandSetting()"></i></div>
@@ -8,14 +8,19 @@
   </div>
   <div class="content">
     <div class="main-cont">
-      <div class="cont-pic" [style]="'background-image: url('+buyer.profilePic+')'"></div>
+      <div
+        class="cont-pic"
+        [ngStyle]="{
+          'background-image': 'url('+buyer.profilePic+')'
+        }"
+      ></div>
       <div class="info-group">
         <div class="info-item following">
-          <div class="num">{{ buyer?.followingCount }}</div>
+          <div class="num">{{ buyer.followingCount }}</div>
           <div class="text">Following</div>
         </div>
         <div class="info-item follower">
-          <div class="num">{{ buyer?.followerCount }}</div>
+          <div class="num">{{ buyer.followerCount }}</div>
           <div class="text">Followers</div>
         </div>
         <div class="info-item posts-tag">
