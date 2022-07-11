@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { ProfileLayoutService } from './../../service/layout-service/profile-layout.service';
 import { Buyer } from './../../model/interface/Buyer';
 import { first, Subject, takeUntil } from 'rxjs';

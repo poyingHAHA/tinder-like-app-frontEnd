@@ -1,9 +1,15 @@
 <div class="my-container">
   <div class="content">
     <div class="pic-wrapper">
-      <div class="pic">
+      <label
+        class="pic"
+        [ngStyle]="{
+          'background-image': 'url('+(buyerPic$ | async)+')'
+        }"
+      >
+        <input style="display: none;" type="file" class="upload-img" (change)="onFileSelect($event)">
         <div class="add"><i class="fa-solid fa-plus"></i></div>
-      </div>
+      </label>
     </div>
     <div class="form">
       <form [formGroup]="editForm" (ngSubmit)="editProfile()">

@@ -10,5 +10,9 @@ export const environment = {
     tinder: "tinder",
     treemap: "treemap"
   },
-  imgBase: "https://cf.shopee.tw/file/"
+  imgBase: "https://cf.shopee.tw/file/",
+  myImgURL: "http://140.119.19.32/images/",
+  myImgRoute:{
+    buyer_profile_pic: "buyer/profile-pic/"
+  }
 };

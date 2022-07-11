@@ -40,6 +40,9 @@
   max-height: 100%;
   border-radius: 50%;
   position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .pic::after

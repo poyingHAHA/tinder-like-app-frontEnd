@@ -12,11 +12,12 @@ export interface Buyer
   verify_expire: string,
   active: boolean,
   gender: string,
-  profilePic: string
   selfIntro: string,
   public: boolean,
   followerCount: number,
   followingCount: number,
   superLikeLeft: number,
+  profilePic: string,
+  birthday: string,
   refreshToken: String
 }
