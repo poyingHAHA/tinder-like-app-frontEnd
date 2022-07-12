@@ -1,3 +1,4 @@
+import { TreeMapRecommendPool } from '../../model/interface/TreeMapRecommendPool';
 import { Observable, mapTo, map, first } from 'rxjs';
 import { BuyerService } from './../buyer-service/buyer.service';
 import { environment } from 'src/environments/environment';
@@ -18,5 +19,10 @@ export class TreemapService {
   getTreemapRecommendPost(): Observable<ProductPost[]>
   {
     return this.http.get<ProductPost[]>(`${this.baseURI}/recommendItems/${this.buyerService.getBuyerId()}`);
+  }
+
+  getRecommendScore(buyerid: string, itemid: string): Observable<TreeMapRecommendPool>
+  {
+    return this.http.get<TreeMapRecommendPool>(`${this.baseURI}/recommendScore/${buyerid}/${itemid}`);
   }
 }
