@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ProductPost } from 'src/app/model/interface/ProductPost';
 import Swiper, {SwiperOptions, Pagination, Virtual } from 'swiper';
-import { SwiperComponent } from 'swiper/angular';
+import { EventsParams, SwiperComponent } from 'swiper/angular';
 
 Swiper.use([Pagination, Virtual])
 @Component({
@@ -12,6 +12,7 @@ Swiper.use([Pagination, Virtual])
 export class BigPostsComponent implements OnInit, AfterViewInit{
   @Input('posts') posts: ProductPost[];
   @Input('initialSlide') initSlide?: number;
+  @Output('slideChange') slideChange: EventEmitter<number>;
 
   @ViewChild('swiper') swiper?: SwiperComponent;
 
@@ -24,6 +25,7 @@ export class BigPostsComponent implements OnInit, AfterViewInit{
 
   constructor() {
     this.posts = [];
+    this.slideChange = new EventEmitter<number>();
   }
 
   ngOnInit(): void {
@@ -34,5 +36,10 @@ export class BigPostsComponent implements OnInit, AfterViewInit{
     if(this.initSlide){
       this.swiper?.swiperRef.slideTo(this.initSlide);
     }
+  }
+
+  onSlideChange(event: [swiper: Swiper])
+  {
+    this.slideChange.emit(event[0].activeIndex);
   }
 }

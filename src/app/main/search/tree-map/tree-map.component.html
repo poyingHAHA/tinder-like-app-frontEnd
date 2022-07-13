@@ -1,4 +1,4 @@
-<div class="my-container">
+<div class="my-container" *ngIf="!isSorting">
   <div class="inner-grid">
     <div class="treemap"
       *ngFor="let post of posts; let i=index"

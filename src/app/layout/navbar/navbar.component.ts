@@ -1,3 +1,5 @@
+import { ProductPost } from './../../model/interface/ProductPost';
+import { Observable, forkJoin, first, mergeMap, takeWhile } from 'rxjs';
 import { TinderService } from './../../service/tinder-service/tinder.service';
 import { NavigationEnd, NavigationStart, RouteConfigLoadEnd, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -28,9 +30,10 @@ export class NavbarComponent implements OnInit {
 
           //switch page from tinder page
           if(this.previousRoute === "tinder-page"){
-            let subs = this.tinderService.switchPageFromTinder().subscribe(msg=>{
+            let subs = this.tinderService.switchPageFromTinder()
+            .pipe(first())
+            .subscribe(msg=>{
               //console.log(msg);
-              subs.unsubscribe();
             })
           }
 

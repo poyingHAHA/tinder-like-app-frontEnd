@@ -1,5 +1,5 @@
 import { TreeMapRecommendPool } from './../../../model/interface/TreeMapRecommendPool';
-import { Observable, forkJoin, switchMap } from 'rxjs';
+import { Observable, forkJoin, switchMap, Subject, takeUntil } from 'rxjs';
 import { BuyerService } from './../../../service/buyer-service/buyer.service';
 import { TreemapService } from './../../../service/treemap-service/treemap.service';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
@@ -17,12 +17,18 @@ export class TreeMapComponent implements OnInit {
 
   @Output('openPost') openPost: EventEmitter<ProductPostModel.ProductPost>;
 
+  isSorting: boolean;
+
+  destroy$: Subject<any>;
+
   constructor(
     private buyerService: BuyerService,
     private treemapService: TreemapService
   ) {
+    this.destroy$ = new Subject<any>();
     this.openPost = new EventEmitter<ProductPostModel.ProductPost>();
-   }
+    this.isSorting = true;
+  }
 
   ngOnInit(): void {
     //based on rating star
@@ -32,6 +38,7 @@ export class TreeMapComponent implements OnInit {
 
     //based on recommend score
     this.sortPostsByRecommendScore();
+    this.isSorting = false;
   }
 
   clickPost(post: ProductPostModel.ProductPost)
@@ -59,11 +66,12 @@ export class TreeMapComponent implements OnInit {
       }
 
       forkJoin(getScores$)
+      .pipe(takeUntil(this.destroy$))
       .subscribe(recs=>{
         if(this.posts){
           for(let post of this.posts)
           {
-            let rec = recs.find(x=>x.itemid==post._id);
+            let rec = recs.find(x=>x && x.itemid==post._id);
             if(rec){ //有在推薦
               inRecommendPool.push(post);
             }else{
@@ -71,9 +79,16 @@ export class TreeMapComponent implements OnInit {
             }
           }
         }
-        inRecommendPool.sort((p1, p2)=>recs.find(x=>x.itemid==p2._id)!.score - recs.find(x=>x.itemid==p1._id)!.score)
+        inRecommendPool.sort((p1, p2)=>recs.find(x=>x && x.itemid==p2._id)!.score - recs.find(x=>x && x.itemid==p1._id)!.score)
         this.posts = inRecommendPool.concat(notInRecommendPool);
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

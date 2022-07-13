@@ -1,6 +1,8 @@
 <div class="my-container">
   <app-share-big-posts
+    #bigPost
     [posts]="posts"
+    (slideChange)="onSlideChange($event)"
   ></app-share-big-posts>
 </div>
 

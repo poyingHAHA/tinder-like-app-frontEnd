@@ -1,5 +1,5 @@
 import { BuyerService } from './../buyer-service/buyer.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ProductPost } from './../../model/interface/ProductPost';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -11,12 +11,18 @@ import { Tinder } from 'src/app/model/DTO/Tinder';
 })
 export class TinderService {
   baseURI: string;
+  private liked: ProductPost[];
+  private disliked: ProductPost[];
+  private superLiked: ProductPost[];
 
   constructor(
     private http: HttpClient,
     private buyerService: BuyerService
   ) {
     this.baseURI = `${environment.domain}/${environment.baseRoute.tinder}`;
+    this.liked = [];
+    this.disliked = [];
+    this.superLiked = [];
   }
 
   tinderLike(post: ProductPost): Observable<ProductPost>

@@ -65,11 +65,6 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     )
     .subscribe((posts)=>{
-
-      if(posts){
-        this.isLoading = false;
-      }
-
       //after loading data to put labels
       this.testTags = [
         {
@@ -80,6 +75,10 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.generateAndAddTags(this.selectFromArrayRandomly(posts, 3));
       this.addTreeMaps(this.slicePosts(posts));
+
+      if(posts){
+        this.isLoading = false;
+      }
     });
   }
 
