@@ -6,7 +6,7 @@ import { tinderEvent } from './../../service/layout-service/tinder-layout.servic
 import { TinderLayoutService } from '../../service/layout-service/tinder-layout.service';
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import 'hammerjs';
-import { Subscription, Subject, Observable, takeUntil, filter, takeWhile, BehaviorSubject, first } from 'rxjs';
+import { Subscription, Subject, Observable, takeUntil, filter, takeWhile, BehaviorSubject, first, repeat } from 'rxjs';
 
 interface swipeCard{
   post: ProductPost,
@@ -164,12 +164,13 @@ export class TinderPageComponent implements OnInit, OnDestroy {
     //每次變動 等同滑like, dislike
     //最好不要用forkJoin在service一次發送history 因為要等server跑 所以不會第一時間收到推薦
     //應該要在使用者滑動的時候同時計算
+    //執行2次 來回差兩倍
     if(item && item.like === "like"){
       item.like = "dislike";
-      this.tinderService.tinderDisLike(item.post).pipe(first()).subscribe(res=>{});
+      this.tinderService.tinderDisLike(item.post).pipe(takeUntil(this.destroy$),repeat(2)).subscribe(res=>{});
     }else if(item && item.like === "dislike"){
       item.like = "like";
-      this.tinderService.tinderLike(item.post).pipe(first()).subscribe(res=>{})
+      this.tinderService.tinderLike(item.post).pipe(takeUntil(this.destroy$),repeat(2)).subscribe(res=>{})
     }
 
     let toDis = this.likes.filter(x => x.like=="dislike");
