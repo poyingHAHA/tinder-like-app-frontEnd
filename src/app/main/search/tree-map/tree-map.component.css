@@ -11,13 +11,13 @@
 {
   display: grid;
   grid-template-rows: auto auto auto;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 30vw 30vw 30vw;
   width: 100%;
-  /* height: 100%; */
+  grid-gap: 0.7rem;
   gap: 0.7rem;
   grid-auto-flow: row;
-  align-items: center;
   align-content: center;
+  justify-content: center;
 }
 
 .great-recommend-odd
