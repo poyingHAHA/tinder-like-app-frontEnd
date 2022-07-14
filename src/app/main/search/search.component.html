@@ -21,6 +21,7 @@
         [label]="label.label"
         [isActive]="label.isActive"
         (click)="activateTag(label.label)"
+        (click)="filterPostByTag(label.label)"
       ></app-tag>
     </div>
   </div>
@@ -29,7 +30,7 @@
   </div>
 
   <div [ngClass]="isLoading? 'sklt-grids' : ''" class="grids">
-    <div class="grid" *ngFor="let treemap of treemaps; let i=index;">
+    <div class="grid" *ngFor="let treemap of displayTreemaps; let i=index;">
       <app-tree-map
         [posts]="treemap"
         [evenOrOdd]="i"
@@ -46,12 +47,12 @@
     <!-- all settings in ts file, openPost function -->
     <app-share-big-posts
       *ngIf="isBigPost"
-      [posts]="flatten2DArray(treemaps)"
-      [initialSlide]="flatten2DArray(treemaps).indexOf(startBigPost)"
+      [posts]="flatten2DArray(displayTreemaps)"
+      [initialSlide]="flatten2DArray(displayTreemaps).indexOf(startBigPost)"
     ></app-share-big-posts>
   </div>
 
-  <div *ngIf="!isLoading" class="loader-wrapper">
+  <div *ngIf="!isLoading && !isFiltered" class="loader-wrapper">
     <app-loader-spiner></app-loader-spiner>
   </div>
 

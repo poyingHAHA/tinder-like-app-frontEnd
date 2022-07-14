@@ -1,7 +1,7 @@
 import { BuyerService } from './../../service/buyer-service/buyer.service';
 import { TreemapService } from './../../service/treemap-service/treemap.service';
 import * as ProductPostModel from './../../model/interface/ProductPost';
-import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, debounceTime, first, Observable, forkJoin, switchMap, map, mergeMap, fromEvent, of } from 'rxjs';
+import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, debounceTime, first, Observable, forkJoin, switchMap, map, mergeMap, fromEvent, of, Observer } from 'rxjs';
 import { PostService } from './../../service/post-service/post.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListener, Type } from '@angular/core';
 import { BigPostsComponent } from 'src/app/share/post/big-posts/big-posts.component';
@@ -25,11 +25,16 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isOpening: boolean;
   isBigPost: boolean;
+  isFiltered: boolean;
   startBigPost?: ProductPostModel.ProductPost;
 
   destroy$: Subject<any>;
-  treemaps: ProductPostModel.ProductPost[][]=[];
+  scroll$!: Observable<void>;
   scrollSub!: Subscription;
+  scrollObserver: Observer<void>;
+
+  treemaps: ProductPostModel.ProductPost[][]=[];
+  displayTreemaps: ProductPostModel.ProductPost[][]=[];
 
   isScrollToBottom: boolean;
 
@@ -41,6 +46,8 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isLoading = true;
     this.searchTxt = "";
     this.isSearchMode = false;
+    this.isFiltered = false;
+
     this.destroy$ = new Subject<any>();
 
     //let shop: string = "624941b301a9a3c75d9d26d6";
@@ -48,6 +55,24 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isScrollToBottom = false;
     this.isOpening = false;
     this.isBigPost = false;
+
+    this.scrollObserver = {
+      next: ()=>{
+        this.cleanTagsAndKeepFirst();
+        this.loadMoreTreeMaps(36);
+        let randTreemaps: ProductPostModel.ProductPost[][] = this.selectFromArrayRandomly<ProductPostModel.ProductPost[]>(this.treemaps, 3);
+        let randPosts: ProductPostModel.ProductPost[] = [];
+        randTreemaps.forEach(treemap=>{
+          randPosts.push(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(treemap, 1)[0]);
+        });
+        this.generateAndAddTags(randPosts);
+      },
+      error: (err: Error)=>{
+        console.log(err);
+      },
+      complete: ()=>{}
+    };
+
     this.initTreeMaps();
   }
 
@@ -75,6 +100,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
       this.generateAndAddTags(this.selectFromArrayRandomly(posts, 3));
       this.addTreeMaps(this.slicePosts(posts));
+      this.setDisplayTreeMaps(this.flatten2DArray(this.treemaps));
 
       if(posts){
         this.isLoading = false;
@@ -100,6 +126,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
       morePosts = morePosts.concat(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(posts.random, 36));
       morePosts = morePosts.concat(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(posts.recommend, 60));
       this.addTreeMaps(this.slicePosts(morePosts));
+      this.setDisplayTreeMaps(this.flatten2DArray(this.treemaps));
     });
   }
 
@@ -145,22 +172,16 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //on mobile will trigger multiple times, so that it will call api so many times
     //use rxjs delay
-    this.scrollSub = fromEvent(this.container.nativeElement, 'scroll')
+    this.scroll$ = fromEvent<void>(this.container.nativeElement, 'scroll')
     .pipe(
       takeUntil(this.destroy$),
-      //delay 300ms
+      //delay 300m
       debounceTime(300),
       filter(()=>this.container.nativeElement.offsetHeight + this.container.nativeElement.scrollTop >= this.container.nativeElement.scrollHeight-80)
-    ).subscribe(()=>{
-      this.cleanTagsAndKeepFirst();
-      this.loadMoreTreeMaps(36);
-      let randTreemaps: ProductPostModel.ProductPost[][] = this.selectFromArrayRandomly<ProductPostModel.ProductPost[]>(this.treemaps, 3);
-      let randPosts: ProductPostModel.ProductPost[] = [];
-      randTreemaps.forEach(treemap=>{
-        randPosts.push(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(treemap, 1)[0]);
-      });
-      this.generateAndAddTags(randPosts);
-    });
+    );
+
+    this.scrollSub = this.scroll$.subscribe(this.scrollObserver);
+
   }
 
   selectFromArrayRandomly<T>(arr: any[], num: number): T[]
@@ -204,13 +225,17 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   generateAndAddTags(posts: ProductPostModel.ProductPost[])
   {
+    let seen: any[] = [];
     for(let i=0; i<posts.length; i++)
     {
       posts[i].labels.forEach(label=>{
-        this.testTags.push({
-          label: label.display_name,
-          isActive: false
-        });
+        if(!seen.includes(label.display_name)){
+          this.testTags.push({
+            label: label.display_name,
+            isActive: false
+          });
+          seen.push(label.display_name);
+        }
       });
     }
   }
@@ -235,6 +260,43 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   {
     const res = arr.reduce((accumulator, value)=>accumulator.concat(value), []);
     return res;
+  }
+
+  filterPostByTag(label: string)
+  {
+    if(label=="All"){
+      this.displayTreemaps = this.treemaps;
+      this.scrollSub = this.scroll$.subscribe(this.scrollObserver);
+      this.isFiltered = false;
+      return;
+    }
+
+    this.scrollSub.unsubscribe();
+    this.isFiltered=true;
+
+    let qulifiedPosts = [];
+    qulifiedPosts = (<ProductPostModel.ProductPost[]>this.flatten2DArray(this.treemaps))
+    .filter(post=>{
+      let isQulified = false;
+      for(let l of post.labels)
+      {
+        if(l.display_name==label){
+          isQulified = true;
+          break;
+        }
+      }
+      return isQulified;
+    });
+
+    this.setDisplayTreeMaps(qulifiedPosts);
+  }
+
+  setDisplayTreeMaps(posts: ProductPostModel.ProductPost[])
+  {
+    //in a posts array
+    //slice it
+    let tmpTreemaps = this.slicePosts(posts);
+    this.displayTreemaps = tmpTreemaps;
   }
 
   ngOnDestroy(): void {

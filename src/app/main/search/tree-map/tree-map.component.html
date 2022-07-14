@@ -3,8 +3,8 @@
     <div class="treemap"
       *ngFor="let post of posts; let i=index"
       [ngClass]="{
-        'great-recommend-odd': i==0 && evenOrOdd%2!=0,
-        'great-recommend-even': i==0 && evenOrOdd%2==0
+        'great-recommend-odd':  posts && posts.length>=3 && i==0 && evenOrOdd%2!=0,
+        'great-recommend-even':  posts && posts.length>=4 && i==0 && evenOrOdd%2==0
       }"
     >
       <app-share-post
