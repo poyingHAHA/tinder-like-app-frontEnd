@@ -2,7 +2,7 @@ import { TreeMapRecommendPool } from './../../../model/interface/TreeMapRecommen
 import { Observable, forkJoin, switchMap, Subject, takeUntil } from 'rxjs';
 import { BuyerService } from './../../../service/buyer-service/buyer.service';
 import { TreemapService } from './../../../service/treemap-service/treemap.service';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import * as ProductPostModel from 'src/app/model/interface/ProductPost';
 
 
@@ -36,7 +36,6 @@ export class TreeMapComponent implements OnInit {
     //   return y.rating.rating_star - x.rating.rating_star; //最高分排前面
     // });
 
-    //based on recommend score
     this.sortPostsByRecommendScore();
     this.isSorting = false;
   }

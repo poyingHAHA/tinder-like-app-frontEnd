@@ -123,8 +123,9 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     morePosts$
     .pipe(first())
     .subscribe(posts=>{
-      morePosts = morePosts.concat(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(posts.random, 36));
-      morePosts = morePosts.concat(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(posts.recommend, 60));
+      morePosts = morePosts.concat(posts.random);
+      //may not have so many recommend post because the post been shown will be penaltied
+      morePosts = morePosts.concat(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(posts.recommend, Math.floor(posts.recommend.length*0.6)));
       this.addTreeMaps(this.slicePosts(morePosts));
       this.setDisplayTreeMaps(this.flatten2DArray(this.treemaps));
     });
