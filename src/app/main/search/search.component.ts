@@ -145,6 +145,13 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isSearchMode = true;
   }
 
+  trySearch(event: KeyboardEvent)
+  {
+    if(event.key=="Enter"){
+      alert("search");
+    }
+  }
+
   clickBackBtn()
   {
     if(this.isSearchMode){

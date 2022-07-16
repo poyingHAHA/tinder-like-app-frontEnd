@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="search-input">
-      <input #search type="text" [(ngModel)]="searchTxt" (focus)="changeSearchMode()">
+      <input #search type="text" [(ngModel)]="searchTxt" (focus)="changeSearchMode()" (keypress)="trySearch($event)">
       <div class="my-placeholder" *ngIf="searchTxt===''" (click)="changeSearchMode()"><i class="fa-solid fa-magnifying-glass" style="margin-right: 5px;"></i>Search</div>
       <div class="clear" (click)="clearTxt()"><i class="fa-solid fa-xmark"></i></div>
     </div>
