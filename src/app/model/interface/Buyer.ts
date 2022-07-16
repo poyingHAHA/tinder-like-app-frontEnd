@@ -19,5 +19,6 @@ export interface Buyer
   superLikeLeft: number,
   profilePic: string,
   birthday: string,
-  refreshToken: String
+  likedItems: string[],
+  refreshToken: string
 }

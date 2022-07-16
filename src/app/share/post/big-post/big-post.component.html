@@ -3,8 +3,13 @@
   <div [ngClass]="{'mask-up': isMoreText}" class="mask-bottom"></div>
   <div class="option-group">
     <div class="option like">
-      <i [ngStyle]="{'color': iconState['like']?'#f61313':'#ffffff'}" class="fa-solid fa-heart" (click)="changeMode('like')"></i>
-      <div class="num">953</div>
+      <i
+        [ngStyle]="{'color': iconState['like']?'#f61313':'#ffffff'}"
+        class="fa-solid fa-heart"
+        (click)="changeMode('like')"
+        (click)="likeAction()"
+      ></i>
+      <div class="num">{{ likeCount$ | async }}</div>
     </div>
     <div class="option comments">
       <i class="fa-solid fa-comment" (click)="changeMode('comment')"></i>

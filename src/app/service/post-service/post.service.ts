@@ -16,6 +16,11 @@ export class PostService {
     this.baseURI = `${environment.domain}/${environment.baseRoute.items}`;
   }
 
+  getSpecificProductPost(id: string): Observable<ProductPost>
+  {
+    return this.http.get<ProductPost>(`${this.baseURI}/${id}`);
+  }
+
   getProductPosts(limit: number, skip: number, shopid: string): Observable<ProductPost[]>
   {
     let uri: string = `${this.baseURI}/?limit=${limit}&skip=${skip}&shopid=${shopid}`
@@ -26,5 +31,23 @@ export class PostService {
   {
     let uri: string = `${this.baseURI}/random/${num}`;
     return this.http.get<ProductPost[]>(uri);
+  }
+
+  likePost(itemid: string, buyerid: string): Observable<ProductPost>
+  {
+    let uri: string = `${this.baseURI}/like`;
+    return this.http.patch<ProductPost>(uri, {
+      itemid: itemid,
+      buyerid: buyerid
+    });
+  }
+
+  unlikePost(itemid: string, buyerid: string): Observable<ProductPost>
+  {
+    let uri: string = `${this.baseURI}/unlike`;
+    return this.http.patch<ProductPost>(uri, {
+      itemid: itemid,
+      buyerid: buyerid
+    });
   }
 }

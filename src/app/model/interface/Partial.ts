@@ -33,3 +33,16 @@ export interface TinderUser
 {
   userid: string
 }
+
+export interface variation
+{
+  name: string,
+  options: string[],
+  images: string[],
+}
+
+export interface rating
+{
+  rating_star: number,
+  rating_count: number[],
+}

@@ -1,4 +1,4 @@
-import { Label, TinderUser } from "./Partial";
+import { Label, rating, TinderUser, variation } from "./Partial";
 
 export interface Variation
 {
@@ -28,14 +28,16 @@ export interface ProductPost
 {
   _id: string,
   shopid: string,
+  shopAccount: string,
   sp_itemid: number,
   sp_shopid: number,
   name: string,
+  seg_name: string,
   content: string,
   labels: Label[],
   feLabels: Label[],
   shipping_free: boolean,
-  variation: Variation[],
+  variation: variation[],
   models: {
     name: string,
     price: number,
@@ -47,17 +49,19 @@ export interface ProductPost
   price: number,
   priceMax: number,
   priceMin: number,
-  rating: PostRating,
-  likes: Like[],
+  rating: rating,
   discount: number,
   historicalSold: number,
   monthSold: number,
   stock: number,
-  shared: Share[],
+  likeCount: number,
+  shareCount: number,
+  tinderLikerCount: number,
+  tinderUnlikeCount: number,
+  tinderSuperlikeCount: number,
+
   createdAt: string,
-  updatedAt: string,
-  tinderLike: TinderUser[],
-  tinderDislike: TinderUser[]
+  updatedAt: string
 }
 
 
