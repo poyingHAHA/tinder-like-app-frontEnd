@@ -1,7 +1,7 @@
 import { BuyerService } from './../../service/buyer-service/buyer.service';
 import { TreemapService } from './../../service/treemap-service/treemap.service';
 import * as ProductPostModel from './../../model/interface/ProductPost';
-import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, debounceTime, first, Observable, forkJoin, switchMap, map, mergeMap, fromEvent, of, Observer } from 'rxjs';
+import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, debounceTime, first, Observable, forkJoin, switchMap, map, mergeMap, of, Observer, take, fromEvent } from 'rxjs';
 import { PostService } from './../../service/post-service/post.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListener, Type } from '@angular/core';
 import { BigPostsComponent } from 'src/app/share/post/big-posts/big-posts.component';
@@ -27,6 +27,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   isBigPost: boolean;
   isFiltered: boolean;
   startBigPost?: ProductPostModel.ProductPost;
+  searchState: "ready" | "autofill" | "result" = "ready";
 
   destroy$: Subject<any>;
   scroll$!: Observable<void>;
@@ -142,13 +143,24 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     // custom placeholder will block the focus event
     // so we use view child
     this.search.nativeElement.focus();
+    if(this.searchTxt==""){
+      this.searchState = "ready";
+    }
     this.isSearchMode = true;
   }
 
   trySearch(event: KeyboardEvent)
   {
     if(event.key=="Enter"){
-      alert("search");
+      //alert(this.searchTxt);
+      this.searchState = "result";
+    }
+  }
+
+  autoFill(event: KeyboardEvent)
+  {
+    if(event.key!="Enter"){
+      this.searchState = "autofill";
     }
   }
 

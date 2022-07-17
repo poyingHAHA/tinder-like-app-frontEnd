@@ -50,4 +50,10 @@ export class PostService {
       buyerid: buyerid
     });
   }
+
+  searchPost(keyword: string): Observable<ProductPost[]>
+  {
+    let uri: string = `${this.baseURI}/search/${keyword}`;
+    return this.http.get<ProductPost[]>(uri);
+  }
 }

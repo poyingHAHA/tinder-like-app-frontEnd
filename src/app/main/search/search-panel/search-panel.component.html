@@ -1,0 +1,32 @@
+<div class="my-container">
+  <div *ngIf="searchState=='ready'" class="search-content search-ready">
+    <div class="search-block history">
+      <div class="search-tag his-tag">History</div>
+      <div class="search-opt clear-his"><i class="fa-solid fa-trash"></i></div>
+      <div class="search-contents his-contents">
+        <div class="search-cont his-cont">高領</div>
+        <div class="search-cont his-cont">高領shirt</div>
+      </div>
+    </div>
+    <div class="search-block suggestion">
+      <div class="search-tag suggetion-tag">Suggestion</div>
+      <div class="search-opt reset-sugest"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+      <div class="search-contents sug-contents">
+        <div class="search-cont sug-cont">高領shirt</div>
+        <div class="search-cont sug-cont">高領</div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="searchState=='autofill'" class="search-content search-autofill">
+    <div class="autofill-item" *ngFor="let name of (autoFill$ | async)">
+      <i class="fa-solid fa-magnifying-glass"></i>{{ name }}
+    </div>
+  </div>
+  <div *ngIf="searchState=='result'" class="search-content search-result">
+    <div class="search-result-topbar">
+      <div class="srt-opt srt-item">Item</div>
+      <div class="srt-opt srt-account">Account</div>
+    </div>
+    <div class="search-result-content"></div>
+  </div>
+</div>

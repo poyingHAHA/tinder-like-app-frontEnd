@@ -105,27 +105,6 @@ input
   color: #49b0cd;
 }
 
-
-.search-block
-{
-  padding: 0 20px;
-  margin-top: 30px;
-}
-
-.search-opt
-{
-  text-align: end;
-}
-
-.search-cont
-{
-  display: inline-block;
-  border: 1px solid #49b0cd;
-  border-radius: 50px;
-  padding: 1px 10px;
-  margin: 0 5px;
-}
-
 .backBtn-container
 {
   display: flex;
