@@ -33,13 +33,13 @@
         [pagination]="true"
       >
         <ng-template
-          *ngFor="let i of [1,2]"
+          *ngFor="let i of [0,0]"
           swiperSlide
         >
           <div class="posts g-1 row">
-            <div *ngFor="let i of [0,1,2,3]" class="post col-6">
+            <div *ngFor="let post of (testPost$ | async)" class="post col-6">
               <app-share-share-post
-                [coverImg]="'assets/images/post'+i%4+'.png'"
+                [post]="post"
               ></app-share-share-post>
             </div>
           </div>

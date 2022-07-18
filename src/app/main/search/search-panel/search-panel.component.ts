@@ -1,7 +1,7 @@
 import { ProductPost } from 'src/app/model/interface/ProductPost';
 import { PostService } from './../../../service/post-service/post.service';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { BehaviorSubject, Observable, switchMap, of, takeWhile, Subject, takeUntil, repeatWhen, skip, map } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, of, takeWhile, Subject, takeUntil, repeatWhen, skip, map, pipe } from 'rxjs';
 
 interface searchFactor{
   key: string,
@@ -69,7 +69,11 @@ export class SearchPanelComponent implements OnInit {
           return of([]);
         }
       })
-    )
+    );
+
+    //filter first value
+    this.autoFillSubject.next("");
+    this.searchSubject.next({key: "", type: "search"});
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -84,7 +88,6 @@ export class SearchPanelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   searchItem(name: string)

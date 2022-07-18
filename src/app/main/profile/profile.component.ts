@@ -1,3 +1,5 @@
+import { PostService } from './../../service/post-service/post.service';
+import { ProductPost } from 'src/app/model/interface/ProductPost';
 import { environment } from 'src/environments/environment';
 import { ProfileLayoutService } from './../../service/layout-service/profile-layout.service';
 import { Buyer } from './../../model/interface/Buyer';
@@ -22,12 +24,15 @@ export class ProfileComponent implements OnInit {
   buyerPic$: Observable<string>;
   destroy$: Subject<any>;
 
+  testPost$: Observable<ProductPost[]>;
+
   //need to handle buyer and shop
 
   constructor(
     private _route: Router,
     private buyerService: BuyerService,
-    private profileLayoutService: ProfileLayoutService
+    private profileLayoutService: ProfileLayoutService,
+    private postService: PostService
   )
   {
    this.isSpandSettings = false;
@@ -35,6 +40,7 @@ export class ProfileComponent implements OnInit {
    this.destroy$ = new Subject<any>();
    this.buyer$ = this.buyerService.getBuyer();
    this.buyerPic$ = this.buyer$.pipe(mergeMap(b=>of(b.profilePic)));
+   this.testPost$ = postService.getProductPostsRandomly(4);
   }
 
   ngOnInit(): void {
@@ -60,6 +66,11 @@ export class ProfileComponent implements OnInit {
   collapseOptionContent(event: boolean)
   {
     this.isSpandOptionContent = event
+  }
+
+  counter(n: number)
+  {
+    return new Array(n);
   }
 
   ngOnDestroy(): void {

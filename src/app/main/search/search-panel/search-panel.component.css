@@ -75,11 +75,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  max-height: 92%;
 }
 .src-post
 {
   width: 50%;
-  aspect-ratio: 4/5.2;
+  aspect-ratio: 5/6.2;
   padding: 15px;
 }
 

@@ -4,7 +4,6 @@ import * as ProductPostModel from './../../model/interface/ProductPost';
 import { Subscription, tap, BehaviorSubject, Subject, takeUntil, filter, debounceTime, first, Observable, forkJoin, switchMap, map, mergeMap, of, Observer, take, fromEvent } from 'rxjs';
 import { PostService } from './../../service/post-service/post.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListener, Type } from '@angular/core';
-import { BigPostsComponent } from 'src/app/share/post/big-posts/big-posts.component';
 
 @Component({
   selector: 'app-search',
