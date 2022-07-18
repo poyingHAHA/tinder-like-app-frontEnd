@@ -48,7 +48,7 @@
 .search-result-topbar
 {
   width: 100%;
-  height: 10%;
+  height: 8%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -67,14 +67,21 @@
 }
 .srt-opt-active
 {
-  border-bottom: 1px solid #bbbbbb !important;
+  border-bottom: 3px solid #bbbbbb !important;
 }
 .search-result-content
 {
   width: 100%;
-  height: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-
+.src-post
+{
+  width: 50%;
+  aspect-ratio: 4/5.2;
+  padding: 15px;
+}
 
 .search-block
 {

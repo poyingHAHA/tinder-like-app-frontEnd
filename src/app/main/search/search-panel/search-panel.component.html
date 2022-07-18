@@ -18,15 +18,21 @@
     </div>
   </div>
   <div *ngIf="searchState=='autofill'" class="search-content search-autofill">
-    <div class="autofill-item" *ngFor="let name of (autoFill$ | async)">
+    <div class="autofill-item" *ngFor="let name of (autoFill$ | async)" (click)="searchItem(name)">
       <i class="fa-solid fa-magnifying-glass"></i>{{ name }}
     </div>
   </div>
   <div *ngIf="searchState=='result'" class="search-content search-result">
     <div class="search-result-topbar">
-      <div class="srt-opt srt-item">Item</div>
-      <div class="srt-opt srt-account">Account</div>
+      <div [ngClass]="activeBtn['item']?'srt-opt-active':''" class="srt-opt srt-item" (click)="changeMode('item')">Item</div>
+      <div [ngClass]="activeBtn['account']?'srt-opt-active':''" class="srt-opt srt-account" (click)="changeMode('account')">Account</div>
     </div>
-    <div class="search-result-content"></div>
+    <div class="search-result-content">
+      <div class="src-post" *ngFor="let post of (search$|async)">
+        <app-share-share-post
+          [post]="post"
+        ></app-share-share-post>
+      </div>
+    </div>
   </div>
 </div>

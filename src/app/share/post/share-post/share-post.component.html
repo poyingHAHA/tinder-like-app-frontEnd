@@ -3,13 +3,15 @@
   <div class="price-tag">NT 168</div>
   <div
     class="coverimg"
-    [ngStyle]="{'background-image': 'url('+cover+')'}"
+    [ngStyle]="{
+      'background-image': 'url('+cover+')'
+    }"
   ></div>
   <div class="info">
-    <div class="text">聽覺和視覺效果一流...</div>
+    <div class="text">{{post?.content}}</div>
     <div class="like">
       <i nz-icon nzType="heart" nzTheme="outline"></i>
-      <div class="like-num">300</div>
+      <div class="like-num">{{post?.likeCount}}</div>
     </div>
   </div>
 </div>

@@ -135,6 +135,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   clearTxt()
   {
     this.searchTxt = "";
+    this.searchState = 'ready';
   }
 
   changeSearchMode()
@@ -152,7 +153,6 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   trySearch(event: KeyboardEvent)
   {
     if(event.key=="Enter"){
-      //alert(this.searchTxt);
       this.searchState = "result";
     }
   }
@@ -161,6 +161,9 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   {
     if(event.key!="Enter"){
       this.searchState = "autofill";
+      if(this.searchTxt=="" || this.searchTxt.trim()==""){
+        this.searchState = 'ready';
+      }
     }
   }
 

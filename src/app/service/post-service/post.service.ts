@@ -53,7 +53,17 @@ export class PostService {
 
   searchPost(keyword: string): Observable<ProductPost[]>
   {
-    let uri: string = `${this.baseURI}/search/${keyword}`;
-    return this.http.get<ProductPost[]>(uri);
+    let uri: string = `${this.baseURI}/search`;
+    return this.http.post<ProductPost[]>(uri, {
+      keyword: keyword
+    });
+  }
+
+  getSearchPost(keyword: string): Observable<ProductPost[]>
+  {
+    let uri: string = `${this.baseURI}/getSearch`;
+    return this.http.post<ProductPost[]>(uri, {
+      keyword: keyword
+    });
   }
 }

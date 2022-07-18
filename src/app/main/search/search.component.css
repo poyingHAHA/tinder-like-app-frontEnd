@@ -99,7 +99,7 @@ input
   top: 60px;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 8vh;
   background-color: #ffffff;
   z-index: 4;
   color: #49b0cd;
