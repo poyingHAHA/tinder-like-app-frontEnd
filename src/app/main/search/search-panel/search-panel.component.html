@@ -34,7 +34,7 @@
       <div
         class="src-post"
         *ngFor="let post of searchResults"
-        (click)="openPost()"
+        (click)="openPost(post)"
       >
         <app-share-share-post
           [post]="post"
@@ -50,4 +50,16 @@
       ></app-entire-loader-roller>
     </ng-template>
   </div>
+</div>
+
+<app-entire-loader-roller [isLoading]="isOpening"></app-entire-loader-roller>
+<div class="big-post" [ngClass]="isBigPost?'big-post-active':''">
+  <div class="bp-back">
+    <div class="bp-back-btn" (click)="backBigPost()"><i class="fa-solid fa-arrow-left"></i></div>
+  </div>
+  <!-- only show one post -->
+  <app-share-big-post
+    *ngIf="openedPost"
+    [post]="openedPost"
+  ></app-share-big-post>
 </div>

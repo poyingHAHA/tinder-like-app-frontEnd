@@ -166,6 +166,11 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  changeStateFromPanel(event: "ready"|"autofill"|"result")
+  {
+    this.searchState = event;
+  }
+
   clickBackBtn()
   {
     if(this.isSearchMode){

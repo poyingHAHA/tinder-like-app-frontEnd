@@ -67,6 +67,7 @@
     <app-search-panel
       [searchState]="searchState"
       [keyword]="searchTxt"
+      (searchItem)="changeStateFromPanel($event)"
     ></app-search-panel>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { ProductPost } from 'src/app/model/interface/ProductPost';
 import { PostService } from './../../../service/post-service/post.service';
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { BehaviorSubject, Observable, switchMap, of, takeWhile, Subject, takeUntil, repeatWhen, skip, map, pipe } from 'rxjs';
 
 interface searchFactor{
@@ -16,6 +16,11 @@ interface searchFactor{
 export class SearchPanelComponent implements OnInit {
   @Input('searchState') searchState: "ready" | "autofill" | "result";
   @Input('keyword') keyword: string;
+  @Output('searchItem') changeState: EventEmitter<"ready"|"autofill"|"result">;
+
+  isOpening: boolean;
+  isBigPost: boolean;
+  openedPost?: ProductPost;
 
   activeBtn: {[key: string]: boolean} = {
     'item': true,
@@ -71,6 +76,10 @@ export class SearchPanelComponent implements OnInit {
       })
     );
 
+    this.isOpening = false;
+    this.isBigPost = false;
+
+    this.changeState = new EventEmitter<"ready"|"autofill"|"result">();
     //filter first value
     this.autoFillSubject.next("");
     this.searchSubject.next({key: "", type: "search"});
@@ -93,6 +102,7 @@ export class SearchPanelComponent implements OnInit {
   searchItem(name: string)
   {
     this.searchState = 'result';
+    this.changeState.emit(this.searchState);
     this.searchSubject.next({
       key: name,
       type: "getSearch"
@@ -116,9 +126,19 @@ export class SearchPanelComponent implements OnInit {
     }
   }
 
-  openPost()
+  openPost(post: ProductPost)
   {
+    this.isOpening = true;
+    this.openedPost = post;
 
+    setTimeout(() => {
+      this.isBigPost = true;
+      this.isOpening = false;
+    }, 1000);
+  }
+  backBigPost()
+  {
+    this.isBigPost = false;
   }
 
   ngOnDestroy(): void {
