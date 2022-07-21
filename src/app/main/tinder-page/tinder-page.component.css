@@ -293,3 +293,14 @@
   top: 10%;
   bottom: calc( 8vh + 20px );
 }
+
+.logo
+{
+  height: 100%;
+  aspect-ratio: 1.5/1;
+  background-image: url('/assets/images/Logo.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: auto;
+}
