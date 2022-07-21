@@ -156,13 +156,13 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  autoFill(event: KeyboardEvent)
-  {
-    if(event.key!="Enter"){
-      this.searchState = "autofill";
-      if(this.searchTxt=="" || this.searchTxt.trim()==""){
-        this.searchState = 'ready';
-      }
+  //ngModelChange
+  //for trigger autofill or it will ignore first chinese input
+  autoFill(e: string){
+    this.searchTxt = e;
+    this.searchState = "autofill";
+    if(this.searchTxt=="" || this.searchTxt.trim()==""){
+      this.searchState = 'ready';
     }
   }
 

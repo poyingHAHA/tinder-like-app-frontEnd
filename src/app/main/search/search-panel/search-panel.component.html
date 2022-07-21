@@ -27,12 +27,27 @@
       <div [ngClass]="activeBtn['item']?'srt-opt-active':''" class="srt-opt srt-item" (click)="changeMode('item')">Item</div>
       <div [ngClass]="activeBtn['account']?'srt-opt-active':''" class="srt-opt srt-account" (click)="changeMode('account')">Account</div>
     </div>
-    <div class="search-result-content">
-      <div class="src-post" *ngFor="let post of (search$|async)">
+    <div
+      *ngIf="(search$|async) as searchResults; else loading"
+      class="search-result-content"
+    >
+      <div
+        class="src-post"
+        *ngFor="let post of searchResults"
+        (click)="openPost()"
+      >
         <app-share-share-post
           [post]="post"
         ></app-share-share-post>
       </div>
     </div>
+    <ng-template
+      #loading
+      class="loading"
+    >
+      <app-entire-loader-roller
+        [isLoading]="true"
+      ></app-entire-loader-roller>
+    </ng-template>
   </div>
 </div>
