@@ -2,28 +2,22 @@ import { BuyerFollow, ShopFollow } from "./Partial"
 
 export interface Shop
 {
-  sp_shopid: number,
-  role: string,
-  itemcount: number,
-  account: string,
-  name: string,
-  password: string,
+  buyerid: string,
+  createdAt: string,
+  email: string,
+  followerCount: number,
+  likeCount: number,
   profilePic: string,
-  selfIntro: string,
-  follower:{
-    buyer: BuyerFollow[],
-    shop: ShopFollow[],
-    count: number
-  },
-  following: {
-    buyer: BuyerFollow[],
-    shop: ShopFollow[],
-    count: number
-  },
-  rating:{
-    ratingStar: number,
+  public: boolean,
+  rating: {
     ratingBad: number,
+    ratingGood: number,
     ratingNormal: number,
-    ratingGood: number
+    ratingStar: number
   }
+  role: string,
+  selfIntro: string,
+  shopAccount: string,
+  sp_shopid: string,
+  updatedAt: string
 }

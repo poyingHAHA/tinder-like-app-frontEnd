@@ -128,6 +128,19 @@
   padding-bottom: 100%;
 }
 
+.description-wrapper
+{
+  overflow-y: scroll;
+}
+
+.prod-name
+{
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-weight: 900;
+  font-style: italic;
+}
+
 .description
 {
   font-size: 3.5vmin;

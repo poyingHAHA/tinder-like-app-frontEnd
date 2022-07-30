@@ -35,22 +35,26 @@
   </div>
 
   <div class="info-group">
-    <div class="user-info">
+    <div class="user-info" *ngIf="(shop$|async) as shop">
       <div class="user-pic"
         [ngStyle]="{
-          'background-image': 'url('+imgBase+shop?.profilePic+')'
+          'background-image': 'url('+imgBase+shop.profilePic+')'
         }"
       ></div>
-      <div class="user-name">{{ shop?.name }}</div>
+      <div class="user-name">{{ shop.shopAccount }}</div>
     </div>
-    <div
-      appMoreContent
-      class="description"
-      [text]="post.content"
-      (moreText)="moreText($event)"
-    >
-      {{ post.content.substring(0,20) }}
+    <div class="description-wrapper">
+      <div class="prod-name">{{ post.name }}</div>
+      <div
+        appMoreContent
+        class="description"
+        [text]="post.content"
+        (moreText)="moreText($event)"
+      >
+        {{ post.content.substring(0,20) }}
+      </div>
     </div>
+
     <div class="tags">
       <div *ngFor="let label of post.labels" class="tag">
         #{{ label.display_name }}

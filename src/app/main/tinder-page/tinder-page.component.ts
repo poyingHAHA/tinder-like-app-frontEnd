@@ -1,3 +1,5 @@
+import { Utility } from './../../utility';
+import { TreemapService } from './../../service/treemap-service/treemap.service';
 import { BuyerService } from './../../service/buyer-service/buyer.service';
 import { TinderService } from './../../service/tinder-service/tinder.service';
 import { ProductPost } from './../../model/interface/ProductPost';
@@ -6,7 +8,7 @@ import { tinderEvent } from './../../service/layout-service/tinder-layout.servic
 import { TinderLayoutService } from '../../service/layout-service/tinder-layout.service';
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import 'hammerjs';
-import { Subscription, Subject, Observable, takeUntil, filter, takeWhile, BehaviorSubject, first, repeat } from 'rxjs';
+import { Subscription, Subject, Observable, takeUntil, filter, takeWhile, BehaviorSubject, first, repeat, mergeMap, forkJoin, of } from 'rxjs';
 
 interface swipeCard{
   post: ProductPost,
@@ -18,7 +20,7 @@ interface swipeCard{
   templateUrl: './tinder-page.component.html',
   styleUrls: ['./tinder-page.component.css']
 })
-export class TinderPageComponent implements OnInit, OnDestroy {
+export class TinderPageComponent extends Utility implements OnInit, OnDestroy {
 
   //place in card info
   //add-> unshift往頭加(queue)
@@ -52,8 +54,10 @@ export class TinderPageComponent implements OnInit, OnDestroy {
     private tinderLayoutService: TinderLayoutService,
     private postService: PostService,
     private tinderService: TinderService,
-    private buyerService: BuyerService
+    private buyerService: BuyerService,
+    private treemapService: TreemapService
   ) {
+    super();
     this.cardsInfo = [];
     this.top = 0;
     this.actionSub$ = new Subject<tinderEvent>();
@@ -69,21 +73,37 @@ export class TinderPageComponent implements OnInit, OnDestroy {
     }
 
     //first init top=remain=0
+    //4:6=random:recommend, all load card are 10 pieces
     this.loadMoreSub$
     .pipe(takeUntil(this.destroy$))
     .subscribe(remain=>{
       if(remain<=4){
         let takedPices = this.cardsInfo.length-(this.top+1); //之前拿過的張數
-        let loadPost = this.postService.getProductPostsRandomly(10)
+        let loadPost =
+        forkJoin({
+          rec: this.treemapService.getTreemapRecommendPost(),
+          rand: this.postService.getProductPostsRandomly(10)
+        })
         .subscribe(posts=>{
           if(posts!=null)
           {
             this.isLoading = false;
           }
-          this.cardsInfo = posts.concat(this.cardsInfo);
+
+          let newCards = [];
+          if(posts.rec.length>=10){
+            newCards = Utility.selectFromArrayRandomly<ProductPost>(posts.rec, 6).concat(Utility.selectFromArrayRandomly<ProductPost>(posts.rand, 4));
+            newCards = Utility.selectFromArrayRandomly<ProductPost>(newCards, 10); //random order
+          }else{
+            newCards = posts.rand;
+          }
+
+          this.cardsInfo = newCards.concat(this.cardsInfo);
+
           this.top = remain===0?this.cardsInfo.length-1:this.cardsInfo.length-takedPices-1;
           loadPost.unsubscribe();
         });
+
       }
     });
 

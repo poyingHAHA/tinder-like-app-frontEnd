@@ -30,7 +30,7 @@ export class BigPostComponent implements OnInit, OnDestroy {
   likeCountSubject: BehaviorSubject<any>;
 
   imgBase: string = environment.imgBase;
-  shop?: Shop;
+  shop$: Observable<Shop>;
 
   isImgLoaded: boolean;
   isMoreText: boolean;
@@ -47,16 +47,11 @@ export class BigPostComponent implements OnInit, OnDestroy {
     this.picLoaded = 0;
     this.likeCountSubject = new BehaviorSubject<any>(true);
     this.likeCount$ = new Observable<number>();
+    this.shop$ = new Observable<Shop>();
   }
 
   ngOnInit(): void {
-    this.shopService.getShop(this.post.shopid)
-    .pipe(
-      takeUntil(this.destroy$)
-    )
-    .subscribe(shop=>{
-      this.shop = shop;
-    });
+    this.shop$ = this.shopService.getShop(this.post.shopid);
 
     this.likeCount$ = this.likeCountSubject.pipe(
       switchMapTo(
