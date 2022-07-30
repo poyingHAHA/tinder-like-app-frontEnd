@@ -7,7 +7,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  position: relative;
 }
 
 .skeleton
@@ -273,4 +272,15 @@
   width: 60%;
   top: calc(20vw + 15% + 30px);
   left: 20px;
+}
+
+.action-panel
+{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+  height: 60%;
 }

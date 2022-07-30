@@ -13,6 +13,7 @@ export class Utility
       //0<= rand < 1 -> 0<= rand*len < len
       let item = arr[Math.floor(Math.random()*arr.length)];
       if(!seen.includes(item)){
+        seen.push(item);
         res.push(item);
         counter++;
       }

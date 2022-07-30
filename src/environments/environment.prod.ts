@@ -8,7 +8,8 @@ export const environment = {
     shop: "shop",
     items: "items",
     tinder: "tinder",
-    treemap: "treemap"
+    treemap: "treemap",
+    comment: "comment"
   },
   imgBase: "https://cf.shopee.tw/file/",
   myImgURL: "http://140.119.19.32/images/",

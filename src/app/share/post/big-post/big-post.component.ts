@@ -1,3 +1,5 @@
+import { CommentService } from './../../../service/comment-service/comment.service';
+import { ProductComment } from './../../../model/DTO/ProductComment';
 import { PostService } from './../../../service/post-service/post.service';
 import { BuyerService } from './../../../service/buyer-service/buyer.service';
 import { NzCarouselComponent } from 'ng-zorro-antd/carousel';
@@ -30,7 +32,9 @@ export class BigPostComponent implements OnInit, OnDestroy {
   likeCountSubject: BehaviorSubject<any>;
 
   imgBase: string = environment.imgBase;
+
   shop$: Observable<Shop>;
+  getComment$: Observable<ProductComment[]>;
 
   isImgLoaded: boolean;
   isMoreText: boolean;
@@ -39,7 +43,8 @@ export class BigPostComponent implements OnInit, OnDestroy {
   constructor(
     private shopService: ShopService,
     private buyerService: BuyerService,
-    private postService: PostService
+    private postService: PostService,
+    private commentService: CommentService
   ) {
     this.destroy$ = new Subject();
     this.isImgLoaded = false;
@@ -48,6 +53,7 @@ export class BigPostComponent implements OnInit, OnDestroy {
     this.likeCountSubject = new BehaviorSubject<any>(true);
     this.likeCount$ = new Observable<number>();
     this.shop$ = new Observable<Shop>();
+    this.getComment$ = new Observable<ProductComment[]>();
   }
 
   ngOnInit(): void {
@@ -56,11 +62,14 @@ export class BigPostComponent implements OnInit, OnDestroy {
     this.likeCount$ = this.likeCountSubject.pipe(
       switchMapTo(
         this.postService.getSpecificProductPost(this.post._id).pipe(
-        takeUntil(this.destroy$),
-        repeatWhen(this.likeCountSubject.asObservable),
-        map(post=>post.likeCount),)
+          takeUntil(this.destroy$),
+          repeatWhen(this.likeCountSubject.asObservable),
+          map(post=>post.likeCount)
+        )
       )
     );
+
+    this.getComment$ = this.commentService.getProductComment(this.post._id);
 
     this.buyerService.getBuyer().pipe(
       takeUntil(this.destroy$),
@@ -118,6 +127,11 @@ export class BigPostComponent implements OnInit, OnDestroy {
     action$.subscribe(res=>{
       this.likeCountSubject.next(true);
     });
+  }
+
+  closeActionPanel(type: string)
+  {
+    this.iconState[type] = false;
   }
 
   ngOnDestroy(): void {

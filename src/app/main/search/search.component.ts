@@ -1,3 +1,4 @@
+import { Utility } from './../../utility';
 import { BuyerService } from './../../service/buyer-service/buyer.service';
 import { TreemapService } from './../../service/treemap-service/treemap.service';
 import * as ProductPostModel from './../../model/interface/ProductPost';
@@ -10,7 +11,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, Hos
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SearchComponent extends Utility implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("search") search!: ElementRef;
   @ViewChild("container") container!: ElementRef;
 
@@ -29,6 +30,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
   searchState: "ready" | "autofill" | "result" = "ready";
 
   destroy$: Subject<any>;
+
   scroll$!: Observable<void>;
   scrollSub!: Subscription;
   scrollObserver: Observer<void>;
@@ -43,6 +45,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     private treemapService: TreemapService,
     private buyerService: BuyerService
   ) {
+    super();
     this.isLoading = true;
     this.searchTxt = "";
     this.isSearchMode = false;
@@ -60,10 +63,10 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
       next: ()=>{
         this.cleanTagsAndKeepFirst();
         this.loadMoreTreeMaps(36);
-        let randTreemaps: ProductPostModel.ProductPost[][] = this.selectFromArrayRandomly<ProductPostModel.ProductPost[]>(this.treemaps, 3);
+        let randTreemaps: ProductPostModel.ProductPost[][] = Utility.selectFromArrayRandomly<ProductPostModel.ProductPost[]>(this.treemaps, 3);
         let randPosts: ProductPostModel.ProductPost[] = [];
         randTreemaps.forEach(treemap=>{
-          randPosts.push(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(treemap, 1)[0]);
+          randPosts.push(Utility.selectFromArrayRandomly<ProductPostModel.ProductPost>(treemap, 1)[0]);
         });
         this.generateAndAddTags(randPosts);
       },
@@ -98,7 +101,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       ]
 
-      this.generateAndAddTags(this.selectFromArrayRandomly(posts, 3));
+      this.generateAndAddTags(Utility.selectFromArrayRandomly(posts, 3));
       this.addTreeMaps(this.slicePosts(posts));
       this.setDisplayTreeMaps(this.flatten2DArray(this.treemaps));
 
@@ -125,7 +128,7 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
     .subscribe(posts=>{
       morePosts = morePosts.concat(posts.random);
       //may not have so many recommend post because the post been shown will be penaltied
-      morePosts = morePosts.concat(this.selectFromArrayRandomly<ProductPostModel.ProductPost>(posts.recommend, Math.floor(posts.recommend.length*0.6)));
+      morePosts = morePosts.concat(Utility.selectFromArrayRandomly<ProductPostModel.ProductPost>(posts.recommend, Math.floor(posts.recommend.length*0.6)));
       this.addTreeMaps(this.slicePosts(morePosts));
       this.setDisplayTreeMaps(this.flatten2DArray(this.treemaps));
     });
@@ -209,20 +212,6 @@ export class SearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.scrollSub = this.scroll$.subscribe(this.scrollObserver);
 
-  }
-
-  selectFromArrayRandomly<T>(arr: any[], num: number): T[]
-  {
-    let res: T[] = [];
-
-    for(let i=0; i<num; i++)
-    {
-      //0<= rand < 1 -> 0<= rand*len < len
-      let item = arr[Math.floor(Math.random()*arr.length)];
-      res.push(item);
-    }
-
-    return res;
   }
 
   slicePosts(posts: ProductPostModel.ProductPost[]): ProductPostModel.ProductPost[][]

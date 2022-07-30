@@ -13,7 +13,7 @@
     </div>
     <div class="option comments">
       <i class="fa-solid fa-comment" (click)="changeMode('comment')"></i>
-      <div class="num">27</div>
+      <div class="num">{{ (getComment$ | async)?.length }}</div>
     </div>
     <div class="option shop">
       <i class="fa-solid fa-bag-shopping" (click)="changeMode('shop')"></i>
@@ -63,6 +63,19 @@
     <div class="time">
       {{ post.createdAt.substring(0, 10) }}
     </div>
+  </div>
+
+  <div
+    class="action-panel"
+    *ngIf="iconState['comment'] || iconState['shop']"
+    [ngStyle]="{
+      'height': iconState['comment'] ? '70%' : iconState['shop'] ? '50%' : ''
+    }"
+  >
+    <app-action-panel
+      [actionType]="iconState['comment']?'comment':iconState['shop']?'shop':''"
+      (close)="closeActionPanel($event)"
+    ></app-action-panel>
   </div>
 </div>
 <div *ngIf="!isImgLoaded" class="skeleton">
