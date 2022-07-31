@@ -1,0 +1,17 @@
+<div class="my-container">
+  <div class="com-sha-wrapper">
+    <div (click)="changeMode('comment')" [ngClass]="activeOpt['comment']?'opt-active':''" class="opt com"><i class="fa-solid fa-comment"></i></div>
+    <div  (click)="changeMode('shared')" [ngClass]="activeOpt['shared']?'opt-active':''" class="opt sha"><i class="fa-solid fa-share-from-square"></i></div>
+  </div>
+
+  <div class="content">
+    <app-comment
+      *ngIf="activeOpt['comment']"
+      [postId]="postId"
+    ></app-comment>
+    <app-shared
+      *ngIf="activeOpt['shared']"
+    >
+    </app-shared>
+  </div>
+</div>

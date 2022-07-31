@@ -13,7 +13,7 @@
     <div class="hs" *ngFor="let i of [1,2]"></div>
   </div>
 
-  <div class="card-content">
+  <div #cardcontent class="card-content">
       <div *ngFor="let post of cardsInfo">
         <app-tinder-card
           [post]="post"

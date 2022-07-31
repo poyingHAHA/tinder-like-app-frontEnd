@@ -34,7 +34,7 @@ export class BigPostComponent implements OnInit, OnDestroy {
   imgBase: string = environment.imgBase;
 
   shop$: Observable<Shop>;
-  getComment$: Observable<ProductComment[]>;
+  getCommentCount$: Observable<number>;
 
   isImgLoaded: boolean;
   isMoreText: boolean;
@@ -53,7 +53,7 @@ export class BigPostComponent implements OnInit, OnDestroy {
     this.likeCountSubject = new BehaviorSubject<any>(true);
     this.likeCount$ = new Observable<number>();
     this.shop$ = new Observable<Shop>();
-    this.getComment$ = new Observable<ProductComment[]>();
+    this.getCommentCount$ = new Observable<number>();
   }
 
   ngOnInit(): void {
@@ -69,7 +69,10 @@ export class BigPostComponent implements OnInit, OnDestroy {
       )
     );
 
-    this.getComment$ = this.commentService.getProductComment(this.post._id);
+    this.getCommentCount$ = this.commentService.getProductComment(this.post._id)
+    .pipe(
+      map(coms=>coms.length)
+    );
 
     this.buyerService.getBuyer().pipe(
       takeUntil(this.destroy$),

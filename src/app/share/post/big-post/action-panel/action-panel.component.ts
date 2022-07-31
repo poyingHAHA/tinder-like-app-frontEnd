@@ -9,6 +9,7 @@ export class ActionPanelComponent implements OnInit {
 
   @Output('close') closeAction: EventEmitter<string>;
   @Input('actionType') actionType: "comment" | "shop" | '' = "";
+  @Input('postId') postId: string = "";
 
   constructor() {
     this.closeAction = new EventEmitter<string>();

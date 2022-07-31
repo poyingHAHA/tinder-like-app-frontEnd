@@ -1,6 +1,6 @@
 import { PatchBuyer } from './../../model/DTO/PatchBuyer';
 import { Buyer } from './../../model/interface/Buyer';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, first, tap, map, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -37,16 +37,21 @@ export class BuyerService {
     return this.http.post<any>(`${this.baseURI}/profilePic`, formData);
   }
 
-  setBuyerId(): void
+  setBuyerId(): Observable<boolean>
   {
     if(!this.isHasBuyerId()){
-      let sub = this.doGetBuyerId().subscribe(res=>{
-        this.buyerId = res.data?(<string>res.data):"";
-        this.storeBuyerId();
-        sub.unsubscribe();
-      });
+      return this.doGetBuyerId()
+      .pipe(
+        first(),
+        tap(res=>{
+          this.buyerId = res.data?(<string>res.data):"";
+          this.storeBuyerId();
+        }),
+        map(res=>true)
+      )
     }
-    return;
+
+    return of(true);
   }
 
   doGetBuyerId(): Observable<Response>

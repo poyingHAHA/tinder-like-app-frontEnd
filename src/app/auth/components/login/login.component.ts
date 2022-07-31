@@ -1,3 +1,4 @@
+import { BuyerService } from './../../../service/buyer-service/buyer.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -21,7 +22,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password') }
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private buyerService: BuyerService
+  ) {
     this.loginSubscription = new Subscription();
     this.isSeePassword = false;
   }
@@ -37,7 +42,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     .subscribe(success=>{
       if(success){
         console.log("OK");
-        this.router.navigate(['/main']);
+
+        // some actions after logined need buyerid
+        if(!this.buyerService.isHasBuyerId()){
+          this.buyerService.setBuyerId().subscribe(suc=>{
+            if(suc){
+              this.router.navigate(['/main']);
+            }
+          });
+        }
+
       }else{
         //pop out error
         console.log("No");

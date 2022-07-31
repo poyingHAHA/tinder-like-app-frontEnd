@@ -12,10 +12,11 @@ import { SharePostComponent } from './post/share-post/share-post.component';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { BigPostsComponent } from './post/big-posts/big-posts.component';
 import { SwiperModule } from 'swiper/angular';
-import { CommentComponent } from './post/big-post/comment/comment.component';
 import { ActionPanelComponent } from './post/big-post/action-panel/action-panel.component';
-import { SharedComponent } from './post/big-post/shared/shared.component';
-import { BuyingInfoComponent } from './post/big-post/buying-info/buying-info.component';
+import { BuyingInfoComponent } from './post/big-post/action-panel/buying-info/buying-info.component';
+import { CommentComponent } from './post/big-post/action-panel/comment-panel/comment/comment.component';
+import { CommentPanelComponent } from './post/big-post/action-panel/comment-panel/comment-panel.component';
+import { SharedComponent } from './post/big-post/action-panel/comment-panel/shared/shared.component';
 
 const exportComponents:any[] = [
   PostComponent,
@@ -23,7 +24,7 @@ const exportComponents:any[] = [
   SharePostComponent,
   LoaderSpinerComponent,
   EntireLoaderRollerComponent,
-  BigPostsComponent
+  BigPostsComponent,
 ];
 const exportModules:any[] = [
   FormsModule,
@@ -45,10 +46,11 @@ const exportDirectives: any[]=[
     MoreContentDirective,
     EntireLoaderRollerComponent,
     BigPostsComponent,
-    CommentComponent,
     ActionPanelComponent,
+    BuyingInfoComponent,
+    CommentPanelComponent,
     SharedComponent,
-    BuyingInfoComponent
+    CommentComponent
   ],
   imports: [
     CommonModule,

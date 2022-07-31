@@ -84,12 +84,13 @@ export class TinderCardComponent implements OnInit, OnDestroy, AfterViewInit, On
     this.y = this.initY;
     this.lastX = this.x;
     this.lastY = this.y;
-    this.statusHeight = '8%'; //8% of th card
+    this.statusHeight = '8%'; //8% of th card, in product mode it will ignore checked error
     this.superDetecterOriginalBottom = this.statusHeight;
     this.superDetecterBottom = this.statusHeight;
   }
 
   ngOnInit(): void {
+
   }
 
   ngAfterViewInit(): void {

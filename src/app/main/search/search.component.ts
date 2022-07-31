@@ -193,9 +193,6 @@ export class SearchComponent extends Utility implements OnInit, AfterViewInit, O
   }
 
   ngOnInit(): void {
-    if(!this.buyerService.isHasBuyerId()){
-      this.buyerService.setBuyerId();
-    }
   }
 
   ngAfterViewInit(): void {

@@ -6,7 +6,7 @@ import { ProductPost } from './../../model/interface/ProductPost';
 import { PostService } from './../../service/post-service/post.service';
 import { tinderEvent } from './../../service/layout-service/tinder-layout.service';
 import { TinderLayoutService } from '../../service/layout-service/tinder-layout.service';
-import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import 'hammerjs';
 import { Subscription, Subject, Observable, takeUntil, filter, takeWhile, BehaviorSubject, first, repeat, mergeMap, forkJoin, of } from 'rxjs';
 
@@ -21,7 +21,6 @@ interface swipeCard{
   styleUrls: ['./tinder-page.component.css']
 })
 export class TinderPageComponent extends Utility implements OnInit, OnDestroy {
-
   //place in card info
   //add-> unshift往頭加(queue)
   cardsInfo: ProductPost[];
@@ -66,12 +65,6 @@ export class TinderPageComponent extends Utility implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-    //need buyer id
-    if(!this.buyerService.isHasBuyerId()){
-      this.buyerService.setBuyerId();
-    }
-
     //first init top=remain=0
     //4:6=random:recommend, all load card are 10 pieces
     this.loadMoreSub$

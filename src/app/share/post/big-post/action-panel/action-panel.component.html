@@ -3,8 +3,10 @@
     <div class="close" (click)="close()"><i class="fa-solid fa-xmark"></i></div>
   </div>
   <div class="content">
-    <app-comment *ngIf="actionType=='comment'"></app-comment>
-    <app-shared *ngIf="false"></app-shared>
+    <app-comment-panel
+      *ngIf="actionType=='comment'"
+      [postId]="postId"
+    ></app-comment-panel>
     <app-buying-info *ngIf="actionType=='shop'"></app-buying-info>
   </div>
 </div>

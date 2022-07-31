@@ -1,0 +1,8 @@
+<div *ngIf="(getComment$ | async) as comments" class="my-container">
+  <div class="com-count">{{ comments.length+" comments" }}</div>
+  <div class="comments"></div>
+  <div class="comment-input">
+    <input type="text" [(ngModel)]="sendText">
+    <div class="send" (click)="send()"><i class="fa-solid fa-paper-plane"></i></div>
+  </div>
+</div>
