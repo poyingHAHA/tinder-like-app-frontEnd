@@ -12,6 +12,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { OptionContentComponent } from './option-content/option-content.component';
 import { EditProfileComponent } from './option-content/edit-profile/edit-profile.component';
 import { EditStatusComponent } from './option-content/edit-profile/edit-status/edit-status.component';
+import { SharePostFormComponent } from './option-content/share-post-form/share-post-form.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { EditStatusComponent } from './option-content/edit-profile/edit-status/e
     SettingsComponent,
     OptionContentComponent,
     EditProfileComponent,
-    EditStatusComponent
+    EditStatusComponent,
+    SharePostFormComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +31,8 @@ import { EditStatusComponent } from './option-content/edit-profile/edit-status/e
     ShareModule,
     SwiperModule,
     NzModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzCardModule
   ]
 })
 export class ProfileModule { }

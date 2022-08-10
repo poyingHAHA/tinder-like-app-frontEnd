@@ -47,10 +47,15 @@ export class ProfileComponent implements OnInit {
     this.profileLayoutService.getOption$()
     .pipe(takeUntil(this.destroy$))
     .subscribe(type=>{
+      console.log(type);
       if(type != ""){
         this.isSpandOptionContent = true;
       }
     })
+    // TODO 測試等等刪
+    setTimeout(() => {
+      this.profileLayoutService.setOption('share-post-form');
+    }, 100)
   }
 
   spandSetting()
@@ -71,6 +76,12 @@ export class ProfileComponent implements OnInit {
   counter(n: number)
   {
     return new Array(n);
+  }
+
+  //a big component changes its content when different option activated
+  changeOption(type: string): void
+  {
+    this.profileLayoutService.setOption(type);
   }
 
   ngOnDestroy(): void {

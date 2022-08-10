@@ -17,7 +17,6 @@ import { BuyingInfoComponent } from './post/big-post/action-panel/buying-info/bu
 import { CommentComponent } from './post/big-post/action-panel/comment-panel/comment/comment.component';
 import { CommentPanelComponent } from './post/big-post/action-panel/comment-panel/comment-panel.component';
 import { SharedComponent } from './post/big-post/action-panel/comment-panel/shared/shared.component';
-import { PostFormComponent } from './post-form/post-form.component';
 
 const exportComponents:any[] = [
   PostComponent,
@@ -51,8 +50,7 @@ const exportDirectives: any[]=[
     BuyingInfoComponent,
     CommentPanelComponent,
     SharedComponent,
-    CommentComponent,
-    PostFormComponent
+    CommentComponent
   ],
   imports: [
     CommonModule,
