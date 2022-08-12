@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ProfileLayoutService } from './../../../service/layout-service/profile-layout.service';
 import { Component, Input, OnInit, OnChanges, SimpleChanges, ViewChild, ViewContainerRef, ComponentFactoryResolver, Type, Output, EventEmitter } from '@angular/core';
 import { SharePostFormComponent } from './share-post-form/share-post-form.component';
+import { PostFormComponent } from './share-post-form/post-form/post-form.component';
 
 @Component({
   selector: 'app-option-content',
@@ -19,7 +20,8 @@ export class OptionContentComponent implements OnInit{
   //pass a class as an parameter to the component factory
   typeDict: {[type: string]: Type<any>} = {
     "edit-profile": EditProfileComponent,
-    "share-post-form": SharePostFormComponent
+    "share-post-form": SharePostFormComponent,
+    "post-form": PostFormComponent
   }
 
   //type info icon

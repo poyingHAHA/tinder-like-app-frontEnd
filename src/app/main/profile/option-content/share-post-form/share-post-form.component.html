@@ -1,5 +1,6 @@
 <div class="my-container">
   <div class="content">
+    <h4>與好友分享</h4>
     <ng-container *ngFor="let orderItem of orderItems">
       <div class="container">
         <div class="pic-Container">
@@ -10,24 +11,11 @@
           <p>購買日期: {{orderItem.createdAt}}</p>
           <div class="buttnArea">
             <p>NT {{orderItem.price}}</p>
-            <button class="shareBtn" >share</button>
+            <button class="shareBtn" (click)="changeOption('post-form', orderItem)">share</button>
           </div>
         </div>
       </div>
     </ng-container>
-    <!-- <ng-container *ngFor="let orderItem of orderItems">
-      <nz-card nzHoverable style="width:150px; height: 200px" [nzCover]="coverTemplate">
-        <nz-card-meta [nzTitle]="orderItem.name" nzDescription="www.instagram.com"></nz-card-meta>
-      </nz-card>
-      <ng-template #coverTemplate>
-        <img alt="example" [src]="orderItem.images[0]" />
-      </ng-template>
-    </ng-container> -->
-    <!-- <ul>
-      <li *ngFor="let orderItem of orderItems">
-        {{orderItem.name}}
-      </li>
-    </ul> -->
   </div>
 </div>
 

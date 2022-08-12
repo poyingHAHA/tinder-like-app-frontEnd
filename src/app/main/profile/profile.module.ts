@@ -14,6 +14,7 @@ import { EditProfileComponent } from './option-content/edit-profile/edit-profile
 import { EditStatusComponent } from './option-content/edit-profile/edit-status/edit-status.component';
 import { SharePostFormComponent } from './option-content/share-post-form/share-post-form.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { PostFormComponent } from './option-content/share-post-form/post-form/post-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     OptionContentComponent,
     EditProfileComponent,
     EditStatusComponent,
-    SharePostFormComponent
+    SharePostFormComponent,
+    PostFormComponent
   ],
   imports: [
     CommonModule,

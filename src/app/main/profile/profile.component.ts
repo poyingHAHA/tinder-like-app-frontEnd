@@ -47,15 +47,10 @@ export class ProfileComponent implements OnInit {
     this.profileLayoutService.getOption$()
     .pipe(takeUntil(this.destroy$))
     .subscribe(type=>{
-      console.log(type);
       if(type != ""){
         this.isSpandOptionContent = true;
       }
     })
-    // TODO 測試等等刪
-    setTimeout(() => {
-      this.profileLayoutService.setOption('share-post-form');
-    }, 100)
   }
 
   spandSetting()
